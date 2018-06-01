@@ -1,45 +1,39 @@
 const _ = require('lodash');
-const settingsEntity = require('./settings.entity');
+const entity = require('./settings.entity');
 
 console.log('Registring routes of "/settings"...');
-settingsEntity.methods(['get', 'post', 'put']);
-settingsEntity.updateOptions({new: true, runValidators: true});
+entity.methods(['get', 'put']);
 
-settingsEntity
-    .after('post', sendErrorOrNext)
-    .after('put', sendErrorOrNext);
+//forçando atualização no update
+entity.updateOptions({ new: true, runValidators: true });
 
-function sendErrorOrNext(req, res, next) {
-    const bundle = res.locals.bundle;
-    if (bundle.errors) {
-        var erros = parseErrors(bundle.errors);
-        res.status(500).json({erros});
-    } else {
-        next();
-    }
-}
+//criar settings caso nao exista nenhuma
+// Entity.before('get', function (req, res, next) {
+//     const _d = new Entity({
+//         username: 'wellton', password: 'johnys',
+//         perfil: {
+//             desc_perfil: 'config'
+//         }
+//     });
 
-function parseErrors(nodeRestErros) {
-    const errors = [];
-    _.forIn(nodeRestErros, err => {
-        errors.push({
-            type: err.properties.type,
-            path: err.path,
-            message: err.message,
-        });
-    });
-    return errors;
-}
+//     _d.save(err => {
+//         console.log(err);
+//         console.log('aaaaaaaaaaaaaaaaa');
+//     })
+
+//     console.log(_d);
+//     next();
+// })
 
 //custon api-rest
-settingsEntity.route('count', function (req, res, next) {
-    settingsEntity.count(function (error, value) {
+entity.route('count', function (req, res, next) {
+    entity.count(function (error, value) {
         if (error) {
-            res.status(500).json({errors: [error]});
+            res.status(500).json({ errors: [error] });
         } else {
-            res.json({value});
+            res.json({ value });
         }
     });
 });
 
-module.exports = settingsEntity;
+module.exports = entity;
