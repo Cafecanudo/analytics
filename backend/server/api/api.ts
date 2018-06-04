@@ -1,8 +1,8 @@
 import * as express from 'express';
-import * as morgan from 'morgan';
+import { Application } from 'express';
 import * as bodyParser from 'body-parser';
 import Routes from './routes/routes';
-import { Application } from 'express';
+import morgan = require('morgan');
 
 class Api {
 
@@ -13,11 +13,10 @@ class Api {
         this.middleware();
     }
 
-    public middleware(): void {
+    middleware(): void {
         this.express.use(morgan('dev'));
         this.express.use(bodyParser.urlencoded({extended: true}));
         this.express.use(bodyParser.json());
-
         this.router(this.express);
     }
 

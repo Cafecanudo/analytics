@@ -7,6 +7,6 @@ module.exports = {
     },
     database: {
         host: 'localhost',
-        password: 'softbox@2018@dev'
+        password: 'softbox@development'
     }
 };

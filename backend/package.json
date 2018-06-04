@@ -2,13 +2,10 @@
   "name": "Eldoc-Analytics",
   "version": "0.0.1-SNAPHOST",
   "description": "Eldoc Analytics - Sistema de Analise e monitoria de documentos fiscais ELDOC",
-  "main": "loader.js",
+  "main": "./server/server.ts",
   "scripts": {
-    "lint": "./node_modules/.bin/tslint --project tsconfig.json ./server/**/*.ts",
-    "start": "cross-env NODE_ENV=development nodemon --exec ./node_modules/.bin/ts-node ./server/server.ts",
-    "build": "./node_modules/.bin/tsc --diagnostics",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "all": "npm run lint && npm run test && npm run build && npm run start"
+    "start": "cross-env NODE_ENV=development ./node_modules/.bin/ts-node ./server/server.ts",
+    "builded": "cross-env NODE_ENV=development nodemon ./dist/server.ts"
   },
   "author": "by Wellton S. Barros - welltonbarros@softbox.com.br",
   "keywords": [

@@ -6,13 +6,9 @@ class Routes {
         this.getRoutes(app);
     }
 
-    getRoutes(app: Application): void {
-        app.route('/').get((res: Response) => {
-            res.send('Hello word');
-        });
-        app.route('/ola/:nome').get((req: Request, res: Response) => {
-            res.send(`Hello, ${req.params.nome}`);
-        });
+    getRoutes(app: Application) {
+        app.route('/').get((req: Request, res: Response) => res.send('Hello agora sim'));
+        app.route('/ola/:nome').get((req: Request, res: Response) => res.send(`Ola ${req.params.nome}`));
     }
 }
 
