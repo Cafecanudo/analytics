@@ -11,7 +11,7 @@ var Api = /** @class */ (function () {
         this.middleware();
     }
     Api.prototype.middleware = function () {
-        this.express.use(morgan('dev'));
+        this.express.use(morgan(process.env.ENV || 'dev'));
         this.express.use(bodyParser.urlencoded({ extended: true }));
         this.express.use(bodyParser.json());
         this.express.use(errorHandlerApi_1.errorHandlerApi);

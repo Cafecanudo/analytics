@@ -1,17 +1,16 @@
 import * as http from 'http';
-import Api from './api/api';
-import { errorHandlerApi } from './api/errorHandlerApi';
 
-console.log('Loading settings...');
+const str = require('./config/env/str');
+console.log(str.strEldoc);
+
+import Api from './api/api';
+
 const config = require('./config/env/config')();
 const server = http.createServer(Api);
 
-Api.use(errorHandlerApi);
-
-console.log(config);
-
-server.listen(config.server.port, () => {
-    console.log('\n--> Backend ELDOC-Analytics iniciado na porta: ' +
-        `http://${config.server.hostname}:${config.server.port} <--`);
-    console.log('\n####################################################################');
+server.listen(config.server.port, config.server.hostname);
+server.on('listening', () => {
+    console.log(`Backend ELDOC-Analytics is UP on host: http://${config.server.hostname}:${config.server.port}`);
+    console.log('####################################################################');
 });
+server.on('error', (error: NodeJS.ErrnoException) => console.log(`Ocorreu um erro: ${error}`));
