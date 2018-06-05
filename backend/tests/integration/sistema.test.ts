@@ -1,25 +1,27 @@
 import { app, expect, request } from './config/helpers';
+import { pathApi } from '../../server/modules/RouterDefault';
 
-describe('Teste Unitario do Controller', () => {
+describe('Serviços do sistema', () => {
 
-    describe('GET / Verifica servidor UP', () => {
-        it('Deve retornar 200, confirmando servidor no AR', done => {
+    describe('GET /', () => {
+        it('Verifica se servidor ONLINE', done => {
             request(app).get('/').end((error, res) => {
                 expect(res.status).to.equal(200);
+                expect(res.body).to.keys(['version']);
                 done(error);
             });
         });
     });
 
-    describe('GET /api/profile', () => {
-        it('Deve retornar configuracoes do perfil de usuario', done => {
-            console.log(done);
+    describe(`GET ${pathApi}/configuracao`, () => {
+        it('Verifica estrutura de configurações', done => {
             request(app)
-                .get('/api/profile')
+                .get(`${pathApi}/configuracao`)
                 .end((error, res) => {
                     expect(res.status).to.equal(200);
                     done(error);
                 });
         });
     });
+
 });

@@ -1,8 +1,9 @@
 import * as _ from 'lodash';
 
+const ext = (process.env.NODE_ENV || 'development') === 'test' ? 'js' : 'ts';
 const mergeConfig = _.merge(
-    require('./production.env.ts'),
-    require(`./${process.env.NODE_ENV}.env.ts`)
+    require(`./production.env.${ext}`),
+    require(`./${process.env.NODE_ENV || 'development'}.env.${ext}`)
 );
 
 module.exports = () => mergeConfig;

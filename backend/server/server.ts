@@ -1,16 +1,46 @@
+import * as debug from 'debug';
 import * as http from 'http';
-
-const str = require('./config/env/str');
-console.log(str.strEldoc);
-
 import Api from './api/api';
+import ConsoleUtil from './utils/console.util';
 
-const config = require('./config/env/config')();
+debug('ts-express:server');
+
+const env = require('./config/env/config')();
 const server = http.createServer(Api);
 
-server.listen(config.server.port, config.server.hostname);
+const normalizePort = (val: number | string): any => {
+    const port: number = (typeof val === 'string') ? parseInt(val, 10) : val;
+    if (isNaN(port)) {
+        return val;
+    } else if (port >= 0) {
+        return port;
+    } else {
+        return false;
+    }
+};
+
+const onError = (error: NodeJS.ErrnoException): void => {
+    ConsoleUtil.error(`Ocorreu um erro: ${error}`);
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
+    switch (error.code) {
+        case 'EACCES':
+            console.error(`${env.server.port} requires elevated privileges`);
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(`${env.server.port} is already in use`);
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
+};
+
+server.listen(env.server.port, env.server.hostname);
 server.on('listening', () => {
-    console.log(`Backend ELDOC-Analytics is UP on host: http://${config.server.hostname}:${config.server.port}`);
-    console.log('####################################################################');
+    ConsoleUtil.info(`### ELDOC-Analytics is UP on http://${env.server.hostname}:${env.server.port} ###`);
+    ConsoleUtil.info('####################################################################');
 });
-server.on('error', (error: NodeJS.ErrnoException) => console.log(`Ocorreu um erro: ${error}`));
+server.on('error', onError);

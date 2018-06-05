@@ -1,19 +1,48 @@
 "use strict";
+/* by Wellton Barros */
 Object.defineProperty(exports, "__esModule", { value: true });
-var routes_1 = require("../../modules/user/routes");
-var Routes = /** @class */ (function () {
-    function Routes(app) {
-        this.getRoutes(app);
+const express_1 = require("express");
+const fs = require("fs");
+const mergeConfig = require('../../config/env/config')();
+class Routes {
+    constructor(app) {
+        this.app = app;
+        this.getRoutes();
     }
-    Routes.prototype.getRoutes = function (app) {
-        app.route('/').get(function (req, res) {
+    getRoutes() {
+        this.app.use('/', express_1.Router().get('/', (req, res) => {
             res.json({
-                version: '0.0.1-SNAPSHOT', status: 'Running'
+                version: mergeConfig.version
             });
+        }));
+        this.extracted();
+    }
+    /**
+     * Busca todos os arquivos routes.ts dentro da pasta
+     * ./server/modules, adicionar e crias suas rotas
+     */
+    extracted() {
+        const pathModules = './server/modules/';
+        fs.readdirSync(pathModules).forEach(f => {
+            const _in = `${pathModules}${f}`;
+            if (fs.statSync(_in).isDirectory()) {
+                if (fs.statSync(`${_in}/routes.ts`).isFile()) {
+                    this.getDataAsync(`../../modules/${f}/routes`)
+                        .then(_r => _r.registerRoutes(`modules/${f}/routes.ts`));
+                }
+            }
         });
-        //Registrando rotas de usuario
-        new routes_1.default(app).registerRoutes();
-    };
-    return Routes;
-}());
+    }
+    /**
+     * Faz import dinamico das routes.js
+     * @param routeModule
+     * @returns {Promise<void>}
+     */
+    getDataAsync(routeModule) {
+        const apiClient = Promise.resolve().then(() => require(routeModule)).then(r => {
+            return new r.default(this.app);
+        });
+        return apiClient;
+    }
+}
 exports.default = Routes;

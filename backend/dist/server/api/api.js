@@ -1,25 +1,69 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Express = require("express");
-var bodyParser = require("body-parser");
-var routes_1 = require("./routes/routes");
-var errorHandlerApi_1 = require("./errorHandlerApi");
-var morgan = require("morgan");
-var Api = /** @class */ (function () {
-    function Api() {
-        this.express = Express();
-        this.middleware();
+/* by Wellton Barros */
+const bodyParser = require("body-parser");
+const express = require("express");
+const mongoose = require("mongoose");
+const logger = require("morgan");
+const compression = require("compression");
+const helmet = require("helmet");
+const cors = require("cors");
+//Adicionando rotas
+const routes_1 = require("./routes/routes");
+const errorHandlerApi_1 = require("./errorHandlerApi");
+//somente require
+require('../config/env/str');
+//import locais
+const ConsoleUtil = require('../utils/console.util').default;
+const env = require('../config/env/config')();
+class Api {
+    constructor() {
+        this.app = express();
+        this.mongoDb = `mongodb://${env.database.host}${env.database.port ? `:${env.database.port || 27017}` : ''}/${env.database.databasename}`;
+        this.connectMongoDb();
     }
-    Api.prototype.middleware = function () {
-        this.express.use(morgan(process.env.ENV || 'dev'));
-        this.express.use(bodyParser.urlencoded({ extended: true }));
-        this.express.use(bodyParser.json());
-        this.express.use(errorHandlerApi_1.errorHandlerApi);
-        this.router(this.express);
-    };
-    Api.prototype.router = function (app) {
-        new routes_1.default(app);
-    };
-    return Api;
-}());
-exports.default = new Api().express;
+    connectMongoDb() {
+        ConsoleUtil.info('# Conectando bando de dados[MongoDB]...');
+        mongoose.connect(this.mongoDb, { user: env.database.username, pass: env.database.password }, (err => {
+            if (!err) {
+                ConsoleUtil.info('# Conectado MongoDB=OK.');
+                this.configure();
+                this.routes();
+            }
+            else {
+                ConsoleUtil.info('# Conectado MongoDB=FAIL');
+                ConsoleUtil.error(err);
+            }
+        }));
+    }
+    configure() {
+        ConsoleUtil.info('# Configurando aplicação[Middlewares]...');
+        if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
+            this.app.use(logger('dev'));
+        }
+        this.app.use(bodyParser.urlencoded({ extended: true }));
+        this.app.use(errorHandlerApi_1.errorHandlerApi);
+        this.app.use(bodyParser.json());
+        this.app.use(compression());
+        this.app.use(helmet());
+        this.app.use(cors());
+        // cors
+        this.app.use((req, res, next) => {
+            res.header('Access-Control-Allow-Origin', `${env.frontend.protocolo || 'http'}://${env.frontend.host}${env.frontend.port ? `:${env.frontend.port}` : ''}`);
+            res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+            res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials');
+            res.header('Access-Control-Allow-Credentials', 'true');
+            next();
+        });
+    }
+    showHost() {
+        ConsoleUtil.info(`### ELDOC-Analytics is UP on http://${env.server.hostname}:${env.server.port} ###`);
+        ConsoleUtil.info('####################################################################');
+    }
+    routes() {
+        ConsoleUtil.info('# Registrando rotas...');
+        const router = express.Router();
+        new routes_1.default(this.app);
+    }
+}
+exports.default = new Api().app;

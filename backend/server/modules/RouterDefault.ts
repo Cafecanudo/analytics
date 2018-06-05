@@ -1,41 +1,65 @@
-import { Application } from 'express';
-import { IRouteType } from '../../dist/server/modules/IRouteType';
+import { Application, Request, Response, Router } from 'express';
+import ConsoleUtil from '../utils/console.util';
+
+export const pathApi = '/api/v1';
 
 export default abstract class RouterDefault {
 
-    abstract getRoutes(): IRouteType[];
+    private readonly router: Router;
 
-    constructor(public app: Application) {
+    /**
+     * Retorna o URI do Path do servico
+     * @returns {string}
+     */
+    abstract getPath(): string;
+
+    /**
+     * Retorna dos as rotas implementadas de um modulo
+     * @returns {IRouteTypeModel[]}
+     */
+    abstract getRoutes(): IRouteTypeModel[];
+
+    protected constructor(public app: Application) {
+        this.router = Router();
     }
 
-    registerRoutes(): void {
+    registerRoutes(name: string): void {
         this.getRoutes().forEach(_r => {
             this.createRoute(_r);
         });
     }
 
-    createRoute(_r: IRouteType): void {
-        const r = this.app.route(_r.path);
+    createRoute(_r: IRouteTypeModel): void {
+        const _p = '/' + _r.path.replace(/^[\/]+/, '');
         switch (_r.type || 'GET') {
             case 'POST': {
-                r.post(_r.handler);
+                this.router.post(_p, _r.handler);
                 break;
             }
             case 'PUT': {
-                r.post(_r.handler);
+                this.router.put(_p, _r.handler);
                 break;
             }
             case 'DELETE': {
-                r.delete(_r.handler);
+                this.router.delete(_p, _r.handler);
                 break;
             }
             case 'PATCH': {
-                r.patch(_r.handler);
+                this.router.patch(_p, _r.handler);
                 break;
             }
             default: {
-                r.get(_r.handler);
+                this.router.get(_p, _r.handler);
             }
         }
+        const uri = `${pathApi}/${this.getPath().replace(/^[\/]+/, '')}`;
+        this.app.use(uri, this.router);
+        ConsoleUtil.help(`# =====> Rota [${_r.type || 'GET'} ${uri}${_p}] registrada.`);
     }
+}
+
+export interface IRouteTypeModel {
+    type?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+    path: string;
+    handler: (res: Request, rep: Response) => void;
 }

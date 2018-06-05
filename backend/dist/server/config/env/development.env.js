@@ -5,8 +5,14 @@ module.exports = {
         hostname: 'localhost',
         port: 3000
     },
+    frontend: {
+        host: 'localhost',
+        port: '8080'
+    },
     database: {
         host: 'localhost',
-        password: 'softbox@development'
+        databasename: 'eldoc-analytics-dev',
+        username: null,
+        password: null
     }
 };

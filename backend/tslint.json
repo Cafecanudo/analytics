@@ -4,14 +4,11 @@
     "variable-name": [
       true,
       "ban-keywords",
-      "check-format",
       "allow-leading-underscore"
     ],
     "member-access": false,
-//    "prefer-method-signature": true,
     "prefer-function-over-method": false,
     "no-unnecessary-callback-wrapper": true,
-//    "no-parameter-properties": true,
     "new-parens": true,
     "interface-name": [
       true,
@@ -45,7 +42,6 @@
     "no-misused-new": true,
     "no-invalid-this": true,
     "no-invalid-template-strings": true,
-//    "no-implicit-dependencies": true,
     "no-eval": true,
     "eofline": true,
     "no-empty": [
@@ -75,7 +71,7 @@
     ],
     "max-line-length": [
       true,
-      140
+      160
     ],
     "align": [
       true,
