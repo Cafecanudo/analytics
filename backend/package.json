@@ -8,8 +8,8 @@
     "start": "nodemon --exec ./node_modules/.bin/ts-node ./server/server.ts",
     "build": "./node_modules/.bin/tsc",
     "builded": "npm run build && nodemon ./dist/server.ts",
-    "unit-test": "cross-env NODE_ENV=test mocha --opts dist/tests/unit/config/mocha.opts ./dist/tests/unit/unit.test.js",
-    "integration-test": "cross-env NODE_ENV=test mocha --opts dist/tests/integration/config/mocha.opts ./dist/tests/integration/*.test.js"
+    "unit-test": "cross-env NODE_ENV=test mocha --opts ddist/tests/unit/config/mocha.opts ./dist/tests/unit/unit.test.js",
+    "integration-test": "cross-env NODE_ENV=test mocha --opts ./tests/integration/config/mocha.opts"
   },
   "author": "by Wellton S. Barros - welltonbarros@softbox.com.br",
   "keywords": [

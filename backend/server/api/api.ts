@@ -7,14 +7,14 @@ import * as compression from 'compression';
 import * as helmet from 'helmet';
 import * as cors from 'cors';
 //Adicionando rotas
-import Routes from './routes/routes';
 import { errorHandlerApi } from './errorHandlerApi';
+import Routes from './routes/routes';
+import ConsoleUtil from '../utils/console.util';
 
 //somente require
 require('../config/env/str');
 
 //import locais
-const ConsoleUtil = require('../utils/console.util').default;
 const env = require('../config/env/config')();
 
 class Api {
@@ -28,21 +28,21 @@ class Api {
     }
 
     private connectMongoDb(): void {
-        ConsoleUtil.info('# Conectando bando de dados[MongoDB]...');
+        ConsoleUtil.info('Conectando bando de dados[MongoDB]...');
         mongoose.connect(this.mongoDb, {user: env.database.username, pass: env.database.password}, (err => {
             if (!err) {
-                ConsoleUtil.info('# Conectado MongoDB=OK.');
+                ConsoleUtil.info('Conectado MongoDB=OK.');
                 this.configure();
                 this.routes();
             } else {
-                ConsoleUtil.info('# Conectado MongoDB=FAIL');
+                ConsoleUtil.error('Conectado MongoDB=FAIL');
                 ConsoleUtil.error(err);
             }
         }));
     }
 
     private configure(): void {
-        ConsoleUtil.info('# Configurando aplicação[Middlewares]...');
+        ConsoleUtil.info('Configurando aplicação[Middlewares]...');
         if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
             this.app.use(logger('dev'));
         }
@@ -68,13 +68,11 @@ class Api {
     }
 
     private showHost(): void {
-        ConsoleUtil.info(`### ELDOC-Analytics is UP on http://${env.server.hostname}:${env.server.port} ###`);
-        ConsoleUtil.info('####################################################################');
+        ConsoleUtil.info(`ELDOC-Analytics is UP on http://${env.server.hostname}:${env.server.port} ###`);
     }
 
     private routes(): void {
-        ConsoleUtil.info('# Registrando rotas...');
-        const router: express.Router = express.Router();
+        ConsoleUtil.info('Registrando rotas...');
         new Routes(this.app);
     }
 }

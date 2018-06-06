@@ -13,15 +13,14 @@ describe('Serviços do sistema', () => {
         });
     });
 
-    describe(`GET ${pathApi}/configuracao`, () => {
+    describe(`GET ${pathApi}/app`, () => {
         it('Verifica estrutura de configurações', done => {
             request(app)
-                .get(`${pathApi}/configuracao`)
+                .get(`${pathApi}/app`)
                 .end((error, res) => {
                     expect(res.status).to.equal(200);
                     done(error);
                 });
         });
     });
-
 });

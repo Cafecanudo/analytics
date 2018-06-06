@@ -40,7 +40,7 @@ const onError = (error: NodeJS.ErrnoException): void => {
 
 server.listen(env.server.port, env.server.hostname);
 server.on('listening', () => {
-    ConsoleUtil.info(`### ELDOC-Analytics is UP on http://${env.server.hostname}:${env.server.port} ###`);
-    ConsoleUtil.info('####################################################################');
+    ConsoleUtil.info(`ELDOC-Analytics is UP on http://${env.server.hostname}:${env.server.port}`);
+    ConsoleUtil.info('');
 });
 server.on('error', onError);

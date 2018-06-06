@@ -1,32 +1,21 @@
 import { Request, Response } from 'express';
-import RouterDefault, { IRouteTypeModel } from '../RouterDefault';
+import { IRouteTypeModel, RouterDefault } from '../RouterDefault';
+import { GET, Path } from '../../api/@core/decorators/decorators';
 
-export default class Routes extends RouterDefault {
+@Path('/app')
+export default class AplicacaoRoutes extends RouterDefault {
 
-    getPath(): string {
-        return '/configuracao';
-    }
+    // private configuracaoModel: ConfiguracaoModel;
+    private configuracaoSchema: ConfSchema;
 
-    /**
-     * Retorna dados do profile do usuario
-     * @param {e.Request} req
-     * @param {e.Response} res
-     */
-    index(req: Request, res: Response) {
-        res.json({});
-    }
-
-    /**
-     * Retorna todas as rotas para path de Usuario
-     * @returns {IRouteTypeModel[]}
-     */
     getRoutes(): IRouteTypeModel[] {
         return [
-            {
-                path: '/',
-                handler: this.index
-            }
+            {path: '/', handler: this.index}
         ];
     }
 
+    @GET('/')
+    index(req: Request, res: Response) {
+        res.json({});
+    }
 }

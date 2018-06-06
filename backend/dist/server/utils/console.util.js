@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const colors = require('colors/safe');
+const lenh = 100;
 class ConsoleUtil {
     constructor() {
         colors.setTheme({
@@ -9,47 +10,74 @@ class ConsoleUtil {
             verbose: 'cyan',
             prompt: 'grey',
             info: 'green',
-            data: 'grey',
+            data: 'cyan',
             help: 'cyan',
             warn: 'yellow',
             debug: 'blue',
             error: 'red'
         });
     }
-    static help(t, cl = true) {
-        return new ConsoleUtil().help(t, cl);
+    static clear() {
+        console.clear();
     }
-    static info(t, cl = true) {
-        return new ConsoleUtil().info(t, cl);
+    static ln() {
+        console.log();
     }
-    static error(t, cl = true) {
-        return new ConsoleUtil().error(t, cl);
+    static data(t) {
+        return new ConsoleUtil().data(t);
     }
-    static warn(t, cl = true) {
-        return new ConsoleUtil().warn(t, cl);
+    static white(t) {
+        return new ConsoleUtil().white(t);
     }
-    static log(t, cl = true) {
-        return new ConsoleUtil().log(t, cl);
+    static help(t) {
+        return new ConsoleUtil().help(t);
     }
-    help(t, cl = true) {
-        console.log(colors.help(`${cl ? '#### [ ' : ''}${t}${cl ? ' ]' : ''}`));
+    static info(t) {
+        return new ConsoleUtil().info(t);
+    }
+    static error(t) {
+        return new ConsoleUtil().error(t);
+    }
+    static warn(t) {
+        return new ConsoleUtil().warn(t);
+    }
+    static log(t) {
+        return new ConsoleUtil().log(t);
+    }
+    data(t) {
+        console.log(colors.data(this.complenteStr(`#### Data[ ${t}`)));
         return t;
     }
-    info(t, cl = true) {
-        console.log(colors.info(`${cl ? '#### Info [ ' : ''}${t}${cl ? ' ]' : ''}`));
+    help(t) {
+        console.log(colors.help(this.complenteStr(`#### Help[ ${t}`)));
         return t;
     }
-    error(t, cl = true) {
-        console.log(colors.error(`${cl ? '@@@@@@@@> Error [ ' : ''}${t}${cl ? ' ]' : ''}`));
+    info(t) {
+        console.log(colors.info(this.complenteStr(`#### Info[ ${t}`)));
         return t;
     }
-    warn(t, cl = true) {
-        console.log(colors.warn(`${cl ? '#### Warn [ ' : ''}${t}${cl ? ' ]' : ''}`));
+    error(t) {
+        console.log(colors.error(this.complenteStr(`#### Error[ ${t}`)));
         return t;
     }
-    log(t, cl = true) {
-        console.log(`${cl ? '#### Log [ ' : ''}${t}${cl ? ' ]' : ''}`);
+    warn(t) {
+        console.log(colors.warn(this.complenteStr(`#### Warn[ ${t}`)));
         return t;
+    }
+    log(t) {
+        console.log(colors.prompt(this.complenteStr(`#### Log[ ${t}`)));
+        return t;
+    }
+    white(t) {
+        console.log(this.complenteStr(t));
+        return t;
+    }
+    complenteStr(t) {
+        let out = t;
+        for (var i = 0; i < (lenh - t.length); i++) {
+            out += '.';
+        }
+        return out + ' ]';
     }
 }
 exports.default = ConsoleUtil;

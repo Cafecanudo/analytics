@@ -31,10 +31,13 @@ export default class Routes {
             if (fs.statSync(_in).isDirectory()) {
                 if (fs.statSync(`${_in}/routes.ts`).isFile()) {
                     this.getDataAsync(`../../modules/${f}/routes`)
-                        .then(_r => _r.registerRoutes(`modules/${f}/routes.ts`));
+                        .then(_r => _r.registerRoutes(f));
                 }
             }
         });
+        if (process.env.NODE_ENV === 'test') {
+            process.nextTick(run);
+        }
     }
 
     /**
@@ -42,11 +45,11 @@ export default class Routes {
      * @param routeModule
      * @returns {Promise<void>}
      */
-    getDataAsync(routeModule) {
-        const apiClient = import(routeModule).then(r => {
+    async getDataAsync(routeModule) {
+        const apiClient = await import(routeModule).then(r => {
             return new r.default(this.app);
         });
-        return apiClient;
+        return await apiClient;
     }
 
 }

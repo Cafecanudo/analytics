@@ -8,7 +8,17 @@ class RouterDefault {
         this.app = app;
         this.router = express_1.Router();
     }
+    /**
+     * Substitui nome padrão do modulo
+     * @returns {string}
+     */
+    getPath() {
+        return this.name;
+    }
     registerRoutes(name) {
+        this.name = name;
+        console_util_1.default.ln();
+        console_util_1.default.white(`#### Criando rotas para [modulo="${name}"]`);
         this.getRoutes().forEach(_r => {
             this.createRoute(_r);
         });
@@ -38,7 +48,7 @@ class RouterDefault {
         }
         const uri = `${exports.pathApi}/${this.getPath().replace(/^[\/]+/, '')}`;
         this.app.use(uri, this.router);
-        console_util_1.default.help(`# =====> Rota [${_r.type || 'GET'} ${uri}${_p}] registrada.`);
+        console_util_1.default.data(`Rota [${_r.type || 'GET'} ${uri}${_p}] registrada.`);
     }
 }
-exports.default = RouterDefault;
+exports.RouterDefault = RouterDefault;

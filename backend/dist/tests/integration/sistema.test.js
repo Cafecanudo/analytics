@@ -12,10 +12,10 @@ describe('Serviços do sistema', () => {
             });
         });
     });
-    describe(`GET ${RouterDefault_1.pathApi}/configuracao`, () => {
+    describe(`GET ${RouterDefault_1.pathApi}/app`, () => {
         it('Verifica estrutura de configurações', done => {
             helpers_1.request(helpers_1.app)
-                .get(`${RouterDefault_1.pathApi}/configuracao`)
+                .get(`${RouterDefault_1.pathApi}/app`)
                 .end((error, res) => {
                 helpers_1.expect(res.status).to.equal(200);
                 done(error);

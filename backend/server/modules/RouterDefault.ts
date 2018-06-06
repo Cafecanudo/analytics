@@ -3,33 +3,40 @@ import ConsoleUtil from '../utils/console.util';
 
 export const pathApi = '/api/v1';
 
-export default abstract class RouterDefault {
+export abstract class RouterDefault {
 
+    private name: string;
     private readonly router: Router;
-
-    /**
-     * Retorna o URI do Path do servico
-     * @returns {string}
-     */
-    abstract getPath(): string;
 
     /**
      * Retorna dos as rotas implementadas de um modulo
      * @returns {IRouteTypeModel[]}
      */
+
     abstract getRoutes(): IRouteTypeModel[];
+
+    /**
+     * Substitui nome padrão do modulo
+     * @returns {string}
+     */
+    getPath(): string {
+        return this.name;
+    }
 
     protected constructor(public app: Application) {
         this.router = Router();
     }
 
-    registerRoutes(name: string): void {
+    public registerRoutes(name: string): void {
+        this.name = name;
+        ConsoleUtil.ln();
+        ConsoleUtil.white(`#### Criando rotas para [modulo="${name}"]`);
         this.getRoutes().forEach(_r => {
             this.createRoute(_r);
         });
     }
 
-    createRoute(_r: IRouteTypeModel): void {
+    private createRoute(_r: IRouteTypeModel): void {
         const _p = '/' + _r.path.replace(/^[\/]+/, '');
         switch (_r.type || 'GET') {
             case 'POST': {
@@ -54,7 +61,7 @@ export default abstract class RouterDefault {
         }
         const uri = `${pathApi}/${this.getPath().replace(/^[\/]+/, '')}`;
         this.app.use(uri, this.router);
-        ConsoleUtil.help(`# =====> Rota [${_r.type || 'GET'} ${uri}${_p}] registrada.`);
+        ConsoleUtil.data(`Rota [${_r.type || 'GET'} ${uri}${_p}] registrada.`);
     }
 }
 

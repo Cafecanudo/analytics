@@ -9,12 +9,12 @@ const compression = require("compression");
 const helmet = require("helmet");
 const cors = require("cors");
 //Adicionando rotas
-const routes_1 = require("./routes/routes");
 const errorHandlerApi_1 = require("./errorHandlerApi");
+const routes_1 = require("./routes/routes");
+const console_util_1 = require("../utils/console.util");
 //somente require
 require('../config/env/str');
 //import locais
-const ConsoleUtil = require('../utils/console.util').default;
 const env = require('../config/env/config')();
 class Api {
     constructor() {
@@ -23,21 +23,21 @@ class Api {
         this.connectMongoDb();
     }
     connectMongoDb() {
-        ConsoleUtil.info('# Conectando bando de dados[MongoDB]...');
+        console_util_1.default.info('Conectando bando de dados[MongoDB]...');
         mongoose.connect(this.mongoDb, { user: env.database.username, pass: env.database.password }, (err => {
             if (!err) {
-                ConsoleUtil.info('# Conectado MongoDB=OK.');
+                console_util_1.default.info('Conectado MongoDB=OK.');
                 this.configure();
                 this.routes();
             }
             else {
-                ConsoleUtil.info('# Conectado MongoDB=FAIL');
-                ConsoleUtil.error(err);
+                console_util_1.default.error('Conectado MongoDB=FAIL');
+                console_util_1.default.error(err);
             }
         }));
     }
     configure() {
-        ConsoleUtil.info('# Configurando aplicação[Middlewares]...');
+        console_util_1.default.info('Configurando aplicação[Middlewares]...');
         if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
             this.app.use(logger('dev'));
         }
@@ -57,12 +57,10 @@ class Api {
         });
     }
     showHost() {
-        ConsoleUtil.info(`### ELDOC-Analytics is UP on http://${env.server.hostname}:${env.server.port} ###`);
-        ConsoleUtil.info('####################################################################');
+        console_util_1.default.info(`ELDOC-Analytics is UP on http://${env.server.hostname}:${env.server.port} ###`);
     }
     routes() {
-        ConsoleUtil.info('# Registrando rotas...');
-        const router = express.Router();
+        console_util_1.default.info('Registrando rotas...');
         new routes_1.default(this.app);
     }
 }

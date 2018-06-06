@@ -1,4 +1,7 @@
---require ./helpers.js
+--require ./dist/tests/integration/config/helpers.js
 --reporter spec
---watch-extensions js
+--watch-extensions ts
+--delay
 --slow 5000
+--exit
+./dist/tests/integration/*.test.js

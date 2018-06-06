@@ -39,7 +39,7 @@ const onError = (error) => {
 };
 server.listen(env.server.port, env.server.hostname);
 server.on('listening', () => {
-    console_util_1.default.info(`### ELDOC-Analytics is UP on http://${env.server.hostname}:${env.server.port} ###`);
-    console_util_1.default.info('####################################################################');
+    console_util_1.default.info(`ELDOC-Analytics is UP on http://${env.server.hostname}:${env.server.port}`);
+    console_util_1.default.info('');
 });
 server.on('error', onError);
