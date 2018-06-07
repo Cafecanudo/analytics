@@ -1,8 +1,9 @@
 /**
  * Interface do modelo
  */
-//import { Document, Schema } from 'mongoose';
+import { Document, Schema } from 'mongoose';
 import * as mongoose from 'mongoose';
+import { RepositoryBase } from '../../../api/@core/repositorio.base';
 
 export interface IConfiguracaoModel extends mongoose.Document {
     version: string;
@@ -17,7 +18,18 @@ export interface IConfiguracaoModel extends mongoose.Document {
  * Criando schema de dados
  * @type {module:mongoose.Schema}
  */
-export var configuracaoSchema: mongoose.Schema = new mongoose.Schema({
+// export var configuracaoSchema: mongoose.Schema = new mongoose.Schema({
+//     version: {
+//         type: String,
+//         required: true
+//     },
+//     lastUpdate: {
+//         type: Date,
+//         required: true
+//     }
+// });
+
+const configuracaoSchema = new Schema({
     version: {
         type: String,
         required: true
@@ -27,6 +39,13 @@ export var configuracaoSchema: mongoose.Schema = new mongoose.Schema({
         required: true
     }
 });
+
+export class ConfiguracaoRepo extends RepositoryBase<IConfiguracaoModel>{
+
+    constructor() {
+        super('configuracao', configuracaoSchema);
+    }
+}
 
 // class ModeBase<T extends mongoose.Document> {
 //

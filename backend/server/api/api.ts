@@ -82,7 +82,7 @@ class Api {
         //     version: '0.0.1', lastUpdate: new Date()
         // });
 
-        resolve(__m);
+        //resolve(__m);
     }
 
     private showHost(): void {
