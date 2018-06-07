@@ -1,10 +1,10 @@
-import { Model, Document } from 'mongoose';
+import { Document, Schema } from 'mongoose';
 export interface IRead<T> {
 }
 export interface IWrite<T> {
 }
-export declare class RepositoryBase<T extends Document> implements IRead<T>, IWrite<T> {
+export declare class RepositoryBase<T extends Document> {
     private model;
-    constructor(model: Model<Document>);
-    novo(item: T, callback: (error: any, result: T) => void): void;
+    constructor(dbName: string, schema: Schema);
+    createDocument(item: T): Promise<T>;
 }

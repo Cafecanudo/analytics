@@ -93,7 +93,6 @@
       "check-type-operator",
       "check-preblock"
     ],
-    "no-trailing-whitespace": true,
     "space-in-parens": [
       false,
       "never"

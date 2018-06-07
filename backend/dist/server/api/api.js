@@ -66,14 +66,10 @@ class Api {
     }
     createModels(resolve, reject) {
         const _model = mongoose.model('configuracao', configuracaoModel_1.configuracaoSchema);
-        // const __m = <IConfiguracaoModel>{
+        // const __m = new _model({
         //     version: '0.0.1', lastUpdate: new Date()
-        // };
-        // _model.create(__m);
-        const __m = new _model({
-            version: '0.0.1', lastUpdate: new Date()
-        });
-        resolve(__m);
+        // });
+        //resolve(__m);
     }
     showHost() {
         console_util_1.default.info(`ELDOC-Analytics is UP on http://${env.server.hostname}:${env.server.port} ###`);

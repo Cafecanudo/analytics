@@ -1,16 +1,9 @@
-/**
- * Interface do modelo
- */
 import * as mongoose from 'mongoose';
+import { RepositoryBase } from '../../../api/@core/repositorio.base';
 export interface IConfiguracaoModel extends mongoose.Document {
     version: string;
     lastUpdate: Date;
 }
-export interface IModel {
-    configuracao: mongoose.Model<IConfiguracaoModel>;
+export declare class ConfiguracaoRepo extends RepositoryBase<IConfiguracaoModel> {
+    constructor();
 }
-/**
- * Criando schema de dados
- * @type {module:mongoose.Schema}
- */
-export declare var configuracaoSchema: mongoose.Schema;

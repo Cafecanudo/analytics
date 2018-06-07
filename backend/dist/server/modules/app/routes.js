@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const RouterDefault_1 = require("../RouterDefault");
 const decorators_1 = require("../../api/@core/decorators/decorators");
+const configuracaoModel_1 = require("./models/configuracaoModel");
 let AplicacaoRoutes = class AplicacaoRoutes extends RouterDefault_1.RouterDefault {
     getRoutes() {
         return [
@@ -18,6 +19,10 @@ let AplicacaoRoutes = class AplicacaoRoutes extends RouterDefault_1.RouterDefaul
         ];
     }
     index(req, res) {
+        this.configRepo = new configuracaoModel_1.ConfiguracaoRepo();
+        this.configRepo.createDocument({
+            version: '22', lastUpdate: 'e2'
+        });
         res.json({});
     }
 };

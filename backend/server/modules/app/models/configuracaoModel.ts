@@ -9,9 +9,9 @@ export interface IConfiguracaoModel extends mongoose.Document {
     lastUpdate: Date;
 }
 
-export interface IModel {
-    configuracao: mongoose.Model<IConfiguracaoModel>;
-}
+// export interface IModel {
+//     configuracao: mongoose.Model<IConfiguracaoModel>;
+// }
 
 /**
  * Criando schema de dados
@@ -27,3 +27,12 @@ export var configuracaoSchema: mongoose.Schema = new mongoose.Schema({
         required: true
     }
 });
+
+// class ModeBase<T extends mongoose.Document> {
+//
+//     private _model: mongoose.Model<T extends mongoose.Document>;
+//
+//     constructor(dbName: string, schema: mongoose.Schema) {
+//         this._model = mongoose.model<T>(dbName, schema);
+//     }
+// }

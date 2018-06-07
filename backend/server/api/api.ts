@@ -78,14 +78,9 @@ class Api {
     private createModels(resolve, reject): void {
         const _model = mongoose.model<IConfiguracaoModel>('configuracao', configuracaoSchema);
 
-        // const __m = <IConfiguracaoModel>{
+        // const __m = new _model({
         //     version: '0.0.1', lastUpdate: new Date()
-        // };
-        // _model.create(__m);
-
-        const __m = new _model({
-            version: '0.0.1', lastUpdate: new Date()
-        });
+        // });
 
         resolve(__m);
     }
