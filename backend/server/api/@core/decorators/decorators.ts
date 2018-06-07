@@ -1,4 +1,18 @@
-import ConsoleUtil from '../../../utils/console.util';
+import 'reflect-metadata';
+
+const formatMetadataKey = Symbol('Inject');
+
+/**
+ * Injetor de classe
+ * @param {string} formatString
+ * @returns {{(target: Function): void; (target: Object, propertyKey: (string | symbol)): void}}
+ * @constructor
+ */
+export const Inject = (formatString?: string) => {
+    console.log(formatString);
+    console.log(formatMetadataKey);
+    return Reflect.metadata(formatMetadataKey, formatString);
+};
 
 /**
  * Para especificar que classe é um serviço rest

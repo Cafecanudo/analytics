@@ -1,3 +1,14 @@
+import 'reflect-metadata';
+/**
+ * Injetor de classe
+ * @param {string} formatString
+ * @returns {{(target: Function): void; (target: Object, propertyKey: (string | symbol)): void}}
+ * @constructor
+ */
+export declare const Inject: (formatString?: string) => {
+    (target: Function): void;
+    (target: Object, propertyKey: string | symbol): void;
+};
 /**
  * Para especificar que classe é um serviço rest
  * @param {Function} constructor

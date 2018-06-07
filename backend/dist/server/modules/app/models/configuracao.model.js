@@ -1,11 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose = require("mongoose");
+/**
+ * Interface do modelo
+ */
+const mongoose_1 = require("mongoose");
 /**
  * Criando schema de dados
  * @type {module:mongoose.Schema}
  */
-const schema = new mongoose.Schema({
+exports.schema = new mongoose_1.Schema({
     version: {
         type: String,
         required: true
@@ -19,7 +22,7 @@ const schema = new mongoose.Schema({
  * Registrando schema de dados
  * @type {module:mongoose.Model<IConfiguracaoModel>}
  */
-exports.ConfSchema = mongoose.model('configuracao', schema, 'herous', true);
+exports.ConfiguracaoSchema = mongoose_1.model('configuracao', exports.schema, 'herouuu', true);
 /*
 /!**
  * Criando classe do modelo

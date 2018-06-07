@@ -5,9 +5,6 @@ import { GET, Path } from '../../api/@core/decorators/decorators';
 @Path('/app')
 export default class AplicacaoRoutes extends RouterDefault {
 
-    // private configuracaoModel: ConfiguracaoModel;
-    private configuracaoSchema: ConfSchema;
-
     getRoutes(): IRouteTypeModel[] {
         return [
             {path: '/', handler: this.index}
