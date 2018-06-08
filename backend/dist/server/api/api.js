@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/* by Wellton Barros */
 const bodyParser = require("body-parser");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -8,13 +7,10 @@ const logger = require("morgan");
 const compression = require("compression");
 const helmet = require("helmet");
 const cors = require("cors");
-//Adicionando rotas
 const errorHandlerApi_1 = require("./errorHandlerApi");
 const routes_1 = require("./routes/routes");
 const console_util_1 = require("../utils/console.util");
-//somente require
 require('../config/env/str');
-//import locais
 const env = require('../config/env/config')();
 class Api {
     constructor() {
@@ -30,12 +26,6 @@ class Api {
                 console_util_1.default.info('Criando modelo de dados no banco...');
                 this.configure();
                 this.routes();
-                // new Promise(this.createModels).then(res => {
-                //     console.log(res);
-                //     ConsoleUtil.info('Criando modelos=OK');
-                // }).catch(err => {
-                //     ConsoleUtil.error('Criando modelos=FAIL');
-                // });
             }
             else {
                 console_util_1.default.error('Conectado MongoDB=FAIL');
@@ -54,7 +44,6 @@ class Api {
         this.app.use(compression());
         this.app.use(helmet());
         this.app.use(cors());
-        // cors
         this.app.use((req, res, next) => {
             res.header('Access-Control-Allow-Origin', `${env.frontend.protocolo || 'http'}://${env.frontend.host}${env.frontend.port ? `:${env.frontend.port}` : ''}`);
             res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -63,15 +52,6 @@ class Api {
             next();
         });
     }
-    // private createModels(resolve, reject): void {
-    //     const _model = mongoose.model<IConfiguracaoModel>('configuracao', configuracaoSchema);
-    //
-    //     // const __m = new _model({
-    //     //     version: '0.0.1', lastUpdate: new Date()
-    //     // });
-    //
-    //     resolve();
-    // }
     showHost() {
         console_util_1.default.info(`ELDOC-Analytics is UP on http://${env.server.hostname}:${env.server.port} ###`);
     }
@@ -81,3 +61,4 @@ class Api {
     }
 }
 exports.default = new Api().app;
+//# sourceMappingURL=api.js.map

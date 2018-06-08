@@ -5,19 +5,8 @@ export declare abstract class RouterDefault {
     private name;
     private readonly router;
     protected constructor(app: Application);
-    /**
-     * Executado apos classe se contruida
-     */
     postConstructor(): void;
-    /**
-     * Retorna dos as rotas implementadas de um modulo
-     * @returns {IRouteTypeModel[]}
-     */
     abstract getRoutes(): IRouteTypeModel[];
-    /**
-     * Substitui nome padrão do modulo
-     * @returns {string}
-     */
     getPath(): string;
     registerRoutes(name: string): void;
     private createRoute;

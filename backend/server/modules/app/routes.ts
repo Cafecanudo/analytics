@@ -6,8 +6,6 @@ import { ConfiguracaoRepo } from './models/configuracaoModel';
 @Path('/app')
 export default class AplicacaoRoutes extends RouterDefault {
 
-    private configRepo: any;
-
     getRoutes(): IRouteTypeModel[] {
         return [
             {path: '/', handler: this.index}
@@ -16,7 +14,12 @@ export default class AplicacaoRoutes extends RouterDefault {
 
     @GET('/')
     index(req: Request, res: Response) {
-        ConfiguracaoRepo.schema();
-        res.json({});
+        ConfiguracaoRepo.save({
+            version: '1', lastUpdate: new Date()
+        }).then(value => {
+            res.json(value);
+        }).catch(err => {
+            res.status(500).send(err);
+        });
     }
 }

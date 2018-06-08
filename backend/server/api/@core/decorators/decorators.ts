@@ -3,11 +3,39 @@ import { MongodbSchema } from './rest/mongodb.schema';
 
 const formatMetadataKey = Symbol('Inject');
 
-export const MongoDbSchema = (documentName?: string) => {
+/**
+ * Cria a coleção de dados no bootstrap da aplicação.
+ * @param {string | {}} documentName
+ * @returns {(target, propertyKey: string, descriptor: PropertyDescriptor) => void}
+ * @constructor
+ */
+export const MongoDbSchema = (documentName?: string | {}) => {
     return (target, propertyKey: string, descriptor: PropertyDescriptor) => {
         MongodbSchema.builder(target, propertyKey, descriptor, documentName);
     };
 };
+
+/*export const MongoDbSchema = (documentName?: string | {}) => {
+    return (target: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
+
+        const get = () => {
+            return documentName;
+        };
+
+        const set = () => {
+            return documentName;
+        };
+
+        const dqw = Object.defineProperty(target, propertyKey, {get, set});
+
+        console.log(descriptor);
+        console.log(propertyKey);
+        console.log(target);
+        console.log(dqw);
+
+        MongodbSchema.builder(target, propertyKey, documentName);
+    };
+};*/
 
 /**
  * Injetor de classe

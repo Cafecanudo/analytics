@@ -19,8 +19,13 @@ let AplicacaoRoutes = class AplicacaoRoutes extends RouterDefault_1.RouterDefaul
         ];
     }
     index(req, res) {
-        configuracaoModel_1.ConfiguracaoRepo.schema();
-        res.json({});
+        configuracaoModel_1.configuracaoRepo.save({
+            version: '1', lastUpdate: new Date()
+        }).then(value => {
+            res.json(value);
+        }).catch(err => {
+            res.status(500).send(err);
+        });
     }
 };
 __decorate([
@@ -33,3 +38,4 @@ AplicacaoRoutes = __decorate([
     decorators_1.Path('/app')
 ], AplicacaoRoutes);
 exports.default = AplicacaoRoutes;
+//# sourceMappingURL=routes.js.map

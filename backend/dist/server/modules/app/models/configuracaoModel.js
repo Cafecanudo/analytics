@@ -9,19 +9,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * Interface do modelo
- */
-const mongoose_1 = require("mongoose");
 const decorators_1 = require("../../../api/@core/decorators/decorators");
-class BaseModel {
-    constructor() {
-        this._model = mongoose_1.model('', new mongoose_1.Schema(this.schema()));
-        this._model.create();
-    }
-}
-exports.BaseModel = BaseModel;
-class ConfiguracaoRepo extends BaseModel {
+const repositorio_base_1 = require("../../../api/@core/repositorio.base");
+class ConfiguracaoRepo extends repositorio_base_1.RepositoryBase {
     schema() {
         return {
             version: {
@@ -41,57 +31,5 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Object)
 ], ConfiguracaoRepo.prototype, "schema", null);
-const configuracaoRepo = new ConfiguracaoRepo();
-exports.ConfiguracaoRepo = configuracaoRepo;
-//
-//
-// export interface IConfiguracaoModel extends mongoose.Document {
-//     version: string;
-//     lastUpdate: Date;
-// }
-//
-// // export interface IModel {
-// //     configuracao: mongoose.Model<IConfiguracaoModel>;
-// // }
-//
-// /**
-//  * Criando schema de dados
-//  * @type {module:mongoose.Schema}
-//  */
-// // export var configuracaoSchema: mongoose.Schema = new mongoose.Schema({
-// //     version: {
-// //         type: String,
-// //         required: true
-// //     },
-// //     lastUpdate: {
-// //         type: Date,
-// //         required: true
-// //     }
-// // });
-//
-// export const configuracaoSchema = new Schema({
-//     version: {
-//         type: String,
-//         required: true
-//     },
-//     lastUpdate: {
-//         type: Date,
-//         required: true
-//     }
-// });
-//
-// export class ConfiguracaoRepo<T extends mongoose.Document> extends RepositoryBase<T>{
-//
-//     constructor() {
-//         super('configuracao', configuracaoSchema);
-//     }
-// }
-//
-// // class ModeBase<T extends mongoose.Document> {
-// //
-// //     private _model: mongoose.Model<T extends mongoose.Document>;
-// //
-// //     constructor(dbName: string, schema: mongoose.Schema) {
-// //         this._model = mongoose.model<T>(dbName, schema);
-// //     }
-// // }
+exports.configuracaoRepo = new ConfiguracaoRepo();
+//# sourceMappingURL=configuracaoModel.js.map

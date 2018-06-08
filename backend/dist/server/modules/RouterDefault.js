@@ -8,15 +8,8 @@ class RouterDefault {
         this.app = app;
         this.router = express_1.Router();
     }
-    /**
-     * Executado apos classe se contruida
-     */
     postConstructor() {
     }
-    /**
-     * Substitui nome padrão do modulo
-     * @returns {string}
-     */
     getPath() {
         return this.name;
     }
@@ -58,3 +51,4 @@ class RouterDefault {
     }
 }
 exports.RouterDefault = RouterDefault;
+//# sourceMappingURL=RouterDefault.js.map

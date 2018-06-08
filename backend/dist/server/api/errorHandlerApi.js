@@ -1,5 +1,4 @@
 "use strict";
-/* by Wellton Barros */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.errorHandlerApi = (err, req, res, next) => {
     console.error(`API error handler foi executada: ${err}`);
@@ -9,3 +8,4 @@ exports.errorHandlerApi = (err, req, res, next) => {
         message: 'Erro Interno do servidor!'
     });
 };
+//# sourceMappingURL=errorHandlerApi.js.map

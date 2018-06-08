@@ -4,6 +4,8 @@
     "module": "commonjs",
     "outDir": "dist",
     "declaration": true,
+    "sourceMap": true,
+    "removeComments": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "typeRoots": [

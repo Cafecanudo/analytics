@@ -81,3 +81,4 @@ class ConsoleUtil {
     }
 }
 exports.default = ConsoleUtil;
+//# sourceMappingURL=console.util.js.map

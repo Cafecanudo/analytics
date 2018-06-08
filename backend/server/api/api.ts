@@ -35,13 +35,6 @@ class Api {
                 ConsoleUtil.info('Criando modelo de dados no banco...');
                 this.configure();
                 this.routes();
-
-                // new Promise(this.createModels).then(res => {
-                //     console.log(res);
-                //     ConsoleUtil.info('Criando modelos=OK');
-                // }).catch(err => {
-                //     ConsoleUtil.error('Criando modelos=FAIL');
-                // });
             } else {
                 ConsoleUtil.error('Conectado MongoDB=FAIL');
                 ConsoleUtil.error(err);
@@ -74,16 +67,6 @@ class Api {
         });
 
     }
-
-    // private createModels(resolve, reject): void {
-    //     const _model = mongoose.model<IConfiguracaoModel>('configuracao', configuracaoSchema);
-    //
-    //     // const __m = new _model({
-    //     //     version: '0.0.1', lastUpdate: new Date()
-    //     // });
-    //
-    //     resolve();
-    // }
 
     private showHost(): void {
         ConsoleUtil.info(`ELDOC-Analytics is UP on http://${env.server.hostname}:${env.server.port} ###`);

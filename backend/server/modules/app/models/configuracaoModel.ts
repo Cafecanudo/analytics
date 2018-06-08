@@ -10,7 +10,7 @@ export abstract class BaseModel<T> {
 
     constructor() {
         this._model = model('', new Schema(this.schema()));
-        this._model.create();
+        // this._model.create();
     }
 
     /**
@@ -19,9 +19,25 @@ export abstract class BaseModel<T> {
      */
     abstract schema(): {};
 
+    save(document: T): Promise<any> {
+        console.log(document);
+        return new this._model(document).save();
+
+
+        // return new Promise((resolve, reject) => {
+        //     const _n = new this._model().save(document)
+        //         .then(_d => {
+        //             resolve(_d);
+        //         }).catch(err => {
+        //             reject(reject);
+        //         });
+        // });
+    }
+
 }
 
 export interface IConfiguracaoModel {
+    _id?: Schema.Types.ObjectId;
     version: string;
     lastUpdate: Date;
 }

@@ -34,3 +34,4 @@ UsuarioRoutes = __decorate([
     decorators_1.Path('/usuario')
 ], UsuarioRoutes);
 exports.default = UsuarioRoutes;
+//# sourceMappingURL=routes.js.map
