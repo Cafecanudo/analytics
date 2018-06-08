@@ -12,7 +12,7 @@ export interface IConfiguracaoModel {
 class ConfiguracaoRepo extends RepositoryBase<IConfiguracaoModel> {
 
     @MongoDbSchema('configuracao')
-    schema(): {} {
+    schema() {
         return {
             version: {
                 type: String,

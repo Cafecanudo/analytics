@@ -4,7 +4,16 @@ export interface IConfiguracaoModel {
     lastUpdate: Date;
 }
 declare class ConfiguracaoRepo extends RepositoryBase<IConfiguracaoModel> {
-    schema(): {};
+    schema(): {
+        version: {
+            type: StringConstructor;
+            required: boolean;
+        };
+        lastUpdate: {
+            type: DateConstructor;
+            required: boolean;
+        };
+    };
 }
 export declare const configuracaoRepo: ConfiguracaoRepo;
 export {};

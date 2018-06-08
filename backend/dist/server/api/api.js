@@ -8,7 +8,7 @@ const compression = require("compression");
 const helmet = require("helmet");
 const cors = require("cors");
 const errorHandlerApi_1 = require("./errorHandlerApi");
-const routes_1 = require("./routes/routes");
+const routes_1 = require("./routes");
 const console_util_1 = require("../utils/console.util");
 require('../config/env/str');
 const env = require('../config/env/config')();
@@ -35,7 +35,7 @@ class Api {
     }
     configure() {
         console_util_1.default.info('Configurando aplicação[Middlewares]...');
-        if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
+        if ((process.env.NODE_ENV || 'development') === 'development') {
             this.app.use(logger('dev'));
         }
         this.app.use(bodyParser.urlencoded({ extended: true }));

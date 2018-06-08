@@ -11,16 +11,19 @@ export class MongodbSchema {
      * @param {string} propertyKey
      * @param {PropertyDescriptor} descriptor
      */
-    static builder(target, propertyKey: string, descriptor: PropertyDescriptor, documentName?: string | {}) {
-        new MongodbSchema().builder(target, propertyKey, descriptor, documentName);
+    static builder(target, propertyKey: string, descriptor: PropertyDescriptor, collectionName?: string) {
+        new MongodbSchema().builder(target, propertyKey, descriptor, collectionName);
     }
 
-    builder(target, propertyKey: string, descriptor: PropertyDescriptor, documentName?: string | {}) {
-        if (typeof documentName === 'string') {
-            mongoose.connection.createCollection(documentName).catch(err => {
+    builder(target, propertyKey: string, descriptor: PropertyDescriptor, collectionName?: string) {
+        if (typeof collectionName === 'string') {
+            mongoose.connection.createCollection(collectionName).catch(err => {
                 throw new Error(err);
             });
-            mongoose.model(documentName, new mongoose.Schema(descriptor.value()));
+            mongoose.model(collectionName, new mongoose.Schema(descriptor.value()));
         }
+        descriptor.value = {
+            collectionName, caller: descriptor.value
+        };
     }
 }

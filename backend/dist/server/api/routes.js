@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const fs = require("fs");
-const console_util_1 = require("../../utils/console.util");
-const mergeConfig = require('../../config/env/config')();
+const console_util_1 = require("../utils/console.util");
+const mergeConfig = require('../config/env/config')();
 class Routes {
     constructor(app) {
         this.app = app;
@@ -30,7 +30,7 @@ class Routes {
             const _in = `${pathModules}${f}`;
             if (fs.statSync(_in).isDirectory()) {
                 if (fs.statSync(`${_in}/routes.ts`).isFile()) {
-                    this.getDataAsync(f, `../../modules/${f}/routes`)
+                    this.getDataAsync(f, `../modules/${f}/routes`)
                         .then(_r => _r.registerRoutes(f));
                 }
             }

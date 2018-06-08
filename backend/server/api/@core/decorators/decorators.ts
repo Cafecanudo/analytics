@@ -5,13 +5,13 @@ const formatMetadataKey = Symbol('Inject');
 
 /**
  * Cria a coleção de dados no bootstrap da aplicação.
- * @param {string | {}} documentName
+ * @param {string | {}} collectionName
  * @returns {(target, propertyKey: string, descriptor: PropertyDescriptor) => void}
  * @constructor
  */
-export const MongoDbSchema = (documentName?: string | {}) => {
+export const MongoDbSchema = (collectionName?: string) => {
     return (target, propertyKey: string, descriptor: PropertyDescriptor) => {
-        MongodbSchema.builder(target, propertyKey, descriptor, documentName);
+        MongodbSchema.builder(target, propertyKey, descriptor, collectionName);
     };
 };
 

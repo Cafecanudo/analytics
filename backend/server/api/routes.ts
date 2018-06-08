@@ -2,9 +2,9 @@
 
 import { Application, Request, Response, Router } from 'express';
 import * as fs from 'fs';
-import ConsoleUtil from '../../utils/console.util';
+import ConsoleUtil from '../utils/console.util';
 
-const mergeConfig = require('../../config/env/config')();
+const mergeConfig = require('../config/env/config')();
 
 export default class Routes {
 
@@ -44,7 +44,7 @@ export default class Routes {
             const _in = `${pathModules}${f}`;
             if (fs.statSync(_in).isDirectory()) {
                 if (fs.statSync(`${_in}/routes.ts`).isFile()) {
-                    this.getDataAsync(f, `../../modules/${f}/routes`)
+                    this.getDataAsync(f, `../modules/${f}/routes`)
                         .then(_r => _r.registerRoutes(f));
                 }
             }

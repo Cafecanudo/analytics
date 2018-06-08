@@ -8,7 +8,7 @@ import * as helmet from 'helmet';
 import * as cors from 'cors';
 //Adicionando rotas
 import { errorHandlerApi } from './errorHandlerApi';
-import Routes from './routes/routes';
+import Routes from './routes';
 import ConsoleUtil from '../utils/console.util';
 
 //somente require
@@ -44,7 +44,7 @@ class Api {
 
     private configure(): void {
         ConsoleUtil.info('Configurando aplicação[Middlewares]...');
-        if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
+        if ((process.env.NODE_ENV || 'development') === 'development') {
             this.app.use(logger('dev'));
         }
         this.app.use(bodyParser.urlencoded({extended: true}));
