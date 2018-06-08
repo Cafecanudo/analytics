@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { IRouteTypeModel, RouterDefault } from '../RouterDefault';
 import { GET, Path } from '../../api/@core/decorators/decorators';
-import { ConfiguracaoRepo } from './models/configuracaoModel';
+import { configuracaoRepo } from './models/configuracaoModel';
 
 @Path('/app')
 export default class AplicacaoRoutes extends RouterDefault {
@@ -14,7 +14,7 @@ export default class AplicacaoRoutes extends RouterDefault {
 
     @GET('/')
     index(req: Request, res: Response) {
-        ConfiguracaoRepo.save({
+        configuracaoRepo.save({
             version: '1', lastUpdate: new Date()
         }).then(value => {
             res.json(value);

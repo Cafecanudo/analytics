@@ -1,5 +1,10 @@
+import { RepositoryBase } from '../../../api/@core/repositorio.base';
 export interface IConfiguracaoModel {
     version: string;
     lastUpdate: Date;
 }
-export declare const configuracaoRepo: any;
+declare class ConfiguracaoRepo extends RepositoryBase<IConfiguracaoModel> {
+    schema(): {};
+}
+export declare const configuracaoRepo: ConfiguracaoRepo;
+export {};
