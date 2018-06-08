@@ -8,11 +8,20 @@ export abstract class RouterDefault {
     private name: string;
     private readonly router: Router;
 
+    protected constructor(public app: Application) {
+        this.router = Router();
+    }
+
+    /**
+     * Executado apos classe se contruida
+     */
+    postConstructor(): void {
+    }
+
     /**
      * Retorna dos as rotas implementadas de um modulo
      * @returns {IRouteTypeModel[]}
      */
-
     abstract getRoutes(): IRouteTypeModel[];
 
     /**
@@ -23,10 +32,6 @@ export abstract class RouterDefault {
         return this.name;
     }
 
-    protected constructor(public app: Application) {
-        this.router = Router();
-    }
-
     public registerRoutes(name: string): void {
         this.name = name;
         ConsoleUtil.ln();
@@ -34,6 +39,7 @@ export abstract class RouterDefault {
         this.getRoutes().forEach(_r => {
             this.createRoute(_r);
         });
+        this.postConstructor();
     }
 
     private createRoute(_r: IRouteTypeModel): void {

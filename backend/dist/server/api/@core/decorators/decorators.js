@@ -1,7 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
+const mongodb_schema_1 = require("./rest/mongodb.schema");
 const formatMetadataKey = Symbol('Inject');
+exports.MongoDbSchema = (documentName) => {
+    return (target, propertyKey, descriptor) => {
+        mongodb_schema_1.MongodbSchema.builder(target, propertyKey, descriptor, documentName);
+    };
+};
 /**
  * Injetor de classe
  * @param {string} formatString

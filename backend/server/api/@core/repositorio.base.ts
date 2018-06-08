@@ -16,15 +16,21 @@ export class RepositoryBase<T extends Document> /*implements IRead<T>, IWrite<T>
         this.model = model<T>(dbName, schema);
     }
 
-    createDocument(item: T): Promise<T> {
-        return new Promise((resolve, reject) => {
-            const _n = new this.model(item).save(err => {
-                if (!err) {
-                    return resolve(_n);
-                }
-                return reject(err);
-            });
-        });
-    }
+    // save(item: T): Promise<T> {
+    //     return new Promise<T>((resolve, reject) => {
+    //         console
+    //     });
+    // }
+    //
+    // createDocument1(item: T): Promise<T> {
+    //     return new Promise((resolve, reject) => {
+    //         const _n = new this.model(item).save(err => {
+    //             if (!err) {
+    //                 return resolve(_n);
+    //             }
+    //             return reject(err);
+    //         });
+    //     });
+    // }
 
 }

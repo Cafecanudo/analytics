@@ -12,7 +12,6 @@ const cors = require("cors");
 const errorHandlerApi_1 = require("./errorHandlerApi");
 const routes_1 = require("./routes/routes");
 const console_util_1 = require("../utils/console.util");
-const configuracaoModel_1 = require("../modules/app/models/configuracaoModel");
 //somente require
 require('../config/env/str');
 //import locais
@@ -29,14 +28,14 @@ class Api {
             if (!err) {
                 console_util_1.default.info('Conectado MongoDB=OK.');
                 console_util_1.default.info('Criando modelo de dados no banco...');
-                new Promise(this.createModels).then(res => {
-                    console.log(res);
-                    console_util_1.default.info('Criando modelos=OK');
-                    this.configure();
-                    this.routes();
-                }).catch(err => {
-                    console_util_1.default.error('Criando modelos=FAIL');
-                });
+                this.configure();
+                this.routes();
+                // new Promise(this.createModels).then(res => {
+                //     console.log(res);
+                //     ConsoleUtil.info('Criando modelos=OK');
+                // }).catch(err => {
+                //     ConsoleUtil.error('Criando modelos=FAIL');
+                // });
             }
             else {
                 console_util_1.default.error('Conectado MongoDB=FAIL');
@@ -64,13 +63,15 @@ class Api {
             next();
         });
     }
-    createModels(resolve, reject) {
-        const _model = mongoose.model('configuracao', configuracaoModel_1.configuracaoSchema);
-        // const __m = new _model({
-        //     version: '0.0.1', lastUpdate: new Date()
-        // });
-        //resolve(__m);
-    }
+    // private createModels(resolve, reject): void {
+    //     const _model = mongoose.model<IConfiguracaoModel>('configuracao', configuracaoSchema);
+    //
+    //     // const __m = new _model({
+    //     //     version: '0.0.1', lastUpdate: new Date()
+    //     // });
+    //
+    //     resolve();
+    // }
     showHost() {
         console_util_1.default.info(`ELDOC-Analytics is UP on http://${env.server.hostname}:${env.server.port} ###`);
     }

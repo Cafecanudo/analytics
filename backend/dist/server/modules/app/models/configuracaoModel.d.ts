@@ -1,9 +1,18 @@
-import * as mongoose from 'mongoose';
-import { RepositoryBase } from '../../../api/@core/repositorio.base';
-export interface IConfiguracaoModel extends mongoose.Document {
+export declare abstract class BaseModel<T> {
+    private _model;
+    constructor();
+    /**
+     * Para obter o schema do banco de dados
+     * @returns {{}}
+     */
+    abstract schema(): {};
+}
+export interface IConfiguracaoModel {
     version: string;
     lastUpdate: Date;
 }
-export declare class ConfiguracaoRepo extends RepositoryBase<IConfiguracaoModel> {
-    constructor();
+declare class ConfiguracaoRepo extends BaseModel<IConfiguracaoModel> {
+    schema(): {};
 }
+declare const configuracaoRepo: ConfiguracaoRepo;
+export { configuracaoRepo as ConfiguracaoRepo };

@@ -6,7 +6,7 @@ import { ConfiguracaoRepo } from './models/configuracaoModel';
 @Path('/app')
 export default class AplicacaoRoutes extends RouterDefault {
 
-    private configRepo: ConfiguracaoRepo;
+    private configRepo: any;
 
     getRoutes(): IRouteTypeModel[] {
         return [
@@ -16,10 +16,7 @@ export default class AplicacaoRoutes extends RouterDefault {
 
     @GET('/')
     index(req: Request, res: Response) {
-        this.configRepo = new ConfiguracaoRepo();
-        this.configRepo.createDocument({
-            version: '22', lastUpdate: 'e2'
-        });
+        ConfiguracaoRepo.schema();
         res.json({});
     }
 }

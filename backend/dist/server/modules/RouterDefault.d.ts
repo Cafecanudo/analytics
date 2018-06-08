@@ -4,6 +4,11 @@ export declare abstract class RouterDefault {
     app: Application;
     private name;
     private readonly router;
+    protected constructor(app: Application);
+    /**
+     * Executado apos classe se contruida
+     */
+    postConstructor(): void;
     /**
      * Retorna dos as rotas implementadas de um modulo
      * @returns {IRouteTypeModel[]}
@@ -14,7 +19,6 @@ export declare abstract class RouterDefault {
      * @returns {string}
      */
     getPath(): string;
-    protected constructor(app: Application);
     registerRoutes(name: string): void;
     private createRoute;
 }

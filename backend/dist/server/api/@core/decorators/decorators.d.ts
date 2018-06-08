@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+export declare const MongoDbSchema: (documentName?: string) => (target: any, propertyKey: string, descriptor: PropertyDescriptor) => void;
 /**
  * Injetor de classe
  * @param {string} formatString

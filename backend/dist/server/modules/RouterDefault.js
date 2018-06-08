@@ -9,6 +9,11 @@ class RouterDefault {
         this.router = express_1.Router();
     }
     /**
+     * Executado apos classe se contruida
+     */
+    postConstructor() {
+    }
+    /**
      * Substitui nome padrão do modulo
      * @returns {string}
      */
@@ -22,6 +27,7 @@ class RouterDefault {
         this.getRoutes().forEach(_r => {
             this.createRoute(_r);
         });
+        this.postConstructor();
     }
     createRoute(_r) {
         const _p = '/' + _r.path.replace(/^[\/]+/, '');

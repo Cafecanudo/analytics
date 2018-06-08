@@ -1,6 +1,13 @@
 import 'reflect-metadata';
+import { MongodbSchema } from './rest/mongodb.schema';
 
 const formatMetadataKey = Symbol('Inject');
+
+export const MongoDbSchema = (documentName?: string) => {
+    return (target, propertyKey: string, descriptor: PropertyDescriptor) => {
+        MongodbSchema.builder(target, propertyKey, descriptor, documentName);
+    };
+};
 
 /**
  * Injetor de classe

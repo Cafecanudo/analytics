@@ -41,8 +41,8 @@
     "no-eval": true,
     "eofline": true,
     "no-empty": [
-      true,
-      "allow-empty-catch"
+      false,
+      "allow-empty-functions"
     ],
     "no-unused-expression": true,
     "no-duplicate-variable": true,

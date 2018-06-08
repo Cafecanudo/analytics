@@ -19,10 +19,7 @@ let AplicacaoRoutes = class AplicacaoRoutes extends RouterDefault_1.RouterDefaul
         ];
     }
     index(req, res) {
-        this.configRepo = new configuracaoModel_1.ConfiguracaoRepo();
-        this.configRepo.createDocument({
-            version: '22', lastUpdate: 'e2'
-        });
+        configuracaoModel_1.ConfiguracaoRepo.schema();
         res.json({});
     }
 };
