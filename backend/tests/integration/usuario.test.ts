@@ -30,6 +30,21 @@ describe('Serviços de Usuário', () => {
         });
     });
 
+    describe(`GET ${pathApi}/usuario/perfil/notificacao-resumo`, () => {
+        it('Verificar se serviço esta retornando as notificações na estrutura esperada.', done => {
+            request(app)
+                .get(`${pathApi}/usuario/perfil/notificacao-resumo`)
+                .end((error, res) => {
+                    expect(res.status).to.equal(200);
+                    expect(res.body).to.have.keys('notificacao');
+                    expect(res.body.notificacao).to.be.an.instanceof(Array);
+                    expect(res.body.notificacao).to.have.length.above(0);
+                    expect(res.body.notificacao[0]).to.have.keys(['tipo', 'icone', 'descricao', 'ultima', 'quant']);
+                    done(error);
+                });
+        });
+    });
+
     describe(`GET ${pathApi}/usuario/perfil/menu`, () => {
         it('Verifica se menu esta na estruta especificada.', done => {
             request(app)
@@ -41,17 +56,17 @@ describe('Serviços de Usuário', () => {
                     //verificando dashboards
                     expect(res.body.dashboards).to.be.an.instanceof(Array);
                     expect(res.body.dashboards).to.have.lengthOf.above(0, `Lista de dashboard esta vazia: [${res.body.dashboards.length}]`);
-                    expect(res.body.dashboards[0]).to.have.contains.keys(['_id', 'descricao']);
+                    expect(res.body.dashboards[0]).to.have.contains.keys(['_id', 'descricao', 'name']);
 
                     //Verificando grupo menus
                     expect(res.body.grupo_menus).to.be.an.instanceof(Array);
                     expect(res.body.grupo_menus).to.have.length.above(0, `Lista de "Grupo de Menus" esta vazia: [${res.body.grupo_menus.length}]`);
-                    expect(res.body.grupo_menus[0]).to.have.keys('titulo', 'menus');
+                    expect(res.body.grupo_menus[0]).to.have.keys('menus');
 
                     //menus
                     expect(res.body.grupo_menus[0].menus).to.be.an.instanceof(Array);
                     expect(res.body.grupo_menus[0].menus).to.have.length.above(0, `Lista de "Menus" esta vazia: [${res.body.grupo_menus[0].menus.length}]`);
-                    expect(res.body.grupo_menus[0].menus[0]).to.have.keys(['_id', 'tipo', 'descricao', 'url', 'icone']);
+                    expect(res.body.grupo_menus[0].menus[0]).to.have.keys(['_id', 'tipo', 'descricao', 'icone', 'name']);
 
                     //end
                     done(error);

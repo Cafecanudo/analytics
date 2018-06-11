@@ -8,18 +8,14 @@ export default class AplicacaoRoutes extends RouterDefault {
 
     getRoutes(): IRouteTypeModel[] {
         return [
-            {path: '/', index: this.index}
+            { path: '/', index: this.index }
         ];
     }
 
     @GET('/')
     index(req: Request, res: Response) {
-        configuracaoRepo.save({
+        res.json({
             version: '1', lastUpdate: new Date()
-        }).then(value => {
-            res.json(value);
-        }).catch(err => {
-            res.status(500).send(err);
         });
     }
 }

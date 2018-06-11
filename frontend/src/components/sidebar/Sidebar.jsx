@@ -3,7 +3,7 @@ import LogoFavicon from './LogoFavicon'
 import DadosUsuario from "../commons/Usuario";
 import Axios from 'axios';
 import {env} from '../../main/config/config';
-import Menu from "./Menu";
+import SidebarMenu from "./SidebarMenu";
 
 export default class Sidebar extends Component {
 
@@ -15,7 +15,7 @@ export default class Sidebar extends Component {
     /**
      * Obter dados de perfil do usuario logado
      */
-    getPerfilUsuario() {
+    obterPerfilUsuario() {
         Axios.get(`${env.server.url}/v1/usuario/perfil`).then(value => {
             this.setState({
                 usuario: value.data
@@ -28,7 +28,7 @@ export default class Sidebar extends Component {
         $('#sidebar-overlay').click(function () {
             $('body').toggleClass('sidebar-open sidebar-collapse');
         });
-        this.timerID = setInterval(() => this.getPerfilUsuario(), 1000);
+        this.timerID = setInterval(() => this.obterPerfilUsuario(), 500);
     }
 
     componentWillUnmount() {
@@ -41,9 +41,8 @@ export default class Sidebar extends Component {
                 <aside className="main-sidebar sidebar-dark-primary elevation-4">
                     <LogoFavicon/>
                     <div className="sidebar">
-
                         <DadosUsuario usuario={this.state.usuario || {}}/>
-                        <Menu/>
+                        <SidebarMenu/>
                     </div>
                 </aside>
                 <div id="sidebar-overlay"></div>

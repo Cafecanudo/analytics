@@ -13,42 +13,49 @@ const RouterDefault_1 = require("../RouterDefault");
 const decorators_1 = require("../../api/@core/decorators/decorators");
 const usuario_repositorio_1 = require("./usuario.repositorio");
 let UsuarioRoutes = class UsuarioRoutes extends RouterDefault_1.RouterDefault {
-    getRoutes() {
-        return [
-            {
-                path: 'perfil',
-                index: this.perfil
-            },
-            {
-                path: 'perfil/nome',
-                index: this.nome
-            },
-            {
-                path: 'perfil/menu',
-                index: this.menu
-            }
-        ];
-    }
     perfil(req, res) {
-        usuario_repositorio_1.usuarioRepositorio.getPerfilUsuario()
+        usuario_repositorio_1.usuarioRepositorio.obterPerfilUsuario()
             .then(value => res.json(value))
             .catch(err => {
             res.status(err.statusCode).json(err);
         });
     }
     nome(req, res) {
-        usuario_repositorio_1.usuarioRepositorio.getPerfilUsuario()
+        usuario_repositorio_1.usuarioRepositorio.obterPerfilUsuario()
             .then(value => res.json(value.dadosUsuario))
             .catch(err => {
             res.status(err.statusCode).json(err);
         });
     }
     menu(req, res) {
-        usuario_repositorio_1.usuarioRepositorio.getMenusUsuario()
+        usuario_repositorio_1.usuarioRepositorio.obterMenusUsuario()
             .then(value => res.json(value))
             .catch(err => {
             res.status(err.statusCode).json(err);
         });
+    }
+    notificacao(req, res) {
+        usuario_repositorio_1.usuarioRepositorio.obterPerfilNotificacaoResumo()
+            .then(value => res.json(value))
+            .catch(err => {
+            res.status(err.statusCode).json(err);
+        });
+    }
+    getRoutes() {
+        return [
+            {
+                path: 'perfil', index: this.perfil
+            },
+            {
+                path: 'perfil/nome', index: this.nome
+            },
+            {
+                path: 'perfil/menu', index: this.menu
+            },
+            {
+                path: 'perfil/notificacao-resumo', index: this.notificacao
+            }
+        ];
     }
 };
 __decorate([
@@ -69,6 +76,12 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], UsuarioRoutes.prototype, "menu", null);
+__decorate([
+    decorators_1.GET(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], UsuarioRoutes.prototype, "notificacao", null);
 UsuarioRoutes = __decorate([
     decorators_1.Path('/usuario')
 ], UsuarioRoutes);

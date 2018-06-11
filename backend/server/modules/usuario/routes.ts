@@ -6,26 +6,9 @@ import { usuarioRepositorio } from './usuario.repositorio';
 @Path('/usuario')
 export default class UsuarioRoutes extends RouterDefault {
 
-    getRoutes(): IRouteTypeModel[] {
-        return [
-            {
-                path: 'perfil',
-                index: this.perfil
-            },
-            {
-                path: 'perfil/nome',
-                index: this.nome
-            },
-            {
-                path: 'perfil/menu',
-                index: this.menu
-            }
-        ];
-    }
-
     @GET()
     perfil(req: Request, res: Response) {
-        usuarioRepositorio.getPerfilUsuario()
+        usuarioRepositorio.obterPerfilUsuario()
             .then(value => res.json(value))
             .catch(err => {
                 res.status(err.statusCode).json(err);
@@ -34,7 +17,7 @@ export default class UsuarioRoutes extends RouterDefault {
 
     @GET()
     nome(req: Request, res: Response) {
-        usuarioRepositorio.getPerfilUsuario()
+        usuarioRepositorio.obterPerfilUsuario()
             .then(value => res.json(value.dadosUsuario))
             .catch(err => {
                 res.status(err.statusCode).json(err);
@@ -43,11 +26,41 @@ export default class UsuarioRoutes extends RouterDefault {
 
     @GET()
     menu(req: Request, res: Response) {
-        usuarioRepositorio.getMenusUsuario()
+        usuarioRepositorio.obterMenusUsuario()
             .then(value => res.json(value))
             .catch(err => {
                 res.status(err.statusCode).json(err);
             });
+    }
+
+    @GET()
+    notificacao(req: Request, res: Response) {
+        usuarioRepositorio.obterPerfilNotificacaoResumo()
+            .then(value => res.json(value))
+            .catch(err => {
+                res.status(err.statusCode).json(err);
+            });
+    }
+
+    /**
+     * Retorna as rodas de usuario
+     * @returns {IRouteTypeModel[]}
+     */
+    getRoutes(): IRouteTypeModel[] {
+        return [
+            {
+                path: 'perfil', index: this.perfil
+            },
+            {
+                path: 'perfil/nome', index: this.nome
+            },
+            {
+                path: 'perfil/menu', index: this.menu
+            },
+            {
+                path: 'perfil/notificacao-resumo', index: this.notificacao
+            }
+        ];
     }
 
 }

@@ -17,8 +17,9 @@ declare class UsuarioRepositorio extends RepositoryBase<IUsuarioModel> {
             };
         };
     };
-    getMenusUsuario(): Promise<any>;
-    getPerfilUsuario(): Promise<IUsuarioModel>;
+    obterMenusUsuario(): Promise<any>;
+    obterPerfilUsuario(): Promise<IUsuarioModel>;
+    obterPerfilNotificacaoResumo(): Promise<any>;
 }
 export declare const usuarioRepositorio: UsuarioRepositorio;
 export {};
