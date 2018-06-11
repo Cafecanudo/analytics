@@ -25987,7 +25987,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (typeof emitter.prependListener === 'function') {
 	    return emitter.prependListener(event, fn);
 	  } else {
-	    // This is a hack to make sure that our error handler is attached before any
+	    // This is a hack to make sure that our error index is attached before any
 	    // userland ones.  NEVER DO THIS. This is here only because this code needs
 	    // to continue to work with older versions of Node.js that do not include
 	    // the prependListener() method. The goal is to eventually remove this hack.
@@ -26427,7 +26427,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  // when the dest drains, it reduces the awaitDrain counter
 	  // on the source.  This would be more elegant with a .once()
-	  // handler in flow(), but adding and removing repeatedly is
+	  // index in flow(), but adding and removing repeatedly is
 	  // too slow.
 	  var ondrain = pipeOnDrain(src);
 	  dest.on('drain', ondrain);
@@ -26488,7 +26488,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (EElistenerCount(dest, 'error') === 0) dest.emit('error', er);
 	  }
 
-	  // Make sure our error handler is attached before userland ones.
+	  // Make sure our error index is attached before userland ones.
 	  prependListener(dest, 'error', onerror);
 
 	  // Both close and finish should trigger unpipe, but only once.
@@ -28204,7 +28204,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    function installPostMessageImplementation() {
-	        // Installs an event handler on `global` for the `message` event: see
+	        // Installs an event index on `global` for the `message` event: see
 	        // * https://developer.mozilla.org/en/DOM/window.postMessage
 	        // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
 

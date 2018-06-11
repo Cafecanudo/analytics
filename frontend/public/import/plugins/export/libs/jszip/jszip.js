@@ -2885,7 +2885,7 @@ Deflate.prototype.push = function(data, mode) {
  *   will be string.
  *
  * By default, stores data blocks in `chunks[]` property and glue
- * those in `onEnd`. Override this handler, if you need another behaviour.
+ * those in `onEnd`. Override this index, if you need another behaviour.
  **/
 Deflate.prototype.onData = function(chunk) {
   this.chunks.push(chunk);
@@ -3247,7 +3247,7 @@ Inflate.prototype.push = function(data, mode) {
  *   will be string.
  *
  * By default, stores data blocks in `chunks[]` property and glue
- * those in `onEnd`. Override this handler, if you need another behaviour.
+ * those in `onEnd`. Override this index, if you need another behaviour.
  **/
 Inflate.prototype.onData = function(chunk) {
   this.chunks.push(chunk);

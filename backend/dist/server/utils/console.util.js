@@ -4,6 +4,7 @@ const colors = require('colors/safe');
 const lenh = 100;
 class ConsoleUtil {
     constructor() {
+        this.showStructure = true;
         colors.setTheme({
             silly: 'rainbow',
             input: 'grey',
@@ -44,28 +45,33 @@ class ConsoleUtil {
     static log(t) {
         return new ConsoleUtil().log(t);
     }
+    static literal() {
+        const _c = new ConsoleUtil();
+        _c.showStructure = false;
+        return _c;
+    }
     data(t) {
-        console.log(colors.data(this.complenteStr(`#### Data[ ${t}`)));
+        console.log(colors.data(this.complenteStr(`${this.showStructure ? '#### Data' : ''}[ ${t}`)));
         return t;
     }
     help(t) {
-        console.log(colors.help(this.complenteStr(`#### Help[ ${t}`)));
+        console.log(colors.help(this.complenteStr(`${this.showStructure ? '#### Help' : ''}[ ${t}`)));
         return t;
     }
     info(t) {
-        console.log(colors.info(this.complenteStr(`#### Info[ ${t}`)));
+        console.log(colors.info(this.complenteStr(`${this.showStructure ? '#### Info' : ''}[ ${t}`)));
         return t;
     }
     error(t) {
-        console.log(colors.error(this.complenteStr(`#### Error[ ${t}`)));
+        console.log(colors.error(this.showStructure ? this.complenteStr(`#### Error[ ${t}`) : t));
         return t;
     }
     warn(t) {
-        console.log(colors.warn(this.complenteStr(`#### Warn[ ${t}`)));
+        console.log(colors.warn(this.complenteStr(`${this.showStructure ? '#### Warn' : ''}[ ${t}`)));
         return t;
     }
     log(t) {
-        console.log(colors.prompt(this.complenteStr(`#### Log[ ${t}`)));
+        console.log(colors.prompt(this.complenteStr(`${this.showStructure ? '#### Log' : ''}[ ${t}`)));
         return t;
     }
     white(t) {

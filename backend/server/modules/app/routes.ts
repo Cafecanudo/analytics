@@ -8,7 +8,7 @@ export default class AplicacaoRoutes extends RouterDefault {
 
     getRoutes(): IRouteTypeModel[] {
         return [
-            {path: '/', handler: this.index}
+            {path: '/', index: this.index}
         ];
     }
 

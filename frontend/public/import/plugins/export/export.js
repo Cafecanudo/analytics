@@ -2939,7 +2939,7 @@ if ( !AmCharts.translations[ "export" ][ "en" ] ) {
 			},
 
 			/**
-			 * Callback handler; injects additional arguments to callback
+			 * Callback index; injects additional arguments to callback
 			 */
 			handleCallback: function( callback ) {
 				var i1, data = Array();
@@ -3012,7 +3012,7 @@ if ( !AmCharts.translations[ "export" ][ "en" ] ) {
 			},
 
 			/**
-			 * Border handler; injects additional border to canvas
+			 * Border index; injects additional border to canvas
 			 */
 			handleBorder: function( options ) {
 				if ( _this.config.border instanceof Object ) {
@@ -4365,7 +4365,7 @@ if ( !AmCharts.translations[ "export" ][ "en" ] ) {
 } )();
 
 /**
- * Set init handler
+ * Set init index
  */
 AmCharts.addInitHandler( function( chart ) {
 	new AmCharts[ "export" ]( chart );

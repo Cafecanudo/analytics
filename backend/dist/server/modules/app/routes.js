@@ -15,7 +15,7 @@ const configuracaoModel_1 = require("./models/configuracaoModel");
 let AplicacaoRoutes = class AplicacaoRoutes extends RouterDefault_1.RouterDefault {
     getRoutes() {
         return [
-            { path: '/', handler: this.index }
+            { path: '/', index: this.index }
         ];
     }
     index(req, res) {

@@ -4,6 +4,8 @@ const lenh = 100;
 
 class ConsoleUtil {
 
+    private showStructure: boolean = true;
+
     constructor() {
         colors.setTheme({
             silly: 'rainbow',
@@ -55,33 +57,43 @@ class ConsoleUtil {
         return new ConsoleUtil().log(t);
     }
 
+    /**
+     * Imprime literalmente no console com a cor especifica
+     * @returns {this}
+     */
+    static literal(): any {
+        const _c = new ConsoleUtil();
+        _c.showStructure = false;
+        return _c;
+    }
+
     data(t?): any {
-        console.log(colors.data(this.complenteStr(`#### Data[ ${t}`)));
+        console.log(colors.data(this.complenteStr(`${this.showStructure ? '#### Data' : '' }[ ${t}`)));
         return t;
     }
 
     help(t?): any {
-        console.log(colors.help(this.complenteStr(`#### Help[ ${t}`)));
+        console.log(colors.help(this.complenteStr(`${this.showStructure ? '#### Help' : '' }[ ${t}`)));
         return t;
     }
 
     info(t?): any {
-        console.log(colors.info(this.complenteStr(`#### Info[ ${t}`)));
+        console.log(colors.info(this.complenteStr(`${this.showStructure ? '#### Info' : '' }[ ${t}`)));
         return t;
     }
 
     error(t?): any {
-        console.log(colors.error(this.complenteStr(`#### Error[ ${t}`)));
+        console.log(colors.error(this.showStructure ? this.complenteStr(`#### Error[ ${t}`) : t));
         return t;
     }
 
     warn(t?): any {
-        console.log(colors.warn(this.complenteStr(`#### Warn[ ${t}`)));
+        console.log(colors.warn(this.complenteStr(`${this.showStructure ? '#### Warn' : '' }[ ${t}`)));
         return t;
     }
 
     log(t?): any {
-        console.log(colors.prompt(this.complenteStr(`#### Log[ ${t}`)));
+        console.log(colors.prompt(this.complenteStr(`${this.showStructure ? '#### Log' : '' }[ ${t}`)));
         return t;
     }
 

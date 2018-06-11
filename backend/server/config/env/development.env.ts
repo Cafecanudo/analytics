@@ -6,6 +6,7 @@ module.exports = {
         port: 3000
     },
     frontend: {
+        protocolo: 'http',
         host: 'localhost',
         port: '8080'
     },

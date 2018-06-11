@@ -46,23 +46,23 @@ export abstract class RouterDefault {
         const _p = '/' + _r.path.replace(/^[\/]+/, '');
         switch (_r.type || 'GET') {
             case 'POST': {
-                this.router.post(_p, _r.handler);
+                this.router.post(_p, _r.index);
                 break;
             }
             case 'PUT': {
-                this.router.put(_p, _r.handler);
+                this.router.put(_p, _r.index);
                 break;
             }
             case 'DELETE': {
-                this.router.delete(_p, _r.handler);
+                this.router.delete(_p, _r.index);
                 break;
             }
             case 'PATCH': {
-                this.router.patch(_p, _r.handler);
+                this.router.patch(_p, _r.index);
                 break;
             }
             default: {
-                this.router.get(_p, _r.handler);
+                this.router.get(_p, _r.index);
             }
         }
         const uri = `${pathApi}/${this.getPath().replace(/^[\/]+/, '')}`;
@@ -74,5 +74,5 @@ export abstract class RouterDefault {
 export interface IRouteTypeModel {
     type?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
     path: string;
-    handler: (res: Request, rep: Response) => void;
+    index: (res: Request, rep: Response) => void;
 }

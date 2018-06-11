@@ -14,5 +14,5 @@ export declare abstract class RouterDefault {
 export interface IRouteTypeModel {
     type?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
     path: string;
-    handler: (res: Request, rep: Response) => void;
+    index: (res: Request, rep: Response) => void;
 }

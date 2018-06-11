@@ -29,7 +29,7 @@ class Api {
 
     private connectMongoDb(): void {
         ConsoleUtil.info('Conectando banco de dados[MongoDB]...');
-        mongoose.connect(this.mongoDb, {user: env.database.username, pass: env.database.password}, (err => {
+        mongoose.connect(this.mongoDb, { user: env.database.username, pass: env.database.password }, (err => {
             if (!err) {
                 ConsoleUtil.info('Conectado MongoDB=OK.');
                 ConsoleUtil.info('Criando modelo de dados no banco...');
@@ -47,24 +47,16 @@ class Api {
         if ((process.env.NODE_ENV || 'development') === 'development') {
             this.app.use(logger('dev'));
         }
-        this.app.use(bodyParser.urlencoded({extended: true}));
+        this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(errorHandlerApi);
         this.app.use(bodyParser.json());
         this.app.use(compression());
         this.app.use(helmet());
-        this.app.use(cors());
-
-        // cors
-        this.app.use((req, res, next) => {
-            res.header(
-                'Access-Control-Allow-Origin',
-                `${env.frontend.protocolo || 'http'}://${env.frontend.host}${env.frontend.port ? `:${env.frontend.port}` : ''}`
-            );
-            res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-            res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials');
-            res.header('Access-Control-Allow-Credentials', 'true');
-            next();
-        });
+        this.app.use(cors({
+            origin: `${env.frontend.protocolo || 'http'}://${env.frontend.host}${env.frontend.port ? `:${env.frontend.port}` : ''}`,
+            methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+            optionsSuccessStatus: 204
+        }));
 
     }
 

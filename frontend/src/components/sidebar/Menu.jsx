@@ -1,18 +1,92 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
+import Axios from "axios/index";
+import {env} from "../../main/config/config";
 
 export default class Menu extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = {
+            list: []
+        }
+    }
+
+    obterMenusDoPerfil() {
+        Axios.get(`${env.server.url}/v1/usuario/perfil/menu`).then(value => {
+            this.setState({
+                list: value.data
+            });
+            clearInterval(this.timerID);
+        }).catch(reason => {
+
+        });
+    }
+
+    componentDidMount() {
+        this.timerID = setInterval(() => this.obterMenusDoPerfil(), 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+
+    render() {
+        return (
+            <nav className="mt-2">
+                <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <li className="nav-item has-treeview">
+                        <a href="#" className="nav-link">
+                            <i className="nav-icon fa fa-line-chart"></i>
+                            <p>
+                                Menu 1
+                            </p>
+                        </a>
+                    </li>
+                    <li className="nav-item has-treeview">
+                        <a href="#" className="nav-link">
+                            <i className="nav-icon fa fa-line-chart"></i>
+                            <p>
+                                Menu 2
+                                <i className="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul className="nav nav-treeview">
+                            <li className="nav-item">
+                                <a href="#" className="nav-link">
+                                    <i className="fa nav-icon fa-television"></i>
+                                    <p>Submenu 1</p>
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a href="#" className="nav-link">
+                                    <i className="fa nav-icon fa-television"></i>
+                                    <p>Submenu 2</p>
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a href="#" className="nav-link">
+                                    <i className="fa nav-icon fa-television"></i>
+                                    <p>Submenu 3</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        );
+    }
+
+    /*asd(){
         this.state = {
             usuario: props.usuario,
             menus: [
                 {
                     icon: 'dashboard', display: 'Dashboard', open: true,
                     menus: [
-                        { url: '/Resumo', icon: 'line-chart', display: 'Resumo' },
-                        { url: '/Resumo', icon: 'area-chart', display: 'Contingência' },
-                        { url: '/Resumo', icon: 'bar-chart', display: 'Notas Divegentes' }
+                        {url: '/Resumo', icon: 'line-chart', display: 'Resumo'},
+                        {url: '/Resumo', icon: 'area-chart', display: 'Contingência'},
+                        {url: '/Resumo', icon: 'bar-chart', display: 'Notas Divegentes'}
                     ]
                 },
                 {
@@ -25,10 +99,10 @@ export default class Menu extends Component {
     componentDidMount() {
         $('.nav-sidebar .has-treeview .nav-link').click(function () {
             if ($(this).parent().hasClass('menu-open')) {
-                $(this).removeClass('active').parent().removeClass('menu-open').css({ height: 40 });
+                $(this).removeClass('active').parent().removeClass('menu-open').css({height: 40});
             } else {
                 $(this).addClass('active').parent().addClass('menu-open')
-                    .css({ height: ($(this).parent().height() + $(this).next().height() + 5) })
+                    .css({height: ($(this).parent().height() + $(this).next().height() + 5)})
             }
         })
     }
@@ -81,7 +155,7 @@ export default class Menu extends Component {
                             <p>Graficos</p>
                         </a>
                     </li>
-                    {/*<li className="nav-item has-treeview menu-open">
+                    {/!*<li className="nav-item has-treeview menu-open">
             <a href="#" className="nav-link active">
               <i className="nav-icon fa fa-dashboard"></i>
               <p>
@@ -109,9 +183,9 @@ export default class Menu extends Component {
                 </a>
               </li>
             </ul>
-          </li>*/}
+          </li>*!/}
                 </ul>
             </nav>
         )
-    }
+    }*/
 }

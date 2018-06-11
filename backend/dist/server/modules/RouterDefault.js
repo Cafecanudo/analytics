@@ -26,23 +26,23 @@ class RouterDefault {
         const _p = '/' + _r.path.replace(/^[\/]+/, '');
         switch (_r.type || 'GET') {
             case 'POST': {
-                this.router.post(_p, _r.handler);
+                this.router.post(_p, _r.index);
                 break;
             }
             case 'PUT': {
-                this.router.put(_p, _r.handler);
+                this.router.put(_p, _r.index);
                 break;
             }
             case 'DELETE': {
-                this.router.delete(_p, _r.handler);
+                this.router.delete(_p, _r.index);
                 break;
             }
             case 'PATCH': {
-                this.router.patch(_p, _r.handler);
+                this.router.patch(_p, _r.index);
                 break;
             }
             default: {
-                this.router.get(_p, _r.handler);
+                this.router.get(_p, _r.index);
             }
         }
         const uri = `${exports.pathApi}/${this.getPath().replace(/^[\/]+/, '')}`;

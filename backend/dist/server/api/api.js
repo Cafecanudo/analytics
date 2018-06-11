@@ -43,14 +43,11 @@ class Api {
         this.app.use(bodyParser.json());
         this.app.use(compression());
         this.app.use(helmet());
-        this.app.use(cors());
-        this.app.use((req, res, next) => {
-            res.header('Access-Control-Allow-Origin', `${env.frontend.protocolo || 'http'}://${env.frontend.host}${env.frontend.port ? `:${env.frontend.port}` : ''}`);
-            res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-            res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials');
-            res.header('Access-Control-Allow-Credentials', 'true');
-            next();
-        });
+        this.app.use(cors({
+            origin: `${env.frontend.protocolo || 'http'}://${env.frontend.host}${env.frontend.port ? `:${env.frontend.port}` : ''}`,
+            methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+            optionsSuccessStatus: 204
+        }));
     }
     showHost() {
         console_util_1.default.info(`ELDOC-Analytics is UP on http://${env.server.hostname}:${env.server.port} ###`);

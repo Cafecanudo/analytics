@@ -15,7 +15,7 @@ module.exports = {
     filename: './app.js',
   },
   devServer: {
-    port: process.env.PORT || 8000,
+    port: process.env.PORT || 8080,
     compress: true,
     contentBase: [
       path.join(__dirname, "public")

@@ -15,28 +15,6 @@ export const MongoDbSchema = (collectionName?: string) => {
     };
 };
 
-/*export const MongoDbSchema = (documentName?: string | {}) => {
-    return (target: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
-
-        const get = () => {
-            return documentName;
-        };
-
-        const set = () => {
-            return documentName;
-        };
-
-        const dqw = Object.defineProperty(target, propertyKey, {get, set});
-
-        console.log(descriptor);
-        console.log(propertyKey);
-        console.log(target);
-        console.log(dqw);
-
-        MongodbSchema.builder(target, propertyKey, documentName);
-    };
-};*/
-
 /**
  * Injetor de classe
  * @param {string} formatString

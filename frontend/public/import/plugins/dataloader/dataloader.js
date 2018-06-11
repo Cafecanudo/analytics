@@ -38,7 +38,7 @@ not apply to any other amCharts products that are covered by different licenses.
 AmCharts.translations.dataLoader = {};
 
 /**
- * Set init handler
+ * Set init index
  */
 AmCharts.addInitHandler( function( chart ) {
 
@@ -193,7 +193,7 @@ AmCharts.addInitHandler( function( chart ) {
     // set percent loaded for this file
     l.percentLoaded[ url ] = 0;
 
-    // hijack user-defined "progress" handler with our own, so that we can
+    // hijack user-defined "progress" index with our own, so that we can
     // track progress
     if ( options.progress !== undefined && typeof( options.progress ) === 'function' && options._progress === undefined ) {
       options._progress = options.progress;
@@ -371,7 +371,7 @@ AmCharts.addInitHandler( function( chart ) {
   }
 
   /**
-   * Checks if postProcess is set and invokes the handler
+   * Checks if postProcess is set and invokes the index
    */
   function postprocess( data, options ) {
     if ( undefined !== options.postProcess && isFunction( options.postProcess ) )
@@ -510,7 +510,7 @@ if ( undefined === AmCharts.__ ) {
 }
 
 /**
- * Loads a file from url and calls function handler with the result
+ * Loads a file from url and calls function index with the result
  */
 AmCharts.loadFile = function( url, options, handler ) {
 
@@ -553,7 +553,7 @@ AmCharts.loadFile = function( url, options, handler ) {
     }
   }
 
-  // set handler for data if async loading
+  // set index for data if async loading
   request.onreadystatechange = function() {
 
     if ( 4 === request.readyState && ( 404 === request.status || 500 === request.status ) )

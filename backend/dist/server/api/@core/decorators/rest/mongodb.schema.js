@@ -10,7 +10,6 @@ class MongodbSchema {
             mongoose.connection.createCollection(collectionName).catch(err => {
                 throw new Error(err);
             });
-            mongoose.model(collectionName, new mongoose.Schema(descriptor.value()));
         }
         descriptor.value = {
             collectionName, caller: descriptor.value

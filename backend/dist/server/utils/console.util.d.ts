@@ -1,4 +1,5 @@
 declare class ConsoleUtil {
+    private showStructure;
     constructor();
     static clear(): any;
     static ln(): any;
@@ -9,6 +10,7 @@ declare class ConsoleUtil {
     static error(t?: any): any;
     static warn(t?: any): any;
     static log(t?: any): any;
+    static literal(): any;
     data(t?: any): any;
     help(t?: any): any;
     info(t?: any): any;

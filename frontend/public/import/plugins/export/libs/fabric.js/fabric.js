@@ -130,7 +130,7 @@ fabric.devicePixelRatio = fabric.window.devicePixelRatio ||
    * @deprecated `observe` deprecated since 0.8.34 (use `on` instead)
    * @memberOf fabric.Observable
    * @alias on
-   * @param {String|Object} eventName Event name (eg. 'after:render') or object with key/value pairs (eg. {'after:render': handler, 'selection:cleared': handler})
+   * @param {String|Object} eventName Event name (eg. 'after:render') or object with key/value pairs (eg. {'after:render': index, 'selection:cleared': index})
    * @param {Function} handler Function that receives a notification when an event of the specified type occurs
    * @return {Self} thisArg
    * @chainable
@@ -155,12 +155,12 @@ fabric.devicePixelRatio = fabric.window.devicePixelRatio ||
   }
 
   /**
-   * Stops event observing for a particular event handler. Calling this method
+   * Stops event observing for a particular event index. Calling this method
    * without arguments removes all handlers for all events
    * @deprecated `stopObserving` deprecated since 0.8.34 (use `off` instead)
    * @memberOf fabric.Observable
    * @alias off
-   * @param {String|Object} eventName Event name (eg. 'after:render') or object with key/value pairs (eg. {'after:render': handler, 'selection:cleared': handler})
+   * @param {String|Object} eventName Event name (eg. 'after:render') or object with key/value pairs (eg. {'after:render': index, 'selection:cleared': index})
    * @param {Function} handler Function to be deleted from EventListeners
    * @return {Self} thisArg
    * @chainable
@@ -170,7 +170,7 @@ fabric.devicePixelRatio = fabric.window.devicePixelRatio ||
       return;
     }
 
-    // remove all key/value pairs (event name -> event handler)
+    // remove all key/value pairs (event name -> event index)
     if (arguments.length === 0) {
       for (eventName in this.__eventListeners) {
         _removeEventListener.call(this, eventName);
@@ -6467,7 +6467,7 @@ fabric.ElementsParser.prototype.checkIfDone = function() {
 
     /**
      * Calculates canvas element offset relative to the document
-     * This method is also attached as "resize" event handler of window
+     * This method is also attached as "resize" event index of window
      * @return {fabric.Canvas} instance
      * @chainable
      */
@@ -24318,7 +24318,7 @@ fabric.Image.filters.BaseFilter.fromObject = function(object, callback) {
     },
 
     /**
-     * Initializes "added" event handler
+     * Initializes "added" event index
      */
     initAddedHandler: function() {
       var _this = this;
@@ -24674,7 +24674,7 @@ fabric.Image.filters.BaseFilter.fromObject = function(object, callback) {
     },
 
     /**
-     * Initializes "mousemove" event handler
+     * Initializes "mousemove" event index
      */
     initMouseMoveHandler: function() {
       this.canvas.on('mouse:move', this.mouseMoveHandler);
@@ -25198,7 +25198,7 @@ fabric.Image.filters.BaseFilter.fromObject = function(object, callback) {
 
 fabric.util.object.extend(fabric.IText.prototype, /** @lends fabric.IText.prototype */ {
   /**
-   * Initializes "dbclick" event handler
+   * Initializes "dbclick" event index
    */
   initDoubleClickSimulation: function() {
 
@@ -25277,7 +25277,7 @@ fabric.util.object.extend(fabric.IText.prototype, /** @lends fabric.IText.protot
   },
 
   /**
-   * Initializes "mousedown" event handler
+   * Initializes "mousedown" event index
    */
   initMousedownHandler: function() {
     this.on('mousedown', function(options) {
@@ -25314,7 +25314,7 @@ fabric.util.object.extend(fabric.IText.prototype, /** @lends fabric.IText.protot
   },
 
   /**
-   * Initializes "mouseup" event handler
+   * Initializes "mouseup" event index
    */
   initMouseupHandler: function() {
     this.on('mouseup', function(options) {
@@ -26896,7 +26896,7 @@ fabric.util.object.extend(fabric.IText.prototype, /** @lends fabric.IText.protot
       oURL.port = ( oURL.protocol.indexOf('https:') === 0 ) ? 443 : 80;
     }
 
-    // assign request handler based on protocol
+    // assign request index based on protocol
     var reqHandler = (oURL.protocol.indexOf('https:') === 0 ) ? HTTPS : HTTP,
         req = reqHandler.request({
           hostname: oURL.hostname,
