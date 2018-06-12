@@ -1,5 +1,6 @@
-import React, {Component} from 'react'
-import noUserFoto from '../../resources/images/no-user-photo.png'
+import React, { Component } from 'react';
+import noUserFoto from '../../resources/images/no-user-photo.png';
+import { NavLink } from 'react-router-dom';
 
 export default class DadosUsuario extends Component {
 
@@ -10,12 +11,15 @@ export default class DadosUsuario extends Component {
     render() {
         return (
             <div className="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div className="image">
-                    <img src={this.props.usuario.foto || noUserFoto} className="img-circle elevation-2" alt="User Image"/>
-                </div>
-                <div className="info">
-                    <a href="#/perfil" className="d-block">{this.props.usuario.dadosUsuario ? this.props.usuario.dadosUsuario.nome : 'Carregando...'}</a>
-                </div>
+                <NavLink className={'d-block'} to={'/perfil'} activeClassName="active-sub">
+                    <div className="image">
+                        <img src={this.props.usuario.foto || noUserFoto} className="img-circle elevation-2"
+                             alt="User Image"/>
+                    </div>
+                    <div className="info">
+                        {this.props.usuario.dadosUsuario ? this.props.usuario.dadosUsuario.nome : 'Carregando...'}
+                    </div>
+                </NavLink>
             </div>
         );
     }

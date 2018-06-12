@@ -6,7 +6,7 @@ body, html {
   background: #f4f6f9;
 }
 
-#app{
+#app {
   height: 100%;
 }
 
@@ -19,6 +19,35 @@ body, html {
       > .nav-link.active {
         background-color: #f05722;
       }
+      .nav-link.active-sub {
+        background-color: #5d656d;
+      }
     }
+  }
+}
+
+.main-footer {
+  padding: 5px;
+  color: #555;
+  border-top: 1px solid #c1c0c0;
+  background: #fff;
+  margin-top: -29px;
+  font-size: 12px;
+}
+
+.user-panel {
+  .image {
+    float: left;
+  }
+  a.d-block{
+    width: 100%;
+    padding: 5px 0 0;
+    border-radius: 4px;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+  a.d-block.active-sub {
+    background: #5d656d;
   }
 }

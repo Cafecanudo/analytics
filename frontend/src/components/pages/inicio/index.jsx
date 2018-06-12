@@ -1,6 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import { bindActionCreators } from 'redux';
 
-export class Inicio extends Component {
+class Inicio extends Component {
+
+    componentWillMount() {
+        this.props.actionChangeBreadcrumb({
+            title: 'Dashboard',
+            link: [
+                {
+                    url: 'teste 1', descricao: 'descricao 1'
+                },
+                {
+                    url: 'teste 2', descricao: 'descricao 2'
+                }
+            ]
+        });
+    }
 
     render() {
         return (
@@ -125,3 +142,16 @@ export class Inicio extends Component {
         );
     }
 }
+
+const actionChangeBreadcrumb = (bread) => {
+    return {
+        type: 'NEW_BREADCRUMB',
+        breadcrumb: bread
+    };
+};
+
+const mapDispatch = (dispatch) => {
+    return bindActionCreators({ actionChangeBreadcrumb }, dispatch);
+};
+
+export default withRouter(connect(null, mapDispatch)(Inicio));

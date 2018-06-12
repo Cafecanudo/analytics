@@ -1,6 +1,7 @@
-import React, {Component} from 'react'
-import Axios from "axios/index";
-import {env} from "../../main/config/config";
+import React, { Component } from 'react';
+import Axios from 'axios/index';
+import { env } from '../../main/config/config';
+import { NavLink } from 'react-router-dom';
 
 export default class SidebarMenu extends Component {
 
@@ -11,8 +12,17 @@ export default class SidebarMenu extends Component {
                 dashboards: [],
                 grupo_menus: []
             }
-        }
+        };
     }
+
+    breadcrumb(path, pathName, name) {
+        if (path) {
+            console.log(path);
+            console.log(pathName);
+            console.log(name);
+            console.log('--------------------------------');
+        }
+    };
 
     obterMenusPerfil() {
         Axios.get(`${env.server.url}/v1/usuario/perfil/menu`).then(value => {
@@ -34,15 +44,17 @@ export default class SidebarMenu extends Component {
     getDashboard() {
         const _dash = this.state.perfil.dashboards.map((dash, index) => (
             <li key={index} className="nav-item" title={dash.hint || ''}>
-                <a href={`#/dashboard/${dash.name || 'sem-dashboards'}`} className="nav-link">
+                <NavLink to={`/dashboard/${dash.name || 'sem-dashboards'}`} className={'nav-link'}
+                         activeClassName="active-sub"
+                         isActive={(path, pathName) => this.breadcrumb(path, pathName, `Dashboard ${dash.descricao}`)}>
                     <i className={`nav-icon ${dash.icone}`}></i>
                     <p>{dash.descricao}</p>
-                </a>
+                </NavLink>
             </li>
         ));
         return (
             <li className="nav-item has-treeview" sc-down={this.state.perfil.dashboards.length * 43}>
-                <a href="#" className="nav-link">
+                <a className="nav-link">
                     <i className={`nav-icon fa fa-${this.state.perfil.dashboards.length > 0 ? 'dashboard' : 'spinner fa-pulse fa-3x fa-fw'}`}></i>
                     <p>
                         {this.state.perfil.dashboards.length > 0 ? 'Dashboard' : 'Carregando...'}
@@ -70,11 +82,12 @@ export default class SidebarMenu extends Component {
             const menu = _m;
             return (
                 <li key={index} id="monitor" className="nav-item has-treeview">
-                    <a href={`#/${menu.tipo === 'PAGE' ? menu.url : `perfil/acesso/${menu.name}`}`}
-                       className="nav-link">
+                    <NavLink to={`/${menu.tipo === 'PAGE' ? menu.url : `perfil/acesso/${menu.name}`}`}
+                             className={'nav-link'} activeClassName="active-sub"
+                             isActive={(path, pathName) => this.breadcrumb(path, pathName, menu.descricao)}>
                         <i className={`nav-icon ${menu.icone}`}></i>
                         <p>{menu.descricao}</p>
-                    </a>
+                    </NavLink>
                 </li>
             );
         }
@@ -97,12 +110,12 @@ export default class SidebarMenu extends Component {
     }
 
     setActionMenus() {
-        $('.nav-sidebar .has-treeview > .nav-link').unbind().click(function () {
+        $('.nav-sidebar .has-treeview:has(ul) > .nav-link').unbind().click(function () {
             if ($(this).parent().hasClass('menu-open')) {
-                $(this).removeClass('active').parent().removeClass('menu-open').css({height: 40});
+                $(this).removeClass('active').parent().removeClass('menu-open').css({ height: 40 });
             } else {
                 $(this).addClass('active').parent().addClass('menu-open')
-                    .css({height: parseInt($(this).parent().attr('sc-down')) + 45});
+                    .css({ height: parseInt($(this).parent().attr('sc-down')) + 45 });
             }
         });
     }

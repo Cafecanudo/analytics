@@ -1,58 +1,78 @@
-import {BrowserRouter, Route, Switch} from "react-router-dom";
-import React, {Component} from 'react'
+import { Link, Route, Switch } from 'react-router-dom';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import '../@core/dependencies'
-import Sidebar from "../components/sidebar/Sidebar";
-import HeaderMenu from "../components/HeaderMenu";
-//paginas
-import Inicio from '../components/pages/inicio'
+import '../@core/dependencies';
+import Sidebar from '../components/sidebar/Sidebar';
+import HeaderMenu from '../components/HeaderMenu';
+import { ApiRouter } from './routers';
+import { withRouter } from 'react-router';
 
-export default class AppComponent extends Component {
+class AppComponent extends Component {
+
+    obterLinkBreadcrumb() {
+        return this.props.breadcrumb.link.map((component, index) => (
+            <li key={index} className="breadcrumb-item">
+                {(index + 1) !== this.props.breadcrumb.link.length ? (
+                    <Link to={component.url}>
+                        {component.descricao}
+                    </Link>
+                ) : component.descricao}
+            </li>
+        ));
+    }
 
     render() {
         return (
-            <div className="wrapper">
-                <HeaderMenu/>
-                <Sidebar/>
+            <span>
+                <div className="wrapper">
+                    <HeaderMenu/>
+                    <Sidebar/>
 
-                {/*Content Wrapper. Contains page content*/}
-                <div className="content-wrapper">
+                    {/*Content Wrapper. Contains page content*/}
+                    <div className="content-wrapper">
 
-                    <div className="content-header">
-                        <div className="container-fluid">
-                            <div className="row mb-2">
-                                <div className="col-sm-6">
-                                    <h1 className="m-0 text-dark">Dashboard Resumo</h1>
-                                </div>
-                                <div className="col-sm-6">
-                                    <ol className="breadcrumb float-sm-right">
-                                        <li className="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                        <li className="breadcrumb-item active">Resumo</li>
-                                    </ol>
+                        <div className="content-header">
+                            <div className="container-fluid">
+                                <div className="row mb-2">
+                                    <div className="col-sm-6">
+                                        <h1 className="m-0 text-dark">{this.props.breadcrumb.title}</h1>
+                                    </div>
+                                    <div className="col-sm-6">
+                                        <ol className="breadcrumb float-sm-right">
+                                            {this.obterLinkBreadcrumb()}
+                                        </ol>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <section className="content">
-                        <BrowserRouter>
+                        <section className="content">
                             <Switch>
-                                <Route exact={true} path="/" component={Inicio}/>
-                                <Route path="/inicio" component={Inicio}/>
+                                {ApiRouter().map((el, index) => (
+                                    <Route key={index} exact={el.exact || true} path={el.path}
+                                           component={el.component}/>
+                                ))}
                             </Switch>
-                        </BrowserRouter>
-                    </section>
+                        </section>
+                    </div>
+
                 </div>
-
-
-                {/*Main Footer*/}
                 <footer className="main-footer">
                     <div className="float-right d-none d-sm-inline">
                         SOFTBOX
                     </div>
-                    <strong>Copyright &copy; 2018 <a href="#">www.softbox.com.br</a>.</strong> Todos direitos
+                    <span>Copyright &copy; 2018 <a href="#">www.softbox.com.br</a>.</span> Todos direitos
                     reservados.
                 </footer>
-            </div>
-        )
+            </span>
+        );
     }
 }
+
+const mapProps = (state) => {
+    return {
+        breadcrumb: state.breadcrumb
+    };
+};
+
+export default withRouter(connect(mapProps)(AppComponent));
