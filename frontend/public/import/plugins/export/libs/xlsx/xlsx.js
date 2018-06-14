@@ -2917,38 +2917,38 @@ var ct2type/*{[string]:string}*/ = ({
 var CT_LIST = (function(){
 	var o = {
 		workbooks: {
-			xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml",
-			xlsm: "application/vnd.ms-excel.sheet.macroEnabled.main+xml",
-			xlsb: "application/vnd.ms-excel.sheet.binary.macroEnabled.main",
-			xltx: "application/vnd.openxmlformats-officedocument.spreadsheetml.template.main+xml"
+			xlsx: "applicationReducer/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml",
+			xlsm: "applicationReducer/vnd.ms-excel.sheet.macroEnabled.main+xml",
+			xlsb: "applicationReducer/vnd.ms-excel.sheet.binary.macroEnabled.main",
+			xltx: "applicationReducer/vnd.openxmlformats-officedocument.spreadsheetml.template.main+xml"
 		},
 		strs: { /* Shared Strings */
-			xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml",
-			xlsb: "application/vnd.ms-excel.sharedStrings"
+			xlsx: "applicationReducer/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml",
+			xlsb: "applicationReducer/vnd.ms-excel.sharedStrings"
 		},
 		comments: { /* Comments */
-			xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.comments+xml",
-			xlsb: "application/vnd.ms-excel.comments"
+			xlsx: "applicationReducer/vnd.openxmlformats-officedocument.spreadsheetml.comments+xml",
+			xlsb: "applicationReducer/vnd.ms-excel.comments"
 		},
 		sheets: { /* Worksheet */
-			xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml",
-			xlsb: "application/vnd.ms-excel.worksheet"
+			xlsx: "applicationReducer/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml",
+			xlsb: "applicationReducer/vnd.ms-excel.worksheet"
 		},
 		charts: { /* Chartsheet */
-			xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.chartsheet+xml",
-			xlsb: "application/vnd.ms-excel.chartsheet"
+			xlsx: "applicationReducer/vnd.openxmlformats-officedocument.spreadsheetml.chartsheet+xml",
+			xlsb: "applicationReducer/vnd.ms-excel.chartsheet"
 		},
 		dialogs: { /* Dialogsheet */
-			xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.dialogsheet+xml",
-			xlsb: "application/vnd.ms-excel.dialogsheet"
+			xlsx: "applicationReducer/vnd.openxmlformats-officedocument.spreadsheetml.dialogsheet+xml",
+			xlsb: "applicationReducer/vnd.ms-excel.dialogsheet"
 		},
 		macros: { /* Macrosheet (Excel 4.0 Macros) */
-			xlsx: "application/vnd.ms-excel.macrosheet+xml",
-			xlsb: "application/vnd.ms-excel.macrosheet"
+			xlsx: "applicationReducer/vnd.ms-excel.macrosheet+xml",
+			xlsb: "applicationReducer/vnd.ms-excel.macrosheet"
 		},
 		styles: { /* Styles */
-			xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml",
-			xlsb: "application/vnd.ms-excel.styles"
+			xlsx: "applicationReducer/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml",
+			xlsb: "applicationReducer/vnd.ms-excel.styles"
 		}
 	};
 	keys(o).forEach(function(k) { if(!o[k].xlsm) o[k].xlsm = o[k].xlsx; });
@@ -2996,9 +2996,9 @@ var CTYPE_XML_ROOT = writextag('Types', null, {
 });
 
 var CTYPE_DEFAULTS = [
-	['xml', 'application/xml'],
-	['bin', 'application/vnd.ms-excel.sheet.binary.macroEnabled.main'],
-	['vml', 'application/vnd.openxmlformats-officedocument.vmlDrawing'],
+	['xml', 'applicationReducer/xml'],
+	['bin', 'applicationReducer/vnd.ms-excel.sheet.binary.macroEnabled.main'],
+	['vml', 'applicationReducer/vnd.openxmlformats-officedocument.vmlDrawing'],
 	/* from test files */
 	['bmp', 'image/bmp'],
 	['png', 'image/png'],
@@ -3007,7 +3007,7 @@ var CTYPE_DEFAULTS = [
 	['wmf', 'image/x-wmf'],
 	['jpg', 'image/jpeg'], ['jpeg', 'image/jpeg'],
 	['tif', 'image/tiff'], ['tiff', 'image/tiff'],
-	['pdf', 'application/pdf'],
+	['pdf', 'applicationReducer/pdf'],
 	['rels', type2ct.rels[0]]
 ].map(function(x) {
 	return writextag('Default', null, {'Extension':x[0], 'ContentType': x[1]});
@@ -3124,7 +3124,7 @@ function add_rels(rels, rId, f, type, relobj) {
 }
 /* Open Document Format for Office Applications (OpenDocument) Version 1.2 */
 /* Part 3 Section 4 Manifest File */
-var CT_ODS = "application/vnd.oasis.opendocument.spreadsheet";
+var CT_ODS = "applicationReducer/vnd.oasis.opendocument.spreadsheet";
 function parse_manifest(d, opts) {
 	var str = xlml_normalize(d);
 	var Rn;
@@ -3147,7 +3147,7 @@ function parse_manifest(d, opts) {
 function write_manifest(manifest, opts) {
 	var o = [XML_HEADER];
 	o.push('<manifest:manifest xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0" manifest:version="1.2">\n');
-	o.push('  <manifest:file-entry manifest:full-path="/" manifest:version="1.2" manifest:media-type="application/vnd.oasis.opendocument.spreadsheet"/>\n');
+	o.push('  <manifest:file-entry manifest:full-path="/" manifest:version="1.2" manifest:media-type="applicationReducer/vnd.oasis.opendocument.spreadsheet"/>\n');
 	for(var i = 0; i < manifest.length; ++i) o.push('  <manifest:file-entry manifest:full-path="' + manifest[i][0] + '" manifest:media-type="' + manifest[i][1] + '"/>\n');
 	o.push('</manifest:manifest>');
 	return o.join("");
@@ -16725,7 +16725,7 @@ var write_content_ods = (function() {
 
 		var fods = wxt_helper({
 			'xmlns:config':"urn:oasis:names:tc:opendocument:xmlns:config:1.0",
-			'office:mimetype':"application/vnd.oasis.opendocument.spreadsheet"
+			'office:mimetype':"applicationReducer/vnd.oasis.opendocument.spreadsheet"
 		});
 
 		if(opts.bookType == "fods") o.push('<office:document' + attr + fods + '>\n');
@@ -16753,7 +16753,7 @@ var zip = new jszip();
 
 	/* 3:3.3 and 2:2.2.4 */
 	f = "mimetype";
-	zip.file(f, "application/vnd.oasis.opendocument.spreadsheet");
+	zip.file(f, "applicationReducer/vnd.oasis.opendocument.spreadsheet");
 
 	/* Part 1 Section 2.2 Documents */
 	f = "content.xml";
@@ -16770,7 +16770,7 @@ var zip = new jszip();
 	/* Part 3 Section 6 Metadata Manifest File */
 	f = "manifest.rdf";
 	zip.file(f, write_rdf(rdf, opts));
-	manifest.push([f, "application/rdf+xml"]);
+	manifest.push([f, "applicationReducer/rdf+xml"]);
 
 	/* TODO: this is hard-coded to satiate excel */
 	f = "meta.xml";
@@ -17010,7 +17010,7 @@ function parse_zip(zip, opts) {
 	}
 	if(opts.bookVBA) {
 		if(dir.vba.length > 0) out.vbaraw = getzipdata(zip,dir.vba[0].replace(/^\//,''),true);
-		else if(dir.defaults && dir.defaults.bin === 'application/vnd.ms-office.vbaProject') out.vbaraw = getzipdata(zip,'xl/vbaProject.bin',true);
+		else if(dir.defaults && dir.defaults.bin === 'applicationReducer/vnd.ms-office.vbaProject') out.vbaraw = getzipdata(zip,'xl/vbaProject.bin',true);
 	}
 	return out;
 }

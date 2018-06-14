@@ -94,7 +94,7 @@
 				, data_URI_header
 			;
 			if (type === null) {
-				type = "application/octet-stream";
+				type = "applicationReducer/octet-stream";
 			}
 			if (blob instanceof FakeBlob) {
 				data_URI_header = "data:" + type;

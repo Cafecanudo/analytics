@@ -26,6 +26,15 @@ body, html {
   }
 }
 
+.dropdown-item:active {
+  color: #fff;
+  text-decoration: none;
+  background-color: #f05722;
+  .text-muted {
+    color: #fff !important;
+  }
+}
+
 .main-footer {
   padding: 5px;
   color: #555;

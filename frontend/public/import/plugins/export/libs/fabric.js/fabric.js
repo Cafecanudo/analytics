@@ -2713,7 +2713,7 @@ fabric.CommonMethods = {
     xhr.open(method, url, true);
 
     if (method === 'POST' || method === 'PUT') {
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.setRequestHeader('Content-Type', 'applicationReducer/x-www-form-urlencoded');
     }
 
     xhr.send(body);
@@ -10091,7 +10091,7 @@ fabric.PatternBrush = fabric.util.createClass(fabric.PencilBrush, /** @lends fab
      * Discards currently active object and fire events. If the function is called by fabric
      * as a consequence of a mouse event, the event is passed as a parmater and
      * sent to the fire function for the custom events. When used as a method the
-     * e param does not have any application.
+     * e param does not have any applicationReducer.
      * @param {event} e
      * @return {fabric.Canvas} thisArg
      * @chainable
@@ -10122,7 +10122,7 @@ fabric.PatternBrush = fabric.util.createClass(fabric.PencilBrush, /** @lends fab
      * Sets active group to a specified one. If the function is called by fabric
      * as a consequence of a mouse event, the event is passed as a parmater and
      * sent to the fire function for the custom events. When used as a method the
-     * e param does not have any application.
+     * e param does not have any applicationReducer.
      * @param {fabric.Group} group Group to set as a current one
      * @param {Event} e Event object
      * @return {fabric.Canvas} thisArg
@@ -10160,7 +10160,7 @@ fabric.PatternBrush = fabric.util.createClass(fabric.PencilBrush, /** @lends fab
      * Discards currently active group and fire events If the function is called by fabric
      * as a consequence of a mouse event, the event is passed as a parmater and
      * sent to the fire function for the custom events. When used as a method the
-     * e param does not have any application.
+     * e param does not have any applicationReducer.
      * @return {fabric.Canvas} thisArg
      * @chainable
      */
@@ -10197,7 +10197,7 @@ fabric.PatternBrush = fabric.util.createClass(fabric.PencilBrush, /** @lends fab
      * Deactivates all objects and dispatches appropriate events If the function is called by fabric
      * as a consequence of a mouse event, the event is passed as a parmater and
      * sent to the fire function for the custom events. When used as a method the
-     * e param does not have any application.
+     * e param does not have any applicationReducer.
      * @return {fabric.Canvas} thisArg
      * @chainable
      */
@@ -12522,7 +12522,7 @@ fabric.util.object.extend(fabric.StaticCanvas.prototype, /** @lends fabric.Stati
     /**
      * When `true`, object properties are checked for cache invalidation. In some particular
      * situation you may want this to be disabled ( spray brush, very big pathgroups, groups)
-     * or if your application does not allow you to modify properties for groups child you want
+     * or if your applicationReducer does not allow you to modify properties for groups child you want
      * to disable it for groups.
      * default to false
      * since 1.7.0
@@ -12534,7 +12534,7 @@ fabric.util.object.extend(fabric.StaticCanvas.prototype, /** @lends fabric.Stati
     /**
      * When `true`, cache does not get updated during scaling. The picture will get blocky if scaled
      * too much and will be redrawn with correct details at the end of scaling.
-     * this setting is performance and application dependant.
+     * this setting is performance and applicationReducer dependant.
      * default to true
      * since 1.7.0
      * @type Boolean

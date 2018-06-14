@@ -132,12 +132,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	Document.prototype._bufferToBlob = function (buffer) {
 		var blob;
 		try {
-			blob = new Blob([buffer], {type: 'application/pdf'});
+			blob = new Blob([buffer], {type: 'applicationReducer/pdf'});
 		} catch (e) {
 			// Old browser which can't handle it without making it an byte array (ie10)
 			if (e.name === 'InvalidStateError') {
 				var byteArray = new Uint8Array(buffer);
-				blob = new Blob([byteArray.buffer], {type: 'application/pdf'});
+				blob = new Blob([byteArray.buffer], {type: 'applicationReducer/pdf'});
 			}
 		}
 
@@ -222,7 +222,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			throw 'getDataUrl is an async method and needs a callback argument';
 		}
 		this.getBuffer(function (buffer) {
-			cb('data:application/pdf;base64,' + buffer.toString('base64'));
+			cb('data:applicationReducer/pdf;base64,' + buffer.toString('base64'));
 		}, options);
 	};
 
@@ -7954,7 +7954,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    /**
 	     * Creates a function that wraps `func` to invoke it with optional `this`
-	     * binding of `thisArg`, partial application, and currying.
+	     * binding of `thisArg`, partial applicationReducer, and currying.
 	     *
 	     * @private
 	     * @param {Function|string} func The function or method name to wrap.
@@ -31822,7 +31822,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  flush_pending(strm);
-	  /* If avail_out is zero, the application will call deflate again
+	  /* If avail_out is zero, the applicationReducer will call deflate again
 	   * to flush the rest.
 	   */
 	  if (s.wrap > 0) { s.wrap = -s.wrap; }
@@ -47483,7 +47483,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (tryPref && base + 1 < end) {
 	      for (var _i23 = base + 1; _i23 < end; _i23++) {
 	        if (glyphs[_i23].features.pref) {
-	          // 1. Only reorder a glyph produced by substitution during application
+	          // 1. Only reorder a glyph produced by substitution during applicationReducer
 	          //    of the <pref> feature. (Note that a font may shape a Ra consonant with
 	          //    the feature generally but block it in certain contexts.)
 
@@ -47599,7 +47599,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // Scripts that need this are handled by the Arabic shaper, not implemented here for now.
 	    // plan.addStage(['isol', 'init', 'medi', 'fina', 'med2', 'fin2', 'fin3'], false);
 
-	    // Standard topographic presentation and positional feature application
+	    // Standard topographic presentation and positional feature applicationReducer
 	    plan.addStage(['abvs', 'blws', 'pres', 'psts', 'dist', 'abvm', 'blwm']);
 	  };
 
@@ -74453,7 +74453,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					throw ex;
 				}, 0);
 			}
-			, force_saveable_type = "application/octet-stream"
+			, force_saveable_type = "applicationReducer/octet-stream"
 			// the Blob API is fundamentally broken as there is no "downloadfinished" event to subscribe to
 			, arbitrary_revoke_timeout = 1000 * 40 // in ms
 			, revoke = function(file) {

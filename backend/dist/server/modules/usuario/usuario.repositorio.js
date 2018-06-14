@@ -21,7 +21,7 @@ class UsuarioRepositorio extends repositorio_base_1.RepositoryBase {
             resolve({
                 dashboards: [
                     {
-                        preload: true,
+                        principal: true,
                         _id: 'be4c425a7d15b3a1dbb838a0779f1d3e',
                         name: 'resumo',
                         descricao: 'Resumo',

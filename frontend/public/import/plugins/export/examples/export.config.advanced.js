@@ -49,7 +49,7 @@ AmCharts.exportDrawingMenu = [ {
       click: function() {
         this.drawing.handler.done();
         this.toPDF( {}, function( data ) {
-          this.download( data, "application/pdf", "amCharts.pdf" );
+          this.download( data, "applicationReducer/pdf", "amCharts.pdf" );
         } );
       }
     }, {
@@ -182,7 +182,7 @@ AmCharts.exportCFG = {
           click: function() {
             this.capture( {}, function() {
               this.toPDF( {}, function( data ) {
-                this.download( data, "application/pdf", "amCharts.pdf" );
+                this.download( data, "applicationReducer/pdf", "amCharts.pdf" );
               } );
             } );
           }
@@ -218,7 +218,7 @@ AmCharts.exportCFG = {
               this.toPDF( {
                 content: content
               }, function( data ) {
-                this.download( data, "application/pdf", "amCharts.pdf" );
+                this.download( data, "applicationReducer/pdf", "amCharts.pdf" );
               } );
             } );
           }
@@ -249,7 +249,7 @@ AmCharts.exportCFG = {
           label: "XLSX",
           click: function() {
             this.toXLSX( {}, function( data ) {
-              this.download( data, "application/octet-stream", "amCharts.xlsx" );
+              this.download( data, "applicationReducer/octet-stream", "amCharts.xlsx" );
             } );
           }
         } ]

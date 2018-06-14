@@ -464,7 +464,7 @@ if ( !AmCharts.translations[ "export" ][ "en" ] ) {
 						capture: true
 					},
 					PDF: {
-						mimeType: "application/pdf",
+						mimeType: "applicationReducer/pdf",
 						extension: "pdf",
 						capture: true
 					},
@@ -477,7 +477,7 @@ if ( !AmCharts.translations[ "export" ][ "en" ] ) {
 						extension: "json"
 					},
 					XLSX: {
-						mimeType: "application/octet-stream",
+						mimeType: "applicationReducer/octet-stream",
 						extension: "xlsx"
 					}
 				},
@@ -2741,7 +2741,7 @@ if ( !AmCharts.translations[ "export" ][ "en" ] ) {
 					type: "base64"
 				} );
 
-				data = "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64," + data;
+				data = "data:applicationReducer/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64," + data;
 
 				// TRIGGER CALLBACK
 				_this.handleCallback( callback, data, cfg );

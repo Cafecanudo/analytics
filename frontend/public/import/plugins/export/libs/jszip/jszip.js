@@ -1492,7 +1492,7 @@ else {
     var buffer = new ArrayBuffer(0);
     try {
         exports.blob = new Blob([buffer], {
-            type: "application/zip"
+            type: "applicationReducer/zip"
         }).size === 0;
     }
     catch (e) {
@@ -1500,7 +1500,7 @@ else {
             var Builder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder;
             var builder = new Builder();
             builder.append(buffer);
-            exports.blob = builder.getBlob('application/zip').size === 0;
+            exports.blob = builder.getBlob('applicationReducer/zip').size === 0;
         }
         catch (e) {
             exports.blob = false;
@@ -1828,7 +1828,7 @@ exports.arrayBuffer2Blob = function(buffer) {
     try {
         // Blob constructor
         return new Blob([buffer], {
-            type: "application/zip"
+            type: "applicationReducer/zip"
         });
     }
     catch (e) {
@@ -1838,7 +1838,7 @@ exports.arrayBuffer2Blob = function(buffer) {
             var Builder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder;
             var builder = new Builder();
             builder.append(buffer);
-            return builder.getBlob('application/zip');
+            return builder.getBlob('applicationReducer/zip');
         }
         catch (e) {
 
@@ -5483,7 +5483,7 @@ function deflate(strm, flush) {
   }
 
   flush_pending(strm);
-  /* If avail_out is zero, the application will call deflate again
+  /* If avail_out is zero, the applicationReducer will call deflate again
    * to flush the rest.
    */
   if (s.wrap > 0) { s.wrap = -s.wrap; }

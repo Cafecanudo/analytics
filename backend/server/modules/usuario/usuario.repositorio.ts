@@ -19,7 +19,7 @@ class UsuarioRepositorio extends RepositoryBase<IUsuarioModel> {
             resolve({
                 dashboards: [
                     {
-                        preload: true,
+                        principal: true,
                         _id: 'be4c425a7d15b3a1dbb838a0779f1d3e',
                         name: 'resumo',
                         descricao: 'Resumo',
