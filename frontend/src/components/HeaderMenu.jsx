@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import Axios from 'axios/index';
-import { env } from '../main/config/config';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export default class HeaderMenu extends Component {
+import { env } from '../main/config/config';
+import { atualizarNotificacao } from './templates/top-menu/__redux';
+
+class HeaderMenu extends Component {
 
     constructor(props) {
         super(props);
-        this.intervalUpdateNotifications = 3000;
+        this.intervalUpdateNotifications = 30000;
         this.state = {
             notificacao: [],
             bellColor: 'info',
@@ -17,15 +21,19 @@ export default class HeaderMenu extends Component {
 
     obterNotificacoesResumo() {
         Axios.get(`${env.server.url}/v1/usuario/perfil/notificacao-resumo`).then(value => {
-            this.setState(value.data);
-            this.setBellColor();
-            clearInterval(this.timerID);
-            this.timerID = setInterval(() => this.obterNotificacoesResumo(), this.intervalUpdateNotifications);
+            const notificacoes = value.data;
+            console.log(notificacoes);
+
+            this.props.atualizarNotificacao(notificacoes);
+            //this.setState(value.data);
+            // this.setBellColor();
+            // clearInterval(this.timerID);
+            // this.timerID = setInterval(() => this.obterNotificacoesResumo(), this.intervalUpdateNotifications);
         });
     }
 
     componentDidMount() {
-        this.timerID = setInterval(() => this.obterNotificacoesResumo(), 100);
+        this.timerID = setInterval(() => this.obterNotificacoesResumo(), 2000);
     }
 
     componentWillUnmount() {
@@ -33,18 +41,19 @@ export default class HeaderMenu extends Component {
     }
 
     setBellColor() {
-        let quant = 0;
+        /*let quant = 0;
         this.state.notificacao.forEach(el => {
             if (el.tipo === 'ALERTAS') {
                 this.setState({ bellColor: 'danger' });
             }
             quant += el.quant;
         });
-        this.setState({ bellQuant: quant });
+        this.setState({ bellQuant: quant });*/
     }
 
     obterNotificacoesList() {
-        return this.state.notificacao.map((notificacao, index) => (
+        console.log(this.props);
+        return this.props.notificacao.map((notificacao, index) => (
             <data key={index}>
                 <div className="dropdown-divider"></div>
                 <Link to={`/notificacao/tipo/${notificacao.tipo}`} className={'dropdown-item'}>
@@ -56,6 +65,7 @@ export default class HeaderMenu extends Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <nav className="main-header navbar navbar-expand bg-white navbar-light border-bottom">
                 <ul className="navbar-nav">
@@ -103,3 +113,10 @@ export default class HeaderMenu extends Component {
         );
     }
 }
+
+const stateProps = state => ({ notificacao: state.headermenu });
+const dispatchPros = dispatch => bindActionCreators({
+    atualizarNotificacao
+}, dispatch);
+export default connect(stateProps, dispatchPros)(HeaderMenu);
+

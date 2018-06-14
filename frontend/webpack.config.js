@@ -6,7 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: [
-    './src/index.jsx',
+    './src/inicio.jsx',
   ],
   mode: "development",
   devtool: 'source-map',

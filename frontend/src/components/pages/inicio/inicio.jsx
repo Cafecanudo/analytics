@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
+import { atualizarBreadcrumb } from '../../../main/redux/root.actions';
 
 class Inicio extends Component {
 
-    componentWillMount() {
-        this.props.actionChangeBreadcrumb({
+    componentDidMount() {
+        this.props.atualizarBreadcrumb({
             title: 'Dashboard',
             link: [
                 {
@@ -143,15 +144,7 @@ class Inicio extends Component {
     }
 }
 
-const actionChangeBreadcrumb = (bread) => {
-    return {
-        type: 'NEW_BREADCRUMB',
-        breadcrumb: bread
-    };
-};
-
-const mapDispatch = (dispatch) => {
-    return bindActionCreators({ actionChangeBreadcrumb }, dispatch);
-};
-
-export default withRouter(connect(null, mapDispatch)(Inicio));
+const dispatchPros = dispatch => bindActionCreators({
+    atualizarBreadcrumb
+}, dispatch);
+export default withRouter(connect(null, dispatchPros)(Inicio));

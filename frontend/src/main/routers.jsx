@@ -1,4 +1,4 @@
-import Inicio from '../components/pages/inicio';
+import Inicio from '../components/pages/inicio/inicio';
 import NoFound from '../components/pages/nofound';
 import Configuracao from '../components/pages/configuracao';
 

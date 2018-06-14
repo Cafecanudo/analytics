@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import noUserFoto from '../../resources/images/no-user-photo.png';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default class DadosUsuario extends Component {
+import noUserFoto from '../../../resources/images/no-user-photo.png';
 
-    constructor(props) {
-        super(props);
-    }
+class DadosUsuario extends Component {
 
     render() {
         return (
@@ -24,3 +22,6 @@ export default class DadosUsuario extends Component {
         );
     }
 }
+
+const stateProps = state => ({ usuario: state.usuario });
+export default connect(stateProps)(DadosUsuario);

@@ -28769,7 +28769,7 @@ exports.default = Configuracao;
 
 /***/ "./src/components/pages/inicio/index.jsx":
 /*!***********************************************!*\
-  !*** ./src/components/pages/inicio/index.jsx ***!
+  !*** ./src/components/pages/inicio/inicio.jsx ***!
   \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -29103,7 +29103,7 @@ var Inicio = function (_Component) {
 
 var actionChangeBreadcrumb = function actionChangeBreadcrumb(bread) {
     return {
-        type: 'NEW_BREADCRUMB',
+        type: 'UPDATE_BREADCRUMB',
         breadcrumb: bread
     };
 };
@@ -29124,7 +29124,7 @@ exports.default = (0, _reactRouter.withRouter)((0, _reactRedux.connect)(null, ma
 
 /***/ "./src/components/pages/nofound/index.jsx":
 /*!************************************************!*\
-  !*** ./src/components/pages/nofound/index.jsx ***!
+  !*** ./src/components/pages/nofound/inicio.jsx ***!
   \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -29558,7 +29558,7 @@ exports.default = SidebarMenu;
 
 /***/ "./src/index.jsx":
 /*!***********************!*\
-  !*** ./src/index.jsx ***!
+  !*** ./src/inicio.jsx ***!
   \***********************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -29802,7 +29802,7 @@ var appRedux = exports.appRedux = function appRedux() {
     var action = arguments[1];
 
     switch (action.type) {
-        case 'NEW_BREADCRUMB':
+        case 'UPDATE_BREADCRUMB':
             {
                 return action.breadcrumb;
             }
@@ -29847,11 +29847,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ApiRouter = undefined;
 
-var _inicio = __webpack_require__(/*! ../components/pages/inicio */ "./src/components/pages/inicio/index.jsx");
+var _inicio = __webpack_require__(/*! ../components/pages/inicio */ "./src/components/pages/inicio/inicio.jsx");
 
 var _inicio2 = _interopRequireDefault(_inicio);
 
-var _nofound = __webpack_require__(/*! ../components/pages/nofound */ "./src/components/pages/nofound/index.jsx");
+var _nofound = __webpack_require__(/*! ../components/pages/nofound */ "./src/components/pages/nofound/inicio.jsx");
 
 var _nofound2 = _interopRequireDefault(_nofound);
 
@@ -29910,12 +29910,12 @@ module.exports = __webpack_require__.p + "17f2c2b13373bd4048fa4c080448ed25.png";
 
 /***/ 0:
 /*!*****************************!*\
-  !*** multi ./src/index.jsx ***!
+  !*** multi ./src/inicio.jsx ***!
   \*****************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! ./src/index.jsx */"./src/index.jsx");
+module.exports = __webpack_require__(/*! ./src/inicio.jsx */"./src/inicio.jsx");
 
 
 /***/ })

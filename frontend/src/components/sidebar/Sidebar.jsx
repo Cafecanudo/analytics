@@ -1,25 +1,22 @@
-import React, {Component} from 'react'
-import LogoFavicon from './LogoFavicon'
-import DadosUsuario from "../commons/Usuario";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Axios from 'axios';
-import {env} from '../../main/config/config';
-import SidebarMenu from "./SidebarMenu";
 
-export default class Sidebar extends Component {
+import LogoFavicon from './LogoFavicon';
+import DadosUsuario from '../templates/usuario/Usuario';
+import SidebarMenu from './SidebarMenu';
+import { env } from '../../main/config/config';
+import { changeUsuarioLoginAction } from '../templates/usuario/actions';
+import { bindActionCreators } from 'redux';
 
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+class Sidebar extends Component {
 
     /**
      * Obter dados de perfil do usuario logado
      */
     obterPerfilUsuario() {
         Axios.get(`${env.server.url}/v1/usuario/perfil`).then(value => {
-            this.setState({
-                usuario: value.data
-            });
+            this.props.changeUsuarioLoginAction(value.data);
             clearInterval(this.timerID);
         });
     }
@@ -41,12 +38,17 @@ export default class Sidebar extends Component {
                 <aside className="main-sidebar sidebar-dark-primary elevation-4">
                     <LogoFavicon/>
                     <div className="sidebar">
-                        <DadosUsuario usuario={this.state.usuario || {}}/>
+                        <DadosUsuario/>
                         <SidebarMenu/>
                     </div>
                 </aside>
                 <div id="sidebar-overlay"></div>
             </div>
-        )
+        );
     }
 }
+
+const dispatchPros = dispatch => bindActionCreators({
+    changeUsuarioLoginAction
+}, dispatch);
+export default connect(null, dispatchPros)(Sidebar);

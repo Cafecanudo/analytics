@@ -1,12 +1,12 @@
 import { Link, Route, Switch } from 'react-router-dom';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
 import '../@core/dependencies';
 import Sidebar from '../components/sidebar/Sidebar';
 import HeaderMenu from '../components/HeaderMenu';
 import { ApiRouter } from './routers';
-import { withRouter } from 'react-router';
 
 class AppComponent extends Component {
 
@@ -69,10 +69,8 @@ class AppComponent extends Component {
     }
 }
 
-const mapProps = (state) => {
-    return {
-        breadcrumb: state.breadcrumb
-    };
-};
+const stateProps = (state) => ({
+    breadcrumb: state.breadcrumb
+});
 
-export default withRouter(connect(mapProps)(AppComponent));
+export default withRouter(connect(stateProps)(AppComponent));
