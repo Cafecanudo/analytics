@@ -52,7 +52,7 @@ class Menu extends Component {
             return (
                 <li key={index} id="monitor" className="nav-item has-treeview">
                     <NavLink to={`/${menu.tipo === 'PAGE' ? menu.url : `perfil/acesso/${menu.name}`}`}
-                             className={'nav-link'} activeClassName="active-sub">
+                             className={'nav-link'} activeClassName="active-sub" title={menu.hint}>
                         <i className={`nav-icon ${menu.icone}`}></i>
                         <p>{menu.descricao}</p>
                     </NavLink>
@@ -76,6 +76,12 @@ class Menu extends Component {
             <nav className="mt-2">
                 <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
+                    <li id="monitor" className="nav-item has-treeview">
+                        <a href="#" className="nav-link">
+                            <i className="nav-icon fa fa-television"></i>
+                            <p>Modo Monitor</p>
+                        </a>
+                    </li>
                     {this.obterDashboard()}
                     {this.processarGroupMenus(this.props.perfil.grupo_menus)}
                 </ul>

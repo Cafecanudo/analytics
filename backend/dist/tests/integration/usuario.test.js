@@ -57,7 +57,7 @@ describe('Serviços de Usuário', () => {
                 helpers_1.expect(res.body.grupo_menus[0]).to.have.keys('menus');
                 helpers_1.expect(res.body.grupo_menus[0].menus).to.be.an.instanceof(Array);
                 helpers_1.expect(res.body.grupo_menus[0].menus).to.have.length.above(0, `Lista de "Menus" esta vazia: [${res.body.grupo_menus[0].menus.length}]`);
-                helpers_1.expect(res.body.grupo_menus[0].menus[0]).to.have.keys(['_id', 'tipo', 'descricao', 'icone', 'name']);
+                helpers_1.expect(res.body.grupo_menus[0].menus[0]).to.have.keys(['_id', 'tipo', 'descricao', 'icone', 'name', 'hint']);
                 done(error);
             });
         });

@@ -5,12 +5,12 @@
   "main": "./server/server.ts",
   "scripts": {
     "lint": "./node_modules/.bin/tslint --project tsconfig.json ./server/**/*.ts",
-    "start": "nodemon --exec ./node_modules/.bin/ts-node ./server/server.ts",
+    "start-dev": "cross-env NODE_ENV=development nodemon ./node_modules/.bin/ts-node ./server/server.ts",
     "build": "./node_modules/.bin/tsc",
-    "tsc-w": "./node_modules/.bin/tsc -w",
-    "builded": "npm run build && nodemon ./dist/server.ts",
     "unit-test": "cross-env NODE_ENV=test mocha --opts ddist/tests/unit/config/mocha.opts ./dist/tests/unit/unit.test.js",
-    "integration-test": "cross-env NODE_ENV=test mocha --opts ./tests/integration/config/mocha.opts"
+    "integration-test": "cross-env NODE_ENV=test mocha --opts ./tests/integration/config/mocha.opts",
+    "start": "npm run build && node ./dist/server/server.js",
+    "builded": "npm run build && nodemon ./dist/server.ts"
   },
   "author": "by Wellton S. Barros - welltonbarros@softbox.com.br",
   "keywords": [
@@ -55,6 +55,7 @@
     "mocha": "^5.2.0",
     "node-typescript": "^0.1.3",
     "nodemon": "^1.17.5",
+    "pm2": "^2.10.4",
     "supertest": "^3.1.0",
     "testdouble": "^3.8.1",
     "ts-node": "^6.1.0",

@@ -6,7 +6,7 @@
   "license": "ISC",
   "scripts": {
     "start": "webpack-dev-server --mode development --progress --colors --inline --hot",
-    "build": "webpack",
+    "build": "webpack --PORT 80",
     "start-prod": "webpack --progress -p"
   },
   "author": "by Wellton S. Barros - cafecanudo@gmail.com",

@@ -23,27 +23,10 @@ class UsuarioRepositorio extends repositorio_base_1.RepositoryBase {
                     {
                         principal: true,
                         _id: 'be4c425a7d15b3a1dbb838a0779f1d3e',
-                        name: 'resumo',
-                        descricao: 'Resumo',
-                        hint: 'Resumo com os principais gráficos',
+                        name: 'notas-internalizadas',
+                        descricao: 'Status de Notas',
+                        hint: 'Dashboard mostra uma visao de todas as notas internalizadas/pendente/cancelado',
                         icone: 'fa fa-line-chart'
-                    },
-                    {
-                        _id: 'c16a3b1af0746dcf4c5319015fc02865',
-                        name: 'contingencia',
-                        descricao: 'Contingência',
-                        icone: 'fa fa-area-chart'
-                    },
-                    {
-                        _id: '7f003b62c582d1040942285839585e54',
-                        name: 'notas-divergentes',
-                        descricao: 'Notas Divegentes',
-                        icone: 'fa fa-bar-chart'
-                    },
-                    {
-                        descricao: 'Sem Dashboard',
-                        icone: 'fa fa-exclamation-circle',
-                        hint: 'Você não possuir dashboards cadastradas para seu perfil.'
                     }
                 ],
                 grupo_menus: [
@@ -52,16 +35,26 @@ class UsuarioRepositorio extends repositorio_base_1.RepositoryBase {
                             {
                                 _id: '6e90cffbe969c4e39ec755ae04465da5',
                                 tipo: 'GRAFICO',
-                                name: 'contingencia',
-                                descricao: 'Contingência',
+                                name: 'notas-nfs-e',
+                                descricao: 'NFS-e',
+                                hint: 'Notas Fiscais de Serviços Eletrônicas',
                                 icone: 'fa fa-bar-chart'
                             },
                             {
-                                _id: '13f5a88115b5488b6c31e9aadfc56dd6',
+                                _id: '62bf79144f4112d070a6b48f6f621c21',
                                 tipo: 'GRAFICO',
-                                name: 'notas-divergentes',
-                                descricao: 'Notas Divegentes',
-                                icone: 'fa fa-line-chart'
+                                name: 'notas-nf-e',
+                                descricao: 'NF-e',
+                                hint: 'Notas Fiscais de Eletrônicas\'',
+                                icone: 'fa fa-bar-chart'
+                            },
+                            {
+                                _id: '2b08b9562dd8095452efe2c26fdfa3ff',
+                                tipo: 'GRAFICO',
+                                name: 'notas-ct-e',
+                                descricao: 'CT-e',
+                                hint: 'Notas de Conhecimento de Transporte Eletrônico',
+                                icone: 'fa fa-bar-chart'
                             }
                         ]
                     },
@@ -93,11 +86,11 @@ class UsuarioRepositorio extends repositorio_base_1.RepositoryBase {
     obterPerfilUsuario() {
         return new Promise((resolve, reject) => {
             resolve({
-                login: 'cafecanudo',
-                foto: 'https://belicosa.com.br/novo/wp-content/uploads/2013/02/belicosa-mariaaugusta.jpg',
+                login: 'magazineluiza',
+                foto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe8DxY9BZGJm4XRk1yzaxVymx6n3chfn2B02k2hlEGP3oTVNbpPw',
                 dadosUsuario: {
-                    nome: 'Renata Silva',
-                    email: 'cafecanudo@gmail.com'
+                    nome: 'Magazine Luiza',
+                    email: 'magazineluiza@softbox.com.br'
                 }
             });
         });

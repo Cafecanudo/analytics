@@ -5,7 +5,7 @@ const http = require("http");
 const api_1 = require("./api/api");
 const console_util_1 = require("./utils/console.util");
 debug('ts-express:server');
-const env = require('./config/env/config')();
+const env = require('./config/config')();
 const server = http.createServer(api_1.default);
 const normalizePort = (val) => {
     const port = (typeof val === 'string') ? parseInt(val, 10) : val;

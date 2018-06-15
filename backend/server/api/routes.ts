@@ -4,7 +4,7 @@ import { Application, Request, Response, Router } from 'express';
 import * as fs from 'fs';
 import ConsoleUtil from '../utils/console.util';
 
-const mergeConfig = require('../config/env/config')();
+const mergeConfig = require('../config/config')();
 
 export default class Routes {
 

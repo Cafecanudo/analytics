@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const fs = require("fs");
 const console_util_1 = require("../utils/console.util");
-const mergeConfig = require('../config/env/config')();
+const mergeConfig = require('../config/config')();
 class Routes {
     constructor(app) {
         this.app = app;

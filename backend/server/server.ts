@@ -5,7 +5,7 @@ import ConsoleUtil from './utils/console.util';
 
 debug('ts-express:server');
 
-const env = require('./config/env/config')();
+const env = require('./config/config')();
 const server = http.createServer(Api);
 
 const normalizePort = (val: number | string): any => {

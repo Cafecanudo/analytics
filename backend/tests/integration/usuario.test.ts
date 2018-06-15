@@ -66,7 +66,7 @@ describe('Serviços de Usuário', () => {
                     //menus
                     expect(res.body.grupo_menus[0].menus).to.be.an.instanceof(Array);
                     expect(res.body.grupo_menus[0].menus).to.have.length.above(0, `Lista de "Menus" esta vazia: [${res.body.grupo_menus[0].menus.length}]`);
-                    expect(res.body.grupo_menus[0].menus[0]).to.have.keys(['_id', 'tipo', 'descricao', 'icone', 'name']);
+                    expect(res.body.grupo_menus[0].menus[0]).to.have.keys(['_id', 'tipo', 'descricao', 'icone', 'name', 'hint']);
 
                     //end
                     done(error);

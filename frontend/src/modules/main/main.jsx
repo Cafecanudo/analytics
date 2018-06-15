@@ -23,10 +23,6 @@ class MainApplication extends Component {
 
     render() {
         const extracted = (el, i) => {
-            // if ((el.primary || false)) {
-            //     return ;
-
-            console.log(22);
             return (
                 <Route key={i} exact={el.exact || true} path={el.path} component={el.component}/>
             );

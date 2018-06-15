@@ -10,8 +10,8 @@ const cors = require("cors");
 const errorHandlerApi_1 = require("./errorHandlerApi");
 const routes_1 = require("./routes");
 const console_util_1 = require("../utils/console.util");
-require('../config/env/str');
-const env = require('../config/env/config')();
+require('../config/str');
+const env = require('../config/config')();
 class Api {
     constructor() {
         this.app = express();

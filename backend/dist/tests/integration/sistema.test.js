@@ -7,7 +7,6 @@ describe('Serviços do sistema', () => {
         it('Verifica se servidor ONLINE', done => {
             helpers_1.request(helpers_1.app).get('/').end((error, res) => {
                 helpers_1.expect(res.status).to.equal(200);
-                helpers_1.expect(res.body).to.keys(['version']);
                 done(error);
             });
         });

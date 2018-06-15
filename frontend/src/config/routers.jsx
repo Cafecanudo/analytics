@@ -11,10 +11,10 @@ export const ApiRouter = () => {
             path: '/inicio', exact: true, component: Inicio
         },
         {
-            path: '/dashboard/:name', exact: true, component: Dashboard,
+            path: '/dashboard/:name', exact: true, component: Dashboard
         },
         {
-            path: '*', component: NoFound
+            component: NoFound
         }
 
     ];

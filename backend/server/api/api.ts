@@ -12,10 +12,10 @@ import Routes from './routes';
 import ConsoleUtil from '../utils/console.util';
 
 //somente require
-require('../config/env/str');
+require('../config/str');
 
 //import locais
-const env = require('../config/env/config')();
+const env = require('../config/config')();
 
 class Api {
     public app: express.Application;
