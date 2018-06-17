@@ -24,8 +24,6 @@ build:
     - echo "starting build in hml"
     - docker build --tag $DOCKER_REGISTRY/backend_eldoc_analytics_hlg:latest -f ci/backend_eldoc_analytics.Dockerfile --build-arg VERSION_ENV=$HML_VERSION_ENV --build-arg ENVIRONMENT_ENV=$HML_ENVIRONMENT_ENV --build-arg SECRETKEYCRIPT_ENV=$HML_SECRETKEYCRIPT_ENV --build-arg SERVER_HOST_ENV=$HML_SERVER_HOST_ENV --build-arg SERVER_PORT_ENV=$HML_SERVER_PORT_ENV --build-arg FRONT_HOST_ENV=$HML_FRONT_HOST_ENV --build-arg FRONT_PORT_ENV=$HML_FRONT_PORT_ENV --build-arg DATABASE_HOST_ENV=$HML_DATABASE_HOST_ENV --build-arg DATABASE_DBNAME_ENV=$HML_DATABASE_DBNAME_ENV --build-arg DATABASE_USR_ENV=$HML_DATABASE_USR_ENV --build-arg DATABASE_PSW_ENV=$HML_DATABASE_PSW_ENV --build-arg BACK_PROTOCOLO_ENV=$HML_BACK_PROTOCOLO_ENV --build-arg BACK_PORT_ENV=$HML_BACK_PORT_ENV --build-arg BACK_HOST_ENV=$HML_BACK_HOST_ENV .
     - echo "build hml done!"
-    - docker push $DOCKER_REGISTRY/backend_eldoc_analytics_hlg:latest
-    - echo "image pushed successfully!"
     only:
     - /^release.*$/
 
@@ -33,7 +31,7 @@ tests:
     stage: tests
     script:
     - echo "running unit tests ..."
-    - docker run --rm DOCKER_REGISTRY/backend_eldoc_analytics_hlg npm run unit-test
+    - docker run --rm $DOCKER_REGISTRY/backend_eldoc_analytics_hlg npm run unit-test
     - echo "copying frontend html to apache container ..."
     - docker create --name eldoc-analytics DOCKER_REGISTRY/backend_eldoc_analytics_hlg:latest
     - docker cp eldoc-analytics:/frontend/dist html
