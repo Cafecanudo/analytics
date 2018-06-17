@@ -33,7 +33,7 @@ tests:
     - echo "running unit tests ..."
     - docker run --rm $DOCKER_REGISTRY/backend_eldoc_analytics_hlg npm run unit-test
     - echo "copying frontend html to apache container ..."
-    - docker create --name eldoc-analytics DOCKER_REGISTRY/backend_eldoc_analytics_hlg:latest
+    - docker create --name eldoc-analytics $DOCKER_REGISTRY/backend_eldoc_analytics_hlg:latest
     - docker cp eldoc-analytics:/frontend/dist html
     - docker rm eldoc-analytics
     - docker build --tag $DOCKER_REGISTRY/frontend_eldoc_analytics_hlg:latest -f ci/frontend_eldoc_analytics.Dockerfile .
