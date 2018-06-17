@@ -33,9 +33,9 @@ tests:
     - echo "running unit tests ..."
     - docker run --rm $DOCKER_REGISTRY/backend_eldoc_analytics_hlg npm run unit-test
     - echo "copying frontend html to apache container ..."
-    - docker create --name eldoc-analytics $DOCKER_REGISTRY/backend_eldoc_analytics_hlg:latest
-    - docker cp eldoc-analytics:/home/appuser/eldoc-analytics/frontend/dist/ html/
-    - docker rm eldoc-analytics
+    - docker create --name $CI_COMMIT_SHA $DOCKER_REGISTRY/backend_eldoc_analytics_hlg:latest
+    - docker cp $CI_COMMIT_SHA:/home/appuser/eldoc-analytics/frontend/dist/ html/
+    - docker rm $CI_COMMIT_SHA
     - docker build --tag $DOCKER_REGISTRY/frontend_eldoc_analytics_hlg:latest -f ci/frontend_eldoc_analytics.Dockerfile .
     - echo "pushing image to registry ..."
     - docker push $DOCKER_REGISTRY/backend_eldoc_analytics_hlg:latest
