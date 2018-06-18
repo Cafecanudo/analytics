@@ -13,6 +13,22 @@ class UsuarioRepositorio extends RepositoryBase<UsuarioModel> {
         return usuarioSchema;
     }
 
+    login(login, senha): Promise<any> {
+        console.log(login, senha);
+        return new Promise((resolve, reject) => {
+            if (login === 'admin@softbox.com.br' && senha === 'johny') {
+                this.obterPerfilUsuario().then(value => {
+                    resolve(value);
+                });
+            } else {
+                resolve({
+                    statusCode: 403,
+                    message: 'Usuário ou senha inválida!'
+                });
+            }
+        });
+    }
+
     obterMenusUsuario(): Promise<any> {
         return new Promise((resolve, reject) => {
             dashboardRepositorio.obterDashboardPerfilUsuario().then(dashboards => {

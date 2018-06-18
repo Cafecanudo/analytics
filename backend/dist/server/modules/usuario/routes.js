@@ -41,8 +41,18 @@ let UsuarioRoutes = class UsuarioRoutes extends RouterDefault_1.RouterDefault {
             res.status(err.statusCode).json(err);
         });
     }
+    login(req, res) {
+        usuario_repositorio_1.usuarioRepositorio.login(req.body.email, req.body.senha)
+            .then(value => res.status(value.statusCode || 200).json(value))
+            .catch(err => {
+            res.status(500).json(err);
+        });
+    }
     getRoutes() {
         return [
+            {
+                type: 'POST', path: 'login', index: this.login
+            },
             {
                 path: 'perfil', index: this.perfil
             },
@@ -82,6 +92,12 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], UsuarioRoutes.prototype, "notificacao", null);
+__decorate([
+    decorators_1.POST(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], UsuarioRoutes.prototype, "login", null);
 UsuarioRoutes = __decorate([
     decorators_1.Path('/usuario')
 ], UsuarioRoutes);

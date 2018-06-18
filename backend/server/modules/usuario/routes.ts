@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { RouteTypeModel, RouterDefault } from '../RouterDefault';
-import { GET, Path } from '../../api/@core/decorators/decorators';
+import { RouterDefault, RouteTypeModel } from '../RouterDefault';
+import { GET, Path, POST } from '../../api/@core/decorators/decorators';
 import { usuarioRepositorio } from './usuario.repositorio';
 
 @Path('/usuario')
@@ -42,12 +42,24 @@ export default class UsuarioRoutes extends RouterDefault {
             });
     }
 
+    @POST()
+    login(req: Request, res: Response) {
+        usuarioRepositorio.login(req.body.email, req.body.senha)
+            .then(value => res.status(value.statusCode || 200).json(value))
+            .catch(err => {
+                res.status(500).json(err);
+            });
+    }
+
     /**
      * Retorna as rodas de usuario
      * @returns {RouteTypeModel[]}
      */
     getRoutes(): RouteTypeModel[] {
         return [
+            {
+                type: 'POST', path: 'login', index: this.login
+            },
             {
                 path: 'perfil', index: this.perfil
             },

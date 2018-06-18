@@ -32,4 +32,8 @@ exports.GET = (path) => {
     return (target, propertyKey, descriptor) => {
     };
 };
+exports.POST = (path) => {
+    return (target, propertyKey, descriptor) => {
+    };
+};
 //# sourceMappingURL=decorators.js.map

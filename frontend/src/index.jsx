@@ -1,16 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter } from 'react-router-dom';
-import { hot } from 'react-hot-loader';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import MainApplication from './modules/main/main';
 import { appStore } from './config/store';
+import NoFound from './modules/nofound/nofound';
+import Login from './modules/login/login';
 
 const app = () => (
     <HashRouter>
         <Provider store={appStore}>
-            <MainApplication/>
+            <Switch>
+                <Route exact path="/" component={MainApplication}/>
+                <Route exact path="/dashboard/:name" component={MainApplication}/>
+                <Route exact path="/grafico/:name" component={MainApplication}/>
+                <Route exact path="/login" component={Login}/>
+                <Route component={NoFound}/>
+            </Switch>
         </Provider>
     </HashRouter>
 );
