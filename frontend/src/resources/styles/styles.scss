@@ -6,8 +6,53 @@ body, html {
   background: #f4f6f9;
 }
 
+body.fullscreen-mode {
+  .content-wrapper {
+    margin-top: 15px;
+    .app-breadcrumb {
+      display: none;
+    }
+  }
+}
+
+.sidebar-open.sidebar-collapse {
+  .main-sidebar {
+    color: red;
+    overflow-x: hidden;
+  }
+}
+
 #app {
   height: 100%;
+}
+
+.content-header {
+  :-webkit-full-screen {
+    display: none;
+  }
+
+  :-moz-full-screen {
+    display: none;
+  }
+
+  :-ms-fullscreen {
+    display: none;
+  }
+
+  :full-screen {
+    display: none;
+  }
+
+  :fullscreen {
+    display: none;
+  }
+}
+
+.login-box, .register-box {
+  width: 360px;
+  margin: auto auto;
+  position: relative;
+  top: 10%;
 }
 
 .form-group {

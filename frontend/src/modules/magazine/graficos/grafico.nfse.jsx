@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import { env } from '../../../config/config';
 import { Loading } from '../../../components/commons/loading';
 import { ShowComponent } from '../../../components/commons/ifshow';
 import { BarChart, PieChart } from '../../../components/charts/charts';
 import Tabela from '../../../components/commons/tabela';
+import { atualizarBreadcrumbAction } from '../../main/redux/actions';
 
-export default class GraficoNFSE extends Component {
+class GraficoNFSE extends Component {
 
     constructor(props) {
         super(props);
@@ -19,110 +23,62 @@ export default class GraficoNFSE extends Component {
                 data: [],
                 dataChild: []
             },
-            collumsListaNotas: [
-                {
-                    display: 'Número', name: 'numero'
-                },
-                {
-                    display: 'Tipo', name: 'tipo', width: 100
-                },
-                {
-                    display: 'Descrição', name: 'descricao'
-                },
-                {
-                    display: 'Cidade', name: 'cidade'
-                },
-                {
-                    display: 'UF', name: 'uf', width: 40
-                }
-            ],
+            collumsListaNotas: [],
             dataListaNotas: []
         };
     }
 
     obterDadosGrafico() {
-        this.setState({
-            showLista: false,
-            grafico: {
-                ...this.state.grafico,
-                data: [{
-                    'display_name': 'Liberados',
-                    'value_data': 3025,
-                    'color_data': '#007f1e'
-                }, {
-                    'display_name': 'Pendentes',
-                    'value_data': 1882,
-                    'color_data': '#ff0600'
-                }, {
-                    'display_name': 'Cancelados',
-                    'value_data': 1809,
-                    'color_data': '#ff3900'
-                }, {
-                    'display_name': 'Sem PO',
-                    'value_data': 1322,
-                    'color_data': '#ff6f03'
-                }]
-            }
+        Axios.get(`${env.server.url}/v1/magazine/nfse`).then(value => {
+            this.setState({
+                showLista: false,
+                grafico: {
+                    ...this.state.grafico,
+                    data: value.data
+                }
+            });
+            clearTimeout(this.timeNFSE);
         });
     }
 
     obterDadosGraficoChild() {
-        this.setState({
-            dataListaNotas: [],
-            grafico: {
-                ...this.state.grafico,
-                dataChild: [
-                    {
-                        'display_name': 'Erros Integrações',
-                        'value_data': 1882
-                    }, {
-                        'display_name': 'Erros Batimentos',
-                        'value_data': 1809
-                    }, {
-                        'display_name': 'Falta PO',
-                        'value_data': 1322
-                    }, {
-                        'display_name': 'Repovado',
-                        'value_data': 1122
-                    }, {
-                        'display_name': 'Duplicidade',
-                        'value_data': 1114
-                    }
-                ]
-            }
+        Axios.get(`${env.server.url}/v1/magazine/nfse/pendentes`).then(value => {
+            this.setState({
+                dataListaNotas: [],
+                grafico: {
+                    ...this.state.grafico,
+                    dataChild: value.data
+                }
+            });
+            clearTimeout(this.timeNFSE);
         });
     }
 
-    obterDadosLista() {
-        this.setState({
-            dataListaNotas: [
-                {
-                    numero: '843b174f9753ad386ae2112d62f21166',
-                    tipo: 'NFS-e',
-                    descricao: 'NOTAS Descricao 1',
-                    cidade: 'Goiania',
-                    uf: 'GO'
-                },
-                {
-                    numero: '34adbf92c082f8092fd28de4ef114e65',
-                    tipo: 'NFS-e',
-                    descricao: 'NOTAS Descricao 2',
-                    cidade: 'Goiania',
-                    uf: 'GO'
-                },
-                {
-                    numero: '5aae839318ec9c097865a2e37f94b1e1',
-                    tipo: 'NFS-e',
-                    descricao: 'NOTAS Descricao 3',
-                    cidade: 'Goiania',
-                    uf: 'GO'
-                }
-            ]
+    obterColunasDaLista(tipo) {
+        Axios.get(`${env.server.url}/v1/magazine/nfse/pendentes/lista/collumns/${tipo}`).then(value => {
+            this.setState({
+                collumsListaNotas: value.data
+            });
+            clearTimeout(this.timeNFSE);
+            this.timeID = setTimeout(() => this.obterDadosLista(tipo), env.application.timeLoad);
+        });
+    }
+
+    obterDadosLista(tipo) {
+        Axios.get(`${env.server.url}/v1/magazine/nfse/pendentes/lista/${tipo}`).then(value => {
+            console.log(value.data);
+            this.setState({
+                dataListaNotas: value.data
+            });
+            clearTimeout(this.timeNFSE);
         });
     }
 
     componentDidMount() {
         this.timeID = setTimeout(() => this.obterDadosGrafico(), env.application.timeLoad);
+        this.props.atualizarBreadcrumbAction({
+            title: 'NFS-E'
+        });
     }
 
     componentWillUnmount() {
@@ -136,18 +92,20 @@ export default class GraficoNFSE extends Component {
                 tituloChild: nome,
                 showGraficoChild: true
             });
+            clearTimeout(this.timeNFSE);
             this.timeID = setTimeout(() => this.obterDadosGraficoChild(), env.application.timeLoad);
         }
     }
 
-    clickChild(index, valor, nome) {
+    clickChild(index, valor, nome, dataContext) {
         this.setState({
             ...this.state,
             tituloLista: nome,
             showLista: true,
             dataListaNotas: []
         });
-        this.timeID = setTimeout(() => this.obterDadosLista(), env.application.timeLoad);
+        clearTimeout(this.timeNFSE);
+        this.timeID = setTimeout(() => this.obterColunasDaLista(dataContext.name_id), env.application.timeLoad);
     }
 
     render() {
@@ -192,3 +150,6 @@ export default class GraficoNFSE extends Component {
         );
     }
 }
+
+const mapAction = dispatch => bindActionCreators({ atualizarBreadcrumbAction }, dispatch);
+export default connect(null, mapAction)(GraficoNFSE);

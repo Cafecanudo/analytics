@@ -6,14 +6,18 @@ import { atualizarBreadcrumbAction } from '../main/redux/actions';
 
 class Inicio extends Component {
 
-    componentDidMount() {
+    componentDidMount(){
         this.props.atualizarBreadcrumbAction({
             title: 'Inicio'
         });
     }
 
+    componentWillMount() {
+        this.props.history.replace('/dashboard/notas-internalizadas');
+    }
+
     render() {
-        return null;
+        return <div>inin</div>;
     }
 }
 

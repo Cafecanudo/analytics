@@ -36,6 +36,7 @@ export class ___CharPie___ extends Component {
                 'enabled': this.props.export || false
             },
             'clickSlice': (dataItem) => {
+            console.log(dataItem);
                 if (this.props.click) {
                     this.props.click(dataItem.index, dataItem.value, dataItem.title, dataItem.dataContext);
                 }

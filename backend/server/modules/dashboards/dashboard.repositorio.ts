@@ -11,8 +11,6 @@ class DashboardRepositorio extends RepositoryBase<DashboardModel> {
     }
 
     obterDashboardName(idDashboard: string): Promise<any> {
-
-
         return new Promise((resolve, reject) => {
             const dashboard = {
                 principal: true,

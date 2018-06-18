@@ -9,6 +9,68 @@ import { atulizarPerfilMenuAction } from './redux/actions';
 
 class Menu extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            fullscreenMode: false
+        };
+
+        document.addEventListener('fullscreenchange', (e) => {
+            $('body').toggleClass('fullscreen-mode sidebar-open sidebar-collapse');
+        });
+        document.addEventListener('mozfullscreenchange', (e) => {
+            $('body').toggleClass('fullscreen-mode sidebar-open sidebar-collapse');
+        });
+        document.addEventListener('webkitfullscreenchange', (e) => {
+            $('body').toggleClass('fullscreen-mode sidebar-open sidebar-collapse');
+        });
+        document.addEventListener('msfullscreenchange', (e) => {
+            $('body').toggleClass('fullscreen-mode sidebar-open sidebar-collapse');
+        });
+
+        $(document).keyup((e) => {
+            if (e.which == 122) {
+                this.hideComponentFullscreen(this.state.fullscreenMode);
+            }
+        });
+    }
+
+    hideComponentFullscreen(status) {
+        console.log(status);
+        if (status) {
+            $('body').addClass('fullscreen-mode sidebar-open sidebar-collapse');
+        } else {
+            $('body').removeClass('fullscreen-mode sidebar-open sidebar-collapse');
+        }
+    }
+
+    toggleFullScreen() {
+        if (!document.fullscreenElement &&    // alternative standard method
+            !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {  // current working methods
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) {
+                document.documentElement.msRequestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) {
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) {
+                document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+            }
+            this.hideComponentFullscreen(true);
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+            this.hideComponentFullscreen(false);
+        }
+    }
+
     obterDashboard() {
         return (
             <li className="nav-item has-treeview" sc-down={this.props.perfil.dashboards.length * 43}>
@@ -77,7 +139,7 @@ class Menu extends Component {
                 <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <li id="monitor" className="nav-item has-treeview">
-                        <a href="#" className="nav-link">
+                        <a className="nav-link" onClick={() => this.toggleFullScreen()} style={{cursor: 'pointer'}}>
                             <i className="nav-icon fa fa-television"></i>
                             <p>Modo Monitor</p>
                         </a>

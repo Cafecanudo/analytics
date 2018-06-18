@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import { Loading } from '../../../components/commons/loading';
 import { ShowComponent } from '../../../components/commons/ifshow';
 import { BarChart, PieChart } from '../../../components/charts/charts';
 import { env } from '../../../config/config';
 import Tabela from '../../../components/commons/tabela';
+import { timeUpdateChart } from '../dashboard.magazine';
+import { atualizarBreadcrumbAction } from '../../main/redux/actions';
 
-export default class GraficoNFE extends Component {
+class GraficoNFE extends Component {
 
     constructor(props) {
         super(props);
@@ -19,114 +24,68 @@ export default class GraficoNFE extends Component {
                 data: [],
                 dataChild: []
             },
-            collumsListaNotas: [
-                {
-                    display: 'Número', name: 'numero'
-                },
-                {
-                    display: 'Tipo', name: 'tipo', width: 100
-                },
-                {
-                    display: 'Descrição', name: 'descricao'
-                },
-                {
-                    display: 'Cidade', name: 'cidade'
-                },
-                {
-                    display: 'UF', name: 'uf', width: 40
-                }
-            ],
+            collumsListaNotas: [],
             dataListaNotas: []
         };
     }
 
     obterDadosGrafico() {
-        this.setState({
-            showLista: false,
-            grafico: {
-                ...this.state.grafico,
-                data: [{
-                    'display_name': 'Liberados',
-                    'value_data': 3025,
-                    'color_data': '#007f1e'
-                }, {
-                    'display_name': 'Pendentes',
-                    'value_data': 1882,
-                    'color_data': '#ff0600'
-                }, {
-                    'display_name': 'Cancelados',
-                    'value_data': 1809,
-                    'color_data': '#ff3900'
-                }, {
-                    'display_name': 'Sem PO',
-                    'value_data': 1322,
-                    'color_data': '#ff6f03'
-                }]
-            }
+        Axios.get(`${env.server.url}/v1/magazine/nfe`).then(value => {
+            this.setState({
+                showLista: false,
+                grafico: {
+                    ...this.state.grafico,
+                    data: value.data
+                }
+            });
+            clearTimeout(this.timeNFSE);
+            this.timeNFE = setTimeout(() => this.obterDadosGrafico(), timeUpdateChart);
         });
     }
 
     obterDadosGraficoChild() {
-        this.setState({
-            dataListaNotas: [],
-            grafico: {
-                ...this.state.grafico,
-                dataChild: [
-                    {
-                        'display_name': 'Erros Integrações',
-                        'value_data': 1882
-                    }, {
-                        'display_name': 'Erros Batimentos',
-                        'value_data': 1809
-                    }, {
-                        'display_name': 'Falta PO',
-                        'value_data': 1322
-                    }, {
-                        'display_name': 'Repovado',
-                        'value_data': 1122
-                    }, {
-                        'display_name': 'Duplicidade',
-                        'value_data': 1114
-                    }
-                ]
-            }
+        Axios.get(`${env.server.url}/v1/magazine/nfe/pendentes`).then(value => {
+            this.setState({
+                dataListaNotas: [],
+                grafico: {
+                    ...this.state.grafico,
+                    dataChild: value.data
+                }
+            });
+            clearTimeout(this.timeNFSE);
         });
     }
 
-    obterDadosLista() {
-        this.setState({
-            dataListaNotas: [
-                {
-                    numero: '843b174f9753ad386ae2112d62f21166',
-                    tipo: 'NFS-e',
-                    descricao: 'NOTAS Descricao 1',
-                    cidade: 'Goiania',
-                    uf: 'GO'
-                },
-                {
-                    numero: '34adbf92c082f8092fd28de4ef114e65',
-                    tipo: 'NFS-e',
-                    descricao: 'NOTAS Descricao 2',
-                    cidade: 'Goiania',
-                    uf: 'GO'
-                },
-                {
-                    numero: '5aae839318ec9c097865a2e37f94b1e1',
-                    tipo: 'NFS-e',
-                    descricao: 'NOTAS Descricao 3',
-                    cidade: 'Goiania',
-                    uf: 'GO'
-                }
-            ]
+    obterColunasDaLista(tipo) {
+        Axios.get(`${env.server.url}/v1/magazine/nfe/pendentes/lista/collumns/${tipo}`).then(value => {
+            this.setState({
+                collumsListaNotas: value.data
+            });
+            clearTimeout(this.timeNFE);
+            this.timeCollumns = setTimeout(() => this.obterDadosLista(tipo), env.application.timeLoad);
+        });
+    }
+
+    obterDadosLista(tipo) {
+        Axios.get(`${env.server.url}/v1/magazine/nfe/pendentes/lista/${tipo}`).then(value => {
+            console.log(value.data);
+            this.setState({
+                dataListaNotas: value.data
+            });
+            clearTimeout(this.timeNFE);
         });
     }
 
     componentDidMount() {
-        this.timeID = setTimeout(() => this.obterDadosGrafico(), env.application.timeLoad);
+        this.timeNFE = setTimeout(() => this.obterDadosGrafico(), env.application.timeLoad);
     }
 
     componentWillUnmount() {
-        clearTimeout(this.timeID);
+        clearTimeout(this.timeNFE);
+        clearTimeout(this.timeCollumns);
+        this.props.atualizarBreadcrumbAction({
+            title: 'NF-E'
+        });
     }
 
     clickPrincipal(index, valor, nome) {
@@ -136,18 +95,20 @@ export default class GraficoNFE extends Component {
                 tituloChild: nome,
                 showGraficoChild: true
             });
-            this.timeID = setTimeout(() => this.obterDadosGraficoChild(), env.application.timeLoad);
+            clearTimeout(this.timeNFSE);
+            this.timeNFE = setTimeout(() => this.obterDadosGraficoChild(), env.application.timeLoad);
         }
     }
 
-    clickChild(index, valor, nome) {
+    clickChild(index, valor, nome, dataContext) {
         this.setState({
             ...this.state,
             tituloLista: nome,
             showLista: true,
             dataListaNotas: []
         });
-        this.timeID = setTimeout(() => this.obterDadosLista(), env.application.timeLoad);
+        clearTimeout(this.timeNFSE);
+        this.timeNFE = setTimeout(() => this.obterColunasDaLista(dataContext.name_id), env.application.timeLoad);
     }
 
     render() {
@@ -191,131 +152,7 @@ export default class GraficoNFE extends Component {
             </div>
         );
     }
-
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         showGraficoChild: false,
-    //         grafico: {
-    //             data: [],
-    //             dataChild: []
-    //         }
-    //     };
-    // }
-    //
-    // obterDadosGrafico() {
-    //     this.setState({
-    //         grafico: {
-    //             ...this.state.grafico,
-    //             data: [{
-    //                 'display_name': 'Liberados',
-    //                 'value_data': 3025,
-    //                 'color_data': '#007f1e'
-    //             }, {
-    //                 'display_name': 'Pendentes',
-    //                 'value_data': 1882,
-    //                 'color_data': '#ff0600'
-    //             }, {
-    //                 'display_name': 'Cancelados',
-    //                 'value_data': 1809,
-    //                 'color_data': '#ff3900'
-    //             }, {
-    //                 'display_name': 'Sem PO',
-    //                 'value_data': 1322,
-    //                 'color_data': '#ff6f03'
-    //             }]
-    //         }
-    //     });
-    // }
-    //
-    // obterDadosGraficoChild() {
-    //     this.setState({
-    //         grafico: {
-    //             ...this.state.grafico,
-    //             dataChild: [
-    //                 {
-    //                     'display_name': 'Erros Integrações',
-    //                     'value_data': 1882
-    //                 }, {
-    //                     'display_name': 'Erros Batimentos',
-    //                     'value_data': 1809
-    //                 }, {
-    //                     'display_name': 'Falta PO',
-    //                     'value_data': 1322
-    //                 }, {
-    //                     'display_name': 'Repovado',
-    //                     'value_data': 1122
-    //                 }, {
-    //                     'display_name': 'Duplicidade',
-    //                     'value_data': 1114
-    //                 }
-    //             ]
-    //         }
-    //     });
-    // }
-    //
-    // componentDidMount() {
-    //     this.timeID = setTimeout(() => this.obterDadosGrafico(), 100);
-    // }
-    //
-    // componentWillUnmount() {
-    //     clearTimeout(this.timeID);
-    //     clearTimeout(this.timeIDChild);
-    // }
-    //
-    // clickPrincipal(index, valor, nome, dadosBarra) {
-    //     if (nome === 'Pendentes') {
-    //         this.setState({
-    //             ...this.state,
-    //             showGraficoChild: true
-    //         });
-    //         this.timeIDChild = setTimeout(() => this.obterDadosGraficoChild(), 3000);
-    //     }
-    //     // console.log(index);
-    //     // console.log(valor);
-    //     // console.log(nome);
-    //     // console.log(dadosBarra);
-    // }
-    //
-    // clickChild(index, valor, nome, dadosBarra) {
-    //     console.log(index);
-    //     console.log(valor);
-    //     console.log(nome);
-    //     console.log(dadosBarra);
-    // }
-    //
-    // render() {
-    //     return (
-    //         <div className="container-fluid">
-    //             <div className="row">
-    //                 <div className="col-xl">
-    //                     <div className="card card-primary card-outline">
-    //                         <div className="card-header"><h6>Nota Fiscal Eletrônica</h6></div>
-    //                         <div className="card-body">
-    //                             <Loading show={this.state.grafico.data.length == 0} message="Calculando gráfico..."/>
-    //                             <ShowComponent show={this.state.grafico.data.length > 0}>
-    //                                 <BarChart dataProvider={this.state.grafico.data} chart3D={true} export={true} color={true}
-    //                                           click={(index, valor, nome, dadosBarra) => this.clickPrincipal(index, valor, nome, dadosBarra)}/>
-    //                             </ShowComponent>
-    //                         </div>
-    //                     </div>
-    //                 </div>
-    //                 <div className="col-xl" style={{ display: this.state.showGraficoChild ? 'block' : 'none' }}>
-    //                     <div className="card card-primary card-outline">
-    //                         <div className="card-header"><h6>Notas Pendentes</h6></div>
-    //                         <div className="card-body">
-    //                             <Loading show={this.state.grafico.dataChild.length == 0} message="Calculando gráfico..."/>
-    //
-    //                             <ShowComponent show={this.state.grafico.dataChild.length > 0}>
-    //                                 <PieChart dataProvider={this.state.grafico.dataChild} chart3D={true} export={true}
-    //                                           click={(index, valor, nome, dadosBarra) => this.clickChild(index, valor, nome, dadosBarra)}/>
-    //                             </ShowComponent>
-    //
-    //                         </div>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     );
-    // }
 }
+
+const mapAction = dispatch => bindActionCreators({ atualizarBreadcrumbAction }, dispatch);
+export default connect(null, mapAction)(GraficoNFE);

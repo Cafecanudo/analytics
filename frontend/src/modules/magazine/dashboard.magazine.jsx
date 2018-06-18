@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
+
 import { ShowComponent } from '../../components/commons/ifshow';
 import { BarChart } from '../../components/charts/charts';
 import { Loading } from '../../components/commons/loading';
 import { env } from '../../config/config';
+
+export const timeUpdateChart = 60 * 1000;
 
 export default class DashboardMagazine extends Component {
 
@@ -10,7 +14,6 @@ export default class DashboardMagazine extends Component {
         super(props);
         this.state = {
             tituloLista: '',
-            showLista: false,
             tituloChild: '',
             showGraficoChild: false,
             grafico: {
@@ -22,87 +25,48 @@ export default class DashboardMagazine extends Component {
     }
 
     obterDadosGraficoNFSE() {
-        this.setState({
-            showLista: false,
-            grafico: {
-                ...this.state.grafico,
-                dataNFSE: [{
-                    'display_name': 'Liberados',
-                    'value_data': 3025,
-                    'color_data': '#007f1e'
-                }, {
-                    'display_name': 'Pendentes',
-                    'value_data': 1882,
-                    'color_data': '#ff0600'
-                }, {
-                    'display_name': 'Cancelados',
-                    'value_data': 1809,
-                    'color_data': '#ff3900'
-                }, {
-                    'display_name': 'Sem PO',
-                    'value_data': 1322,
-                    'color_data': '#ff6f03'
-                }]
-            }
+        Axios.get(`${env.server.url}/v1/magazine/nfse`).then(value => {
+            this.setState({
+                grafico: {
+                    ...this.state.grafico,
+                    dataNFSE: value.data
+                }
+            });
+            clearTimeout(this.timeNFSE);
+            this.timeNFSE = setTimeout(() => this.obterDadosGraficoNFSE(), timeUpdateChart);
         });
-        this.timeID = setTimeout(() => this.obterDadosGraficodNFE(), env.application.timeLoad);
     }
 
-    obterDadosGraficodNFE() {
-        this.setState({
-            showLista: false,
-            grafico: {
-                ...this.state.grafico,
-                dataNFE: [{
-                    'display_name': 'Liberados',
-                    'value_data': 3025,
-                    'color_data': '#007f1e'
-                }, {
-                    'display_name': 'Pendentes',
-                    'value_data': 1882,
-                    'color_data': '#ff0600'
-                }, {
-                    'display_name': 'Cancelados',
-                    'value_data': 1809,
-                    'color_data': '#ff3900'
-                }, {
-                    'display_name': 'Sem PO',
-                    'value_data': 1322,
-                    'color_data': '#ff6f03'
-                }]
-            }
+    obterDadosGraficoNFE() {
+        Axios.get(`${env.server.url}/v1/magazine/nfe`).then(value => {
+            this.setState({
+                grafico: {
+                    ...this.state.grafico,
+                    dataNFE: value.data
+                }
+            });
+            clearTimeout(this.timeNFE);
+            this.timeCTE = setTimeout(() => this.obterDadosGraficoNFE(), timeUpdateChart);
         });
-        this.timeID = setTimeout(() => this.obterDadosGraficodCTE(), env.application.timeLoad);
     }
 
     obterDadosGraficodCTE() {
-        this.setState({
-            showLista: false,
-            grafico: {
-                ...this.state.grafico,
-                dataCTE: [{
-                    'display_name': 'Liberados',
-                    'value_data': 3025,
-                    'color_data': '#007f1e'
-                }, {
-                    'display_name': 'Pendentes',
-                    'value_data': 1882,
-                    'color_data': '#ff0600'
-                }, {
-                    'display_name': 'Cancelados',
-                    'value_data': 1809,
-                    'color_data': '#ff3900'
-                }, {
-                    'display_name': 'Sem PO',
-                    'value_data': 1322,
-                    'color_data': '#ff6f03'
-                }]
-            }
+        Axios.get(`${env.server.url}/v1/magazine/cte`).then(value => {
+            this.setState({
+                grafico: {
+                    ...this.state.grafico,
+                    dataCTE: value.data
+                }
+            });
+            clearTimeout(this.timeCTE);
+            this.timeNFE = setTimeout(() => this.obterDadosGraficodCTE(), timeUpdateChart);
         });
     }
 
     componentDidMount() {
-        this.timeID = setTimeout(() => this.obterDadosGraficoNFSE(), env.application.timeLoad);
+        this.timeNFSE = setTimeout(() => this.obterDadosGraficoNFSE(), env.application.timeLoad);
+        this.timeCTE = setTimeout(() => this.obterDadosGraficoNFE(), env.application.timeLoad);
+        this.timeNFE = setTimeout(() => this.obterDadosGraficodCTE(), env.application.timeLoad);
     }
 
     componentWillUnmount() {
@@ -115,7 +79,7 @@ export default class DashboardMagazine extends Component {
                 <div className="row">
                     <div className="col-xl">
                         <div className="card card-primary card-outline">
-                            <div className="card-header"><h6>Nota Fiscal Eletr&ocirc;nica</h6></div>
+                            <div className="card-header"><h6>Nota Fiscal de Servi&ccedil;os Eletr&ocirc;nica</h6></div>
                             <div className="card-body">
                                 <Loading show={this.state.grafico.dataNFSE.length == 0} message="Calculando gráfico..."/>
                                 <ShowComponent show={this.state.grafico.dataNFSE.length > 0}>
@@ -129,7 +93,7 @@ export default class DashboardMagazine extends Component {
                     </div>
                     <div className="col-xl">
                         <div className="card card-primary card-outline">
-                            <div className="card-header"><h6>Nota Fiscal de Servi&ccedil;os Eletr&ocirc;nica</h6></div>
+                            <div className="card-header"><h6>Nota Fiscal Eletr&ocirc;nica</h6></div>
                             <div className="card-body">
                                 <Loading show={this.state.grafico.dataNFE.length == 0} message="Calculando gráfico..."/>
                                 <ShowComponent show={this.state.grafico.dataNFE.length > 0}>

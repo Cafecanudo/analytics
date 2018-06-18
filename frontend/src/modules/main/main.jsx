@@ -39,8 +39,7 @@ class MainApplication extends Component {
                     <HeaderMenu/>
                     <Sidebar/>
                     <div className="content-wrapper">
-
-                        <div className="content-header">
+                        <div className="content-header app-breadcrumb">
                             <div className="container-fluid">
                                 <div className="row mb-2">
                                     <div className="col-sm-6">
@@ -58,11 +57,11 @@ class MainApplication extends Component {
                         {/*Troca de rotas acontece aqui*/}
                         <section className="content">
                             <Switch>
-                                <Route exact path="/inicio" component={Inicio}/>
+                                <Route exact path="/" component={Inicio}/>
                                 <Route path="/dashboard/:name" component={DashboardMagazine}/>
-                                <Route exact path="/grafico/notas-nfs-e" component={GraficoNFSE}/>
-                                <Route exact path="/grafico/notas-nf-e" component={GraficoNFE}/>
-                                <Route exact path="/grafico/notas-ct-e" component={GraficoCTE}/>
+                                <Route path="/grafico/notas-nfs-e" component={GraficoNFSE}/>
+                                <Route path="/grafico/notas-nf-e" component={GraficoNFE}/>
+                                <Route path="/grafico/notas-ct-e" component={GraficoCTE}/>
                             </Switch>
                         </section>
                     </div>

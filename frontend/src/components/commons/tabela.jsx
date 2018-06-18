@@ -73,13 +73,13 @@ export default class Tabela extends Component {
                 <div className="export-button">
                     <CSVLink data={this.state.provider} headers={this.getHeadersCSV()}>Exportar CVS</CSVLink>
                 </div>
-                <ul className="pagination pagination-sm m-0 float-right">
+                {/*<ul className="pagination pagination-sm m-0 float-right">
                     <li className="page-item"><a className="page-link" href="#">«</a></li>
                     <li className="page-item"><a className="page-link" href="#">1</a></li>
                     <li className="page-item"><a className="page-link" href="#">2</a></li>
                     <li className="page-item"><a className="page-link" href="#">3</a></li>
                     <li className="page-item"><a className="page-link" href="#">»</a></li>
-                </ul>
+                </ul>*/}
             </pagination-table>
         );
     }
