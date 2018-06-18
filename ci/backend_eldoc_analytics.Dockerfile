@@ -1,7 +1,7 @@
 FROM node:carbon
 
-RUN apt-get update && apt-get install vim -y && \
-    useradd --user-group --create-home --shell /bin/false appuser
+#RUN apt-get update && apt-get install vim -y && \
+#    useradd --user-group --create-home --shell /bin/false appuser
 
 COPY . /home/appuser/eldoc-analytics
 
@@ -38,9 +38,9 @@ RUN sed -e 's/VERSION_ENV/'${VERSION_ENV}'/g' \
         -e 's/BACK_PORT_ENV/'${BACK_PORT_ENV}'/g' ci/config.jsx.template > frontend/src/config/config.jsx 
 
 
-RUN chown -R appuser. /home/appuser
+#RUN chown -R appuser. /home/appuser
 
-USER appuser
+#USER appuser
 
 WORKDIR /home/appuser/eldoc-analytics/backend
 
