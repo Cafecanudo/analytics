@@ -1,12 +1,12 @@
-import { dadosUsuarioSchema, IDadosUsuarioModel } from './dados.usuario.model';
+import { DadosUsuarioModel, dadosUsuarioSchema } from './dados.usuario.model';
 
 /**
  * Interface de modelo de dados do usuario;
  */
-export interface IUsuarioModel {
+export class UsuarioModel {
     login: string;
     foto?: string;
-    dadosUsuario: IDadosUsuarioModel;
+    dadosUsuario: DadosUsuarioModel;
 }
 
 /**

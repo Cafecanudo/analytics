@@ -26,7 +26,7 @@ class ConfiguracaoRepo extends repositorio_base_1.RepositoryBase {
     }
 }
 __decorate([
-    decorators_1.MongoDbSchema('configuracao'),
+    decorators_1.MongoCollection('configuracao'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)

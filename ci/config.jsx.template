@@ -1,4 +1,7 @@
 export const env = {
+    application: {
+        timeLoad: 1000
+    },
     server: {
         url: 'BACK_PROTOCOLO_ENV://BACK_HOST_ENV:BACK_PORT_ENV/api'
     }

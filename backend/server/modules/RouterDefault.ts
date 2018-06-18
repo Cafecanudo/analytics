@@ -20,9 +20,9 @@ export abstract class RouterDefault {
 
     /**
      * Retorna dos as rotas implementadas de um modulo
-     * @returns {IRouteTypeModel[]}
+     * @returns {RouteTypeModel[]}
      */
-    abstract getRoutes(): IRouteTypeModel[];
+    abstract getRoutes(): RouteTypeModel[];
 
     /**
      * Substitui nome padrão do modulo
@@ -42,8 +42,8 @@ export abstract class RouterDefault {
         this.postConstructor();
     }
 
-    private createRoute(_r: IRouteTypeModel): void {
-        const _p = '/' + _r.path.replace(/^[\/]+/, '');
+    private createRoute(_r: RouteTypeModel): void {
+        const _p = (_r.path ? '/' : '') + (_r.path || '').replace(/^[\/]+/, '');
         switch (_r.type || 'GET') {
             case 'POST': {
                 this.router.post(_p, _r.index);
@@ -71,8 +71,8 @@ export abstract class RouterDefault {
     }
 }
 
-export interface IRouteTypeModel {
-    type?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
-    path: string;
+export class RouteTypeModel {
+    type?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' = 'GET';
+    path?: string = '/';
     index: (res: Request, rep: Response) => void;
 }

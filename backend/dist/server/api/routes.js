@@ -29,9 +29,16 @@ class Routes {
         fs.readdirSync(pathModules).forEach(f => {
             const _in = `${pathModules}${f}`;
             if (fs.statSync(_in).isDirectory()) {
-                if (fs.statSync(`${_in}/routes.ts`).isFile()) {
-                    this.getDataAsync(f, `../modules/${f}/routes`)
-                        .then(_r => _r.registerRoutes(f));
+                if (fs.existsSync(`${_in}/routes.ts`)) {
+                    if (fs.statSync(`${_in}/routes.ts`).isFile()) {
+                        this.getDataAsync(f, `../modules/${f}/routes`)
+                            .then(_r => _r.registerRoutes(f));
+                    }
+                }
+                else {
+                    console_util_1.default.ln();
+                    console_util_1.default.warn(`----------------> Modulo "${_in}" não possui o arquivo de rotas. [${_in}/routes.ts]`);
+                    console_util_1.default.ln();
                 }
             }
         });

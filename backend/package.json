@@ -9,6 +9,7 @@
     "build": "./node_modules/.bin/tsc",
     "unit-test": "cross-env NODE_ENV=test mocha --opts ddist/tests/unit/config/mocha.opts ./dist/tests/unit/unit.test.js",
     "integration-test": "cross-env NODE_ENV=test mocha --opts ./tests/integration/config/mocha.opts",
+    "integration-test-watch": "cross-env NODE_ENV=test mocha --opts ./tests/integration/config/mocha.opts --watch",
     "start": "npm run build && node ./dist/server/server.js",
     "builded": "npm run build && nodemon ./dist/server.ts"
   },

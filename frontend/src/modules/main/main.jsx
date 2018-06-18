@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect, Route, Switch, withRouter } from 'react-router-dom';
+import { Link, Route, Switch, withRouter } from 'react-router-dom';
 
 import '../../@core/dependencies';
-import { Sidebar } from '../../components/siderbar/siderbar';
+import Sidebar from '../../components/siderbar/siderbar';
 import HeaderMenu from '../../components/header-menu/header.menu';
-import { ApiRouter } from '../../config/routers';
+import Inicio from '../inicio/inicio';
+import DashboardMagazine from '../magazine/dashboard.magazine';
+import GraficoNFSE from '../magazine/graficos/grafico.nfse';
+import GraficoNFE from '../magazine/graficos/grafico.nfe';
+import GraficoCTE from '../magazine/graficos/grafico.cte';
 
 class MainApplication extends Component {
 
@@ -22,12 +26,6 @@ class MainApplication extends Component {
     }
 
     render() {
-        const extracted = (el, i) => {
-            return (
-                <Route key={i} exact={el.exact || true} path={el.path} component={el.component}/>
-            );
-        };
-
         return (
             <main-application>
                 <div className="wrapper">
@@ -53,9 +51,12 @@ class MainApplication extends Component {
                         {/*Troca de rotas acontece aqui*/}
                         <section className="content">
                             <Switch>
-                                {ApiRouter().map((el, i) => (
-                                    extracted(el, i)
-                                ))}
+                                <Route exact path="/" component={Inicio}/>
+                                <Route exact path="/inicio" component={Inicio}/>
+                                <Route path="/dashboard/:name" component={DashboardMagazine}/>
+                                <Route path="/grafico/notas-nfs-e" component={GraficoNFSE}/>
+                                <Route path="/grafico/notas-nf-e" component={GraficoNFE}/>
+                                <Route path="/grafico/notas-ct-e" component={GraficoCTE}/>
                             </Switch>
                         </section>
                     </div>
@@ -64,8 +65,7 @@ class MainApplication extends Component {
                     <div className="float-right d-none d-sm-inline">
                         SOFTBOX
                     </div>
-                    <span>Copyright &copy; 2018 <a href="#">www.softbox.com.br</a>.</span> Todos direitos
-                    reservados.
+                    <span>Copyright &copy; 2018 <a href="#">www.softbox.com.br</a>.</span> Todos direitos reservados.
                 </footer>
             </main-application>
         );

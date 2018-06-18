@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { IRouteTypeModel, RouterDefault } from '../RouterDefault';
+import { RouteTypeModel, RouterDefault } from '../RouterDefault';
 import { GET, Path } from '../../api/@core/decorators/decorators';
 import { usuarioRepositorio } from './usuario.repositorio';
 
@@ -44,9 +44,9 @@ export default class UsuarioRoutes extends RouterDefault {
 
     /**
      * Retorna as rodas de usuario
-     * @returns {IRouteTypeModel[]}
+     * @returns {RouteTypeModel[]}
      */
-    getRoutes(): IRouteTypeModel[] {
+    getRoutes(): RouteTypeModel[] {
         return [
             {
                 path: 'perfil', index: this.perfil
