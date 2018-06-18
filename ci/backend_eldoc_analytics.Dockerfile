@@ -32,7 +32,7 @@ RUN sed -e 's/VERSION_ENV/'${BACK_VERSION_ENV}'/g' \
 	-e 's/DATABASE_HOST_ENV/'${BACK_DATABASE_HOST_ENV}'/g' \
 	-e 's/DATABASE_DBNAME_ENV/'${BACK_DATABASE_DBNAME_ENV}'/g' \
 	-e 's/DATABASE_USR_ENV/'${BACK_DATABASE_USR_ENV}'/g' \
-	-e 's/DATABASE_PSW_ENV/'${BACK_DATABASE_PSW_ENV}'/g' ci/.env.template > backend/server/config/env/.env.ts && \
+	-e 's/DATABASE_PSW_ENV/'${BACK_DATABASE_PSW_ENV}'/g' ci/env.template > backend/server/config/env/env.ts && \
     sed -e 's/BACK_PROTOCOLO_ENV/'${BACK_PROTOCOLO_ENV}'/g' \
         -e 's/BACK_HOST_ENV/'${BACK_HOST_ENV}'/g' \
         -e 's/BACK_PORT_ENV/'${BACK_PORT_ENV}'/g' ci/config.jsx.template > frontend/src/config/config.jsx
