@@ -1,6 +1,7 @@
 FROM node:carbon
 
-RUN useradd --user-group --create-home --shell /bin/false appuser
+RUN apt-get update && apt-get install vim -y && \
+    useradd --user-group --create-home --shell /bin/false appuser
 
 COPY . /home/appuser/eldoc-analytics
 
