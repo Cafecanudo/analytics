@@ -23,7 +23,7 @@ class RouterDefault {
         this.postConstructor();
     }
     createRoute(_r) {
-        const _p = '/' + _r.path.replace(/^[\/]+/, '');
+        const _p = (_r.path ? '/' : '') + (_r.path || '').replace(/^[\/]+/, '');
         switch (_r.type || 'GET') {
             case 'POST': {
                 this.router.post(_p, _r.index);
@@ -51,4 +51,11 @@ class RouterDefault {
     }
 }
 exports.RouterDefault = RouterDefault;
+class RouteTypeModel {
+    constructor() {
+        this.type = 'GET';
+        this.path = '/';
+    }
+}
+exports.RouteTypeModel = RouteTypeModel;
 //# sourceMappingURL=RouterDefault.js.map

@@ -1,7 +1,7 @@
 import favicon from '../../../resources/images/favicon.png';
 import { TYPES } from './types';
 
-const ESTATO_INICIAL = {
+const ESTADO_INICIAL = {
     configuracao: {
         name: 'ELDOC Analytcs',
         favicon: favicon
@@ -14,10 +14,14 @@ const ESTATO_INICIAL = {
     }
 };
 
-export const applicationReducer = (state = ESTATO_INICIAL, action) => {
+export const applicationReducer = (state = ESTADO_INICIAL, action) => {
     switch (action.type) {
         case TYPES.ATUALIZAR_CONFIGURACOES: {
             return action.configuracoes;
+        }
+        case TYPES.ADD_LINK_BREADCRUMB: {
+            console.log('ALTERAR**********');
+            return 1;
         }
         case TYPES.ATUALIZAR_BREADCRUMB: {
             return {

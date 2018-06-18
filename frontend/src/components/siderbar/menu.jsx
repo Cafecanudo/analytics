@@ -51,7 +51,7 @@ class Menu extends Component {
             const menu = _m;
             return (
                 <li key={index} id="monitor" className="nav-item has-treeview">
-                    <NavLink to={`/${menu.tipo === 'PAGE' ? menu.url : `perfil/acesso/${menu.name}`}`}
+                    <NavLink to={`/${menu.tipo === 'PAGE' ? menu.url : `grafico/${menu.name}`}`}
                              className={'nav-link'} activeClassName="active-sub" title={menu.hint}>
                         <i className={`nav-icon ${menu.icone}`}></i>
                         <p>{menu.descricao}</p>

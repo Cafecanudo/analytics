@@ -33,6 +33,13 @@ class HeaderMenu extends Component {
 
     componentWillUnmount() {
         clearInterval(this.timerID);
+        $('#sidebar-overlay').click(function () {
+            $('body').toggleClass('sidebar-open sidebar-collapse');
+        });
+    }
+
+    collapseMenu() {
+        $('body').toggleClass('sidebar-open sidebar-collapse');
     }
 
     render() {
@@ -40,7 +47,7 @@ class HeaderMenu extends Component {
             <nav className="main-header navbar navbar-expand bg-white navbar-light border-bottom">
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <a className="nav-link" data-widget="pushmenu" href="#">
+                        <a className="nav-link" data-widget="pushmenu" onClick={this.collapseMenu} style={{cursor: 'pointer'}}>
                             <i className="fa fa-bars"></i>
                         </a>
                     </li>

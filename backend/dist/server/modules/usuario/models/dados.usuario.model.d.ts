@@ -1,4 +1,4 @@
-export interface IDadosUsuarioModel {
+export declare class DadosUsuarioModel {
     nome: string;
     email: string;
 }

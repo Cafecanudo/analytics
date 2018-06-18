@@ -6,13 +6,13 @@ export declare abstract class RouterDefault {
     private readonly router;
     protected constructor(app: Application);
     postConstructor(): void;
-    abstract getRoutes(): IRouteTypeModel[];
+    abstract getRoutes(): RouteTypeModel[];
     getPath(): string;
     registerRoutes(name: string): void;
     private createRoute;
 }
-export interface IRouteTypeModel {
+export declare class RouteTypeModel {
     type?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
-    path: string;
+    path?: string;
     index: (res: Request, rep: Response) => void;
 }

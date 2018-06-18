@@ -10,6 +10,25 @@ body, html {
   height: 100%;
 }
 
+.content-wrapper {
+  margin-bottom: 50px;
+}
+
+.card-primary.card-outline {
+  border-top: 3px solid #f05722;
+}
+
+.container-fluid {
+  position: relative;
+}
+
+.card-footer {
+  .export-button {
+    float: left;
+    color: #f05722;
+  }
+}
+
 .sidebar-dark-primary {
   .nav-sidebar {
     > .nav-item {
@@ -48,7 +67,7 @@ body, html {
   .image {
     float: left;
   }
-  a.d-block{
+  a.d-block {
     width: 100%;
     padding: 5px 0 0;
     border-radius: 4px;

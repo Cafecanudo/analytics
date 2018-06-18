@@ -1,7 +1,7 @@
 /**
  * Interface do modelo
  */
-import { MongoDbSchema } from '../../../api/@core/decorators/decorators';
+import { MongoCollection } from '../../../api/@core/decorators/decorators';
 import { RepositoryBase } from '../../../api/@core/repositorio.base';
 
 export interface IConfiguracaoModel {
@@ -11,7 +11,7 @@ export interface IConfiguracaoModel {
 
 class ConfiguracaoRepo extends RepositoryBase<IConfiguracaoModel> {
 
-    @MongoDbSchema('configuracao')
+    @MongoCollection('configuracao')
     schema() {
         return {
             version: {

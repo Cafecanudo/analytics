@@ -31540,11 +31540,11 @@ exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapSt
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.addLinkBreadcrumbAction = exports.atualizarBreadcrumbAction = exports.atualizarConfiguracoes = undefined;
+exports.addLinkBreadcrumbAction = exports.atualizarBreadcrumbAction = exports.atualizarConfiguracoesAction = undefined;
 
 var _types = __webpack_require__(/*! ./types */ "./src/modules/main/redux/types.jsx");
 
-var atualizarConfiguracoes = exports.atualizarConfiguracoes = function atualizarConfiguracoes(configuracoes) {
+var atualizarConfiguracoes = exports.atualizarConfiguracoesAction = function atualizarConfiguracoes(configuracoes) {
     return {
         type: _types.TYPES.ATUALIZAR_CONFIGURACOES,
         configuracoes: configuracoes

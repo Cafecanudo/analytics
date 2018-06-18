@@ -1,5 +1,8 @@
 import 'reflect-metadata';
 import { MongodbSchema } from './rest/mongodb.schema';
+import ConsoleUtil from '../../../utils/console.util';
+
+const listOfCollection = [];
 
 const formatMetadataKey = Symbol('Inject');
 
@@ -9,8 +12,17 @@ const formatMetadataKey = Symbol('Inject');
  * @returns {(target, propertyKey: string, descriptor: PropertyDescriptor) => void}
  * @constructor
  */
-export const MongoDbSchema = (collectionName?: string) => {
+export const MongoCollection = (collectionName?: string) => {
     return (target, propertyKey: string, descriptor: PropertyDescriptor) => {
+        listOfCollection.find(value => {
+            if (value === collectionName) {
+                ConsoleUtil.error(`Ja existe uma collection com nome "@MongoCollection('${collectionName}')". `
+                    + `Classe "${target.constructor.name}.ts".`);
+                process.exit(1);
+            }
+            return false;
+        });
+        listOfCollection.push(collectionName);
         MongodbSchema.builder(target, propertyKey, descriptor, collectionName);
     };
 };

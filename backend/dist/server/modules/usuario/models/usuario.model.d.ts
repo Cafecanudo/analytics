@@ -1,8 +1,8 @@
-import { IDadosUsuarioModel } from './dados.usuario.model';
-export interface IUsuarioModel {
+import { DadosUsuarioModel } from './dados.usuario.model';
+export declare class UsuarioModel {
     login: string;
     foto?: string;
-    dadosUsuario: IDadosUsuarioModel;
+    dadosUsuario: DadosUsuarioModel;
 }
 export declare const usuarioSchema: {
     login: {

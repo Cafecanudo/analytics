@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-export declare const MongoDbSchema: (collectionName?: string) => (target: any, propertyKey: string, descriptor: PropertyDescriptor) => void;
+export declare const MongoCollection: (collectionName?: string) => (target: any, propertyKey: string, descriptor: PropertyDescriptor) => void;
 export declare const Inject: (formatString?: string) => {
     (target: Function): void;
     (target: Object, propertyKey: string | symbol): void;

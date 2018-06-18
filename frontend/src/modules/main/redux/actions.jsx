@@ -1,6 +1,6 @@
 import { TYPES } from './types';
 
-export const atualizarConfiguracoes = (configuracoes) => ({
+export const atualizarConfiguracoesAction = configuracoes => ({
     type: TYPES.ATUALIZAR_CONFIGURACOES,
     configuracoes: configuracoes
 });

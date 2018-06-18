@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
-import { IRouteTypeModel, RouterDefault } from '../RouterDefault';
+import { RouteTypeModel, RouterDefault } from '../RouterDefault';
 import { GET, Path } from '../../api/@core/decorators/decorators';
 import { configuracaoRepo } from './models/configuracaoModel';
 
 @Path('/app')
 export default class AplicacaoRoutes extends RouterDefault {
 
-    getRoutes(): IRouteTypeModel[] {
+    getRoutes(): RouteTypeModel[] {
         return [
             { path: '/', index: this.index }
         ];

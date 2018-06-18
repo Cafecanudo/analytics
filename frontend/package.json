@@ -5,8 +5,8 @@
   "description": "Eldoc Analytics, sistema para monitoramento de dados ficais.",
   "license": "ISC",
   "scripts": {
-    "start": "webpack-dev-server --mode development --progress --colors --inline --hot",
-    "build": "webpack --PORT 80",
+    "start-dev": "webpack-dev-server --mode development --progress --colors --inline --hot",
+    "build": "webpack --progress -p",
     "start-prod": "webpack --progress -p"
   },
   "author": "by Wellton S. Barros - cafecanudo@gmail.com",
@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "http-server": "^0.11.1",
+    "react-csv": "^1.0.14",
     "react-full-screen": "^0.2.2",
     "react-router-dom": "^4.3.1"
   }
