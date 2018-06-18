@@ -41,6 +41,7 @@ RUN sed -e 's/VERSION_ENV/'${VERSION_ENV}'/g' \
 #RUN chown -R appuser. /home/appuser
 
 #USER appuser
+EXPOSE 3000
 
 WORKDIR /home/appuser/eldoc-analytics/backend
 
