@@ -47,8 +47,8 @@ tests:
 deploy_container:
     stage: deploy
     script:
-    - rancherapi.py upgrade $RANCHER_SERVICE_ID --start_first --complete_previous --auto_complete
-    - rancherapi.py upgrade $RANCHER_SERVICE_ID --start_first --complete_previous --auto_complete
+    - rancherapi.py upgrade $BACK_RANCHER_SERVICE_ID --start_first --complete_previous --auto_complete
+    - rancherapi.py upgrade $FRONT_RANCHER_SERVICE_ID --start_first --complete_previous --auto_complete
     environment:
       name: hml
       url: http://$HML_ERP_URL/
