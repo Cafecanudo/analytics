@@ -3,11 +3,10 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { atualizarBreadcrumbAction } from '../main/redux/actions';
-import { Redirect } from 'react-router-dom';
 
 class Inicio extends Component {
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.atualizarBreadcrumbAction({
             title: 'Inicio'
         });
