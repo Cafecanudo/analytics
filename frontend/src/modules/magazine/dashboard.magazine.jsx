@@ -70,7 +70,9 @@ export default class DashboardMagazine extends Component {
     }
 
     componentWillUnmount() {
-        clearTimeout(this.timeID);
+        clearTimeout(this.timeNFSE);
+        clearTimeout(this.timeCTE);
+        clearTimeout(this.timeNFE);
     }
 
     render() {
