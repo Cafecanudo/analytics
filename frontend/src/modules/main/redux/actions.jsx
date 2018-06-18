@@ -1,5 +1,12 @@
 import { TYPES } from './types';
 
+export const atualizarLoginUsuarioAction = loginUsuario => {
+    return ({
+        type: TYPES.ATUALIZAR_LOGIN_USUARIO,
+        loginUsuario: loginUsuario
+    });
+}
+
 export const atualizarConfiguracoesAction = configuracoes => ({
     type: TYPES.ATUALIZAR_CONFIGURACOES,
     configuracoes: configuracoes

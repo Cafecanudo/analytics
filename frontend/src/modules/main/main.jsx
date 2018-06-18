@@ -25,6 +25,13 @@ class MainApplication extends Component {
         ));
     }
 
+
+    componentDidMount() {
+        if (!this.props.loginUsuario || !this.props.loginUsuario.dadosUsuario) {
+            this.props.history.push('/login');
+        }
+    }
+
     render() {
         return (
             <main-application>
@@ -51,12 +58,11 @@ class MainApplication extends Component {
                         {/*Troca de rotas acontece aqui*/}
                         <section className="content">
                             <Switch>
-                                <Route exact path="/" component={Inicio}/>
                                 <Route exact path="/inicio" component={Inicio}/>
                                 <Route path="/dashboard/:name" component={DashboardMagazine}/>
-                                <Route path="/grafico/notas-nfs-e" component={GraficoNFSE}/>
-                                <Route path="/grafico/notas-nf-e" component={GraficoNFE}/>
-                                <Route path="/grafico/notas-ct-e" component={GraficoCTE}/>
+                                <Route exact path="/grafico/notas-nfs-e" component={GraficoNFSE}/>
+                                <Route exact path="/grafico/notas-nf-e" component={GraficoNFE}/>
+                                <Route exact path="/grafico/notas-ct-e" component={GraficoCTE}/>
                             </Switch>
                         </section>
                     </div>
@@ -73,6 +79,7 @@ class MainApplication extends Component {
 }
 
 const mapStateProps = state => ({
+    loginUsuario: state.applicationReducer.loginUsuario,
     breadcrumb: state.applicationReducer.application.breadcrumb
 });
 export default withRouter(connect(mapStateProps)(MainApplication));

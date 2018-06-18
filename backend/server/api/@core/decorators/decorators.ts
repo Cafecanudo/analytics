@@ -66,3 +66,14 @@ export const GET = (path?: string | {}) => {
         // console.log(propertyKey);
     };
 };
+
+export const POST = (path?: string | {}) => {
+    return (target, propertyKey: string, descriptor: PropertyDescriptor) => {
+        //ConsoleUtil.data(`Rota ${path} [GET /api/v1/usuario/perfil] registrada`);
+        // console.log(target);
+        // console.log('-----------------------');
+        // console.log(descriptor);
+        // console.log('-----------------------');
+        // console.log(propertyKey);
+    };
+};

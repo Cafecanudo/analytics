@@ -12,10 +12,6 @@ class Inicio extends Component {
         });
     }
 
-    componentWillMount() {
-        this.props.history.replace('dashboard/notas-internalizadas');
-    }
-
     render() {
         return null;
     }

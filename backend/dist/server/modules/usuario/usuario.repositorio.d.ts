@@ -17,6 +17,7 @@ declare class UsuarioRepositorio extends RepositoryBase<UsuarioModel> {
             };
         };
     };
+    login(login: any, senha: any): Promise<any>;
     obterMenusUsuario(): Promise<any>;
     obterPerfilUsuario(): Promise<UsuarioModel>;
     obterPerfilNotificacaoResumo(): Promise<any>;
