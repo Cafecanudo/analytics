@@ -291,6 +291,15 @@ class MagazineRepositorio extends RepositoryBase<NotaModel> {
             ]);
         });
     }
+
+    appendNota(notas = []): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+            notas.forEach((notaModel: NotaModel) => {
+                this.save(notaModel);
+            });
+            return resolve();
+        });
+    }
 }
 
 /**

@@ -11,7 +11,7 @@ export default class UsuarioRoutes extends RouterDefault {
         magazineRepositorio.notasNFSE()
             .then(value => res.json(value))
             .catch(err => {
-                res.status(err.statusCode).json(err);
+                res.status(500).json(err);
             });
     }
 
@@ -20,7 +20,7 @@ export default class UsuarioRoutes extends RouterDefault {
         magazineRepositorio.notasNFSEPendentes()
             .then(value => res.json(value))
             .catch(err => {
-                res.status(err.statusCode).json(err);
+                res.status(500).json(err);
             });
     }
 
@@ -29,7 +29,7 @@ export default class UsuarioRoutes extends RouterDefault {
         magazineRepositorio.listaNotasNFSE(req.params.tipo)
             .then(value => res.json(value))
             .catch(err => {
-                res.status(err.statusCode).json(err);
+                res.status(500).json(err);
             });
     }
 
@@ -38,7 +38,7 @@ export default class UsuarioRoutes extends RouterDefault {
         magazineRepositorio.colunasListaNotasNFSE(req.params.tipo)
             .then(value => res.json(value))
             .catch(err => {
-                res.status(err.statusCode).json(err);
+                res.status(500).json(err);
             });
     }
 
@@ -47,7 +47,7 @@ export default class UsuarioRoutes extends RouterDefault {
         magazineRepositorio.notasNFE()
             .then(value => res.json(value))
             .catch(err => {
-                res.status(err.statusCode).json(err);
+                res.status(500).json(err);
             });
     }
 
@@ -56,7 +56,7 @@ export default class UsuarioRoutes extends RouterDefault {
         magazineRepositorio.notasNFEPendentes()
             .then(value => res.json(value))
             .catch(err => {
-                res.status(err.statusCode).json(err);
+                res.status(500).json(err);
             });
     }
 
@@ -65,7 +65,7 @@ export default class UsuarioRoutes extends RouterDefault {
         magazineRepositorio.colunasListaNotasNFE(req.params.tipo)
             .then(value => res.json(value))
             .catch(err => {
-                res.status(err.statusCode).json(err);
+                res.status(500).json(err);
             });
     }
 
@@ -74,7 +74,7 @@ export default class UsuarioRoutes extends RouterDefault {
         magazineRepositorio.listaNotasNFE(req.params.tipo)
             .then(value => res.json(value))
             .catch(err => {
-                res.status(err.statusCode).json(err);
+                res.status(500).json(err);
             });
     }
 
@@ -83,7 +83,7 @@ export default class UsuarioRoutes extends RouterDefault {
         magazineRepositorio.notasCTE()
             .then(value => res.json(value))
             .catch(err => {
-                res.status(err.statusCode).json(err);
+                res.status(500).json(err);
             });
     }
 
@@ -92,7 +92,7 @@ export default class UsuarioRoutes extends RouterDefault {
         magazineRepositorio.colunasListaNotasCTE(req.params.tipo)
             .then(value => res.json(value))
             .catch(err => {
-                res.status(err.statusCode).json(err);
+                res.status(500).json(err);
             });
     }
 
@@ -101,16 +101,16 @@ export default class UsuarioRoutes extends RouterDefault {
         magazineRepositorio.listaNotasCTE(req.params.tipo)
             .then(value => res.json(value))
             .catch(err => {
-                res.status(err.statusCode).json(err);
+                res.status(500).json(err);
             });
     }
 
     @POST()
-    appendNotaNFSE(req: Request, res: Response) {
-        magazineRepositorio.listaNotasCTE(req.params.tipo)
-            .then(value => res.json(value))
+    appendNota(req: Request, res: Response) {
+        magazineRepositorio.appendNota(req.body)
+            .then(value => res.send(200))
             .catch(err => {
-                res.status(err.statusCode).json(err);
+                res.status(500).json(err);
             });
     }
 
@@ -124,7 +124,7 @@ export default class UsuarioRoutes extends RouterDefault {
                 path: 'nfse', index: this.notasNFSE
             },
             {
-                type: 'POST', path: 'nfse/append', index: this.appendNotaNFSE
+                type: 'POST', index: this.appendNota
             },
             {
                 path: 'nfse/pendentes', index: this.notasNFSEPendentes
