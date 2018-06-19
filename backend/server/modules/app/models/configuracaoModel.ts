@@ -1,10 +1,12 @@
 /**
  * Interface do modelo
  */
+import { Document } from 'mongoose';
+
 import { MongoCollection } from '../../../api/@core/decorators/decorators';
 import { RepositoryBase } from '../../../api/@core/repositorio.base';
 
-export interface IConfiguracaoModel {
+export interface IConfiguracaoModel extends Document {
     version: string;
     lastUpdate: Date;
 }

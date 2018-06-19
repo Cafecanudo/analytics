@@ -1,5 +1,6 @@
+import { Document } from 'mongoose';
 import { RepositoryBase } from '../../../api/@core/repositorio.base';
-export interface IConfiguracaoModel {
+export interface IConfiguracaoModel extends Document {
     version: string;
     lastUpdate: Date;
 }
