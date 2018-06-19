@@ -15,6 +15,7 @@ export default class Tabela extends Component {
         super(props);
         this.state = {
             provider: props.provider || [],
+            providerFilter: props.provider || [],
             pagination: props.pagination || 10,
             titulo: props.titulo
         };
@@ -22,7 +23,8 @@ export default class Tabela extends Component {
 
     componentWillReceiveProps(props) {
         this.setState({
-            provider: props.provider
+            provider: props.provider || [],
+            providerFilter: props.provider || [],
         });
     }
 
@@ -49,7 +51,7 @@ export default class Tabela extends Component {
     }
 
     provider() {
-        if ((this.state.provider || []).length === 0) {
+        if ((this.state.providerFilter || []).length === 0) {
             return (
                 <tr>
                     <td colSpan={(this.props.collumns || []).length} style={{ textAlign: 'center' }}>
@@ -58,7 +60,7 @@ export default class Tabela extends Component {
                 </tr>
             );
         }
-        return (this.state.provider || []).map((it, i) => {
+        return (this.state.providerFilter || []).map((it, i) => {
             return (
                 <tr key={i}>
                     {this.rows(it)}
@@ -71,7 +73,7 @@ export default class Tabela extends Component {
         return (
             <pagination-table>
                 <div className="export-button">
-                    <CSVLink data={this.state.provider} headers={this.getHeadersCSV()}>Exportar CVS</CSVLink>
+                    <CSVLink data={this.state.providerFilter} headers={this.getHeadersCSV()}>Exportar CVS</CSVLink>
                 </div>
                 {/*<ul className="pagination pagination-sm m-0 float-right">
                     <li className="page-item"><a className="page-link" href="#">«</a></li>
@@ -95,13 +97,13 @@ export default class Tabela extends Component {
     }
 
     search(value) {
-        const newList = (this.state.provider || []).find((it, i) => {
+        const newList = (this.state.provider || []).filter((it, i) => {
             if (it.chave.indexOf(value) > -1 || it.num_doc_ele.indexOf(value) > -1 || it.num_doc.indexOf(value) > -1 || it.uf.indexOf(value) > -1) {
                 return true;
             }
         });
         this.setState({
-            provider: newList
+            providerFilter: newList
         });
     }
 
@@ -124,7 +126,6 @@ export default class Tabela extends Component {
                     </div>
                 </div>
                 <div className="card-body p-0">
-
                     <table className="table table-bordered" style={{ borderLeft: 0, borderRight: 0 }}>
                         <tbody>
                         <tr>
@@ -135,7 +136,7 @@ export default class Tabela extends Component {
                     </table>
                 </div>
                 <div className="card-footer clearfix">
-                    {(this.state.provider || []).length > 0 ? this.pagination() : (
+                    {(this.state.providerFilter || []).length > 0 ? this.pagination() : (
                         <ul className="pagination pagination-sm m-0 float-right">
                             <li className="page-item">
                                 <i className="fa fa-spinner fa-pulse fa-3x fa-fw" style={{ fontSize: '14px', color: '#007bff' }}></i>

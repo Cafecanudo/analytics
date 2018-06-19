@@ -49,7 +49,7 @@ export class ___CharBar___ extends Component {
             'categoryField': 'display_name',
             'categoryAxis': {
                 'gridPosition': 'start',
-                'labelRotation': this.props.rotation || 45
+                'labelRotation': this.props.rotation || 0
             },
             'export': {
                 'enabled': this.props.export || false

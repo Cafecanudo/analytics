@@ -30,7 +30,7 @@ export abstract class RepositoryBase<T extends Document> {
 
     saveOrUpdate(params: {}, document: T): Promise<T> {
         return new Promise<T>((resolve, reject) => {
-            this._model.findOneAndUpdate(params, document, {
+            const daw = this._model.findOneAndUpdate(params, document, {
                 new: true, upsert: true,
                 runValidators: true
             }).then(res => {
@@ -40,6 +40,8 @@ export abstract class RepositoryBase<T extends Document> {
                 console.log(reason);
                 reject(reason);
             });
+
+            console.log(daw);
         });
 
 
