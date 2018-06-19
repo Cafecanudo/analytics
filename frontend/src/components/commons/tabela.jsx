@@ -3,12 +3,6 @@ import React, { Component } from 'react';
 import { Loading } from './loading';
 import { CSVLink } from 'react-csv';
 
-const data = [
-    { firstname: 'Ahmed', lastname: 'Tomi', email: 'ah@smthing.co.com' },
-    { firstname: 'Raed', lastname: 'Labes', email: 'rl@smthing.co.com' },
-    { firstname: 'Yezzi', lastname: 'Min l3b', email: 'ymin@cocococo.com' }
-];
-
 export default class Tabela extends Component {
 
     constructor(props) {

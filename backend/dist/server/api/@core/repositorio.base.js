@@ -15,7 +15,7 @@ class RepositoryBase {
     }
     saveOrUpdate(params, document) {
         return new Promise((resolve, reject) => {
-            this._model.findOneAndUpdate(params, document, {
+            const daw = this._model.findOneAndUpdate(params, document, {
                 new: true, upsert: true,
                 runValidators: true
             }).then(res => {
@@ -25,6 +25,7 @@ class RepositoryBase {
                 console.log(reason);
                 reject(reason);
             });
+            console.log(daw);
         });
     }
 }
