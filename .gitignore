@@ -4,3 +4,5 @@ node_modules
 *.log
 *.iml
 package-lock.json
+backend/dist
+frontend/dist
