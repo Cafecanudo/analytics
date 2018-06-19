@@ -1,1 +1,0 @@
-{"version":3,"file":"dados.usuario.model.js","sourceRoot":"","sources":["../../../../../server/modules/usuario/models/dados.usuario.model.ts"],"names":[],"mappings":";;AAEA,uBAA+B,SAAQ,QAAQ;CAG9C;AAHD,8CAGC;AAEY,QAAA,kBAAkB,GAAG;IAC9B,IAAI,EAAE;QACF,IAAI,EAAE,MAAM;QACZ,QAAQ,EAAE,IAAI;KACjB;IACD,KAAK,EAAE;QACH,IAAI,EAAE,MAAM;QACZ,QAAQ,EAAE,IAAI;KACjB;CACJ,CAAC"}
