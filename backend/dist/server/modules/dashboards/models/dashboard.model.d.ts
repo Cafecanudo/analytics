@@ -1,4 +1,4 @@
-export declare class DashboardModel {
+export declare class DashboardModel extends Document {
     principal: false;
     name: string;
     descricao: string;

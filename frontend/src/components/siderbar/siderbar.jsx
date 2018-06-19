@@ -11,7 +11,7 @@ export default class Sidebar extends Component {
                 <aside className="main-sidebar sidebar-dark-primary elevation-4">
                     <LogoFavicon/>
                     <div className="sidebar">
-                        <DadosUsuario/>
+                        {/*<DadosUsuario/>*/}
                         <Menu/>
                     </div>
                 </aside>

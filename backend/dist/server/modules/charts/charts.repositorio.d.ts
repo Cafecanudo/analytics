@@ -1,6 +1,6 @@
 import { RepositoryBase } from '../../api/@core/repositorio.base';
-import { ChartModel } from './models/chart.model';
-declare class ChartsRepositorio extends RepositoryBase<ChartModel> {
+import { IChartModel } from './models/IChartModel';
+declare class ChartsRepositorio extends RepositoryBase<IChartModel> {
     schema(): {
         tipo: {
             type: StringConstructor;
@@ -26,8 +26,8 @@ declare class ChartsRepositorio extends RepositoryBase<ChartModel> {
             comment: string[];
         };
     };
-    obterGraficoID(idGrafico: string): Promise<ChartModel>;
-    obterGraficoDashboardID(idDashboard: any): Promise<ChartModel[]>;
+    obterGraficoID(idGrafico: string): Promise<any>;
+    obterGraficoDashboardID(idDashboard: any): Promise<any[]>;
 }
 export declare const chartsRepositorio: ChartsRepositorio;
 export {};

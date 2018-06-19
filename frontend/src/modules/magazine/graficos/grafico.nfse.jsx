@@ -8,7 +8,8 @@ import { Loading } from '../../../components/commons/loading';
 import { ShowComponent } from '../../../components/commons/ifshow';
 import { BarChart, PieChart } from '../../../components/charts/charts';
 import Tabela from '../../../components/commons/tabela';
-import { atualizarBreadcrumbAction } from '../../main/redux/actions';
+import { limparBreadcrumbAction } from '../../main/redux/actions';
+import { timeUpdateChart } from '../dashboard.magazine';
 
 class GraficoNFSE extends Component {
 
@@ -38,19 +39,20 @@ class GraficoNFSE extends Component {
                 }
             });
             clearTimeout(this.timeNFSE);
+            this.timeNFSE = setTimeout(() => this.obterDadosGrafico(), timeUpdateChart);
         });
     }
 
     obterDadosGraficoChild() {
         Axios.get(`${env.server.url}/v1/magazine/nfse/pendentes`).then(value => {
             this.setState({
-                dataListaNotas: [],
                 grafico: {
                     ...this.state.grafico,
                     dataChild: value.data
                 }
             });
-            clearTimeout(this.timeNFSE);
+            clearTimeout(this.timeChild);
+            this.timeChild = setTimeout(() => this.obterDadosGraficoChild(), timeUpdateChart);
         });
     }
 
@@ -59,8 +61,8 @@ class GraficoNFSE extends Component {
             this.setState({
                 collumsListaNotas: value.data
             });
-            clearTimeout(this.timeNFSE);
-            this.timeID = setTimeout(() => this.obterDadosLista(tipo), env.application.timeLoad);
+            clearTimeout(this.timeCollumns);
+            this.timeLista = setTimeout(() => this.obterDadosLista(tipo), env.application.timeLoad);
         });
     }
 
@@ -70,19 +72,20 @@ class GraficoNFSE extends Component {
             this.setState({
                 dataListaNotas: value.data
             });
-            clearTimeout(this.timeNFSE);
+            clearTimeout(this.timeLista);
         });
     }
 
     componentDidMount() {
-        this.timeID = setTimeout(() => this.obterDadosGrafico(), env.application.timeLoad);
-        this.props.atualizarBreadcrumbAction({
-            title: 'NFS-E'
-        });
+        this.timeNFSE = setTimeout(() => this.obterDadosGrafico(), env.application.timeLoad);
+        this.props.limparBreadcrumbAction();
     }
 
     componentWillUnmount() {
-        clearTimeout(this.timeID);
+        clearTimeout(this.timeNFSE);
+        clearTimeout(this.timeChild);
+        clearTimeout(this.timeCollumns);
+        clearTimeout(this.timeLista);
     }
 
     clickPrincipal(index, valor, nome) {
@@ -92,8 +95,8 @@ class GraficoNFSE extends Component {
                 tituloChild: nome,
                 showGraficoChild: true
             });
-            clearTimeout(this.timeNFSE);
-            this.timeID = setTimeout(() => this.obterDadosGraficoChild(), env.application.timeLoad);
+            clearTimeout(this.timeChild);
+            this.timeChild = setTimeout(() => this.obterDadosGraficoChild(), env.application.timeLoad);
         }
     }
 
@@ -104,8 +107,7 @@ class GraficoNFSE extends Component {
             showLista: true,
             dataListaNotas: []
         });
-        clearTimeout(this.timeNFSE);
-        this.timeID = setTimeout(() => this.obterColunasDaLista(dataContext.name_id), env.application.timeLoad);
+        this.timeCollumns = setTimeout(() => this.obterColunasDaLista(dataContext.name_id), env.application.timeLoad);
     }
 
     render() {
@@ -151,5 +153,5 @@ class GraficoNFSE extends Component {
     }
 }
 
-const mapAction = dispatch => bindActionCreators({ atualizarBreadcrumbAction }, dispatch);
+const mapAction = dispatch => bindActionCreators({ limparBreadcrumbAction }, dispatch);
 export default connect(null, mapAction)(GraficoNFSE);

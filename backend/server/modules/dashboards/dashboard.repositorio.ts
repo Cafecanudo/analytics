@@ -1,9 +1,8 @@
 import { RepositoryBase } from '../../api/@core/repositorio.base';
 import { MongoCollection } from '../../api/@core/decorators/decorators';
-import { DashboardModel, dashboardSchema } from './models/dashboard.model';
-import { ChartModel } from '../charts/models/chart.model';
+import { dashboardSchema, IDashboardModel } from './models/IDashboardModel';
 
-class DashboardRepositorio extends RepositoryBase<DashboardModel> {
+class DashboardRepositorio extends RepositoryBase<IDashboardModel> {
 
     @MongoCollection('dashboard')
     schema() {
@@ -17,7 +16,7 @@ class DashboardRepositorio extends RepositoryBase<DashboardModel> {
                 _id: 'be4c425a7d15b3a1dbb838a0779f1d3e',
                 name: 'notas-internalizadas',
                 descricao: 'Status de Notas',
-                hint: 'DashboardModel mostra uma visao de todas as notas internalizadas/pendente/cancelado',
+                hint: 'IDashboardModel mostra uma visao de todas as notas internalizadas/pendente/cancelado',
                 icone: 'fa fa-line-chart'
             };
             resolve(dashboard);
@@ -32,7 +31,7 @@ class DashboardRepositorio extends RepositoryBase<DashboardModel> {
                         _id: 'be4c425a7d15b3a1dbb838a0779f1d3e',
                         name: 'notas-internalizadas',
                         descricao: 'Status de Notas',
-                        hint: 'DashboardModel mostra uma visao de todas as notas internalizadas/pendente/cancelado',
+                        hint: 'IDashboardModel mostra uma visao de todas as notas internalizadas/pendente/cancelado',
                         icone: 'fa fa-line-chart'
                     }
                 ]

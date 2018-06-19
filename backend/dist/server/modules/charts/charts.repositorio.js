@@ -11,10 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const repositorio_base_1 = require("../../api/@core/repositorio.base");
 const decorators_1 = require("../../api/@core/decorators/decorators");
-const chart_model_1 = require("./models/chart.model");
+const IChartModel_1 = require("./models/IChartModel");
 class ChartsRepositorio extends repositorio_base_1.RepositoryBase {
     schema() {
-        return chart_model_1.chartSchame;
+        return IChartModel_1.chartSchame;
     }
     obterGraficoID(idGrafico) {
         return new Promise((resolve, reject) => {

@@ -88,7 +88,7 @@ export default class Tabela extends Component {
         return (
             <tr>
                 <td colSpan={(this.props.collumns || []).length}>
-                    <Loading show={true} message={this.props.tituloLoading || ''}/>
+                    <Loading show={true} message={this.props.textLoading || ''}/>
                 </td>
             </tr>
         );

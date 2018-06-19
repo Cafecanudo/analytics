@@ -1,4 +1,5 @@
-export declare abstract class RepositoryBase<T> {
+import * as mongoose from 'mongoose';
+export declare abstract class RepositoryBase<T extends mongoose.Document> {
     private _model;
     private _schema;
     constructor();

@@ -41,6 +41,17 @@ export const applicationReducer = (state = ESTADO_INICIAL, action) => {
                 }
             };
         }
+        case TYPES.LIMPAR_BREADCRUMB: {
+            return {
+                configuracao: {
+                    ...state.configuracao
+                },
+                application: {
+                    ...state.application,
+                    breadcrumb: {}
+                }
+            };
+        }
         default:
             return state;
     }

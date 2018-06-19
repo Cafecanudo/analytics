@@ -1,4 +1,4 @@
-export declare class DadosUsuarioModel {
+export declare class DadosUsuarioModel extends Document {
     nome: string;
     email: string;
 }

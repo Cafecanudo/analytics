@@ -8,7 +8,8 @@ import { ShowComponent } from '../../../components/commons/ifshow';
 import { BarChart } from '../../../components/charts/charts';
 import Tabela from '../../../components/commons/tabela';
 import { env } from '../../../config/config';
-import { atualizarBreadcrumbAction } from '../../main/redux/actions';
+import { limparBreadcrumbAction } from '../../main/redux/actions';
+import { timeUpdateChart } from '../dashboard.magazine';
 
 class GraficoCTE extends Component {
 
@@ -28,12 +29,12 @@ class GraficoCTE extends Component {
     obterDadosGrafico() {
         Axios.get(`${env.server.url}/v1/magazine/cte`).then(value => {
             this.setState({
-                dataListaNotas: [],
                 grafico: {
                     data: value.data
                 }
             });
-            clearTimeout(this.timeNFSE);
+            clearTimeout(this.timeCTE);
+            this.timeCTE = setTimeout(() => this.obterDadosGrafico(), timeUpdateChart);
         });
     }
 
@@ -42,8 +43,8 @@ class GraficoCTE extends Component {
             this.setState({
                 collumsListaNotas: value.data
             });
-            clearTimeout(this.timeNFSE);
-            this.timeID = setTimeout(() => this.obterDadosLista(tipo), env.application.timeLoad);
+            clearTimeout(this.timeCollumns);
+            this.timeLista = setTimeout(() => this.obterDadosLista(tipo), env.application.timeLoad);
         });
     }
 
@@ -53,16 +54,19 @@ class GraficoCTE extends Component {
             this.setState({
                 dataListaNotas: value.data
             });
-            clearTimeout(this.timeNFSE);
+            clearTimeout(this.timeLista);
         });
     }
 
     componentDidMount() {
-        this.timeID = setTimeout(() => this.obterDadosGrafico(), env.application.timeLoad);
+        this.timeCTE = setTimeout(() => this.obterDadosGrafico(), env.application.timeLoad);
+        this.props.limparBreadcrumbAction();
     }
 
     componentWillUnmount() {
-        clearTimeout(this.timeID);
+        clearTimeout(this.timeCTE);
+        clearTimeout(this.timeCollumns);
+        clearTimeout(this.timeLista);
     }
 
     clickBar(index, valor, nome, dataContext) {
@@ -74,7 +78,7 @@ class GraficoCTE extends Component {
                 showLista: true,
                 dataListaNotas: []
             });
-            this.timeID = setTimeout(() => this.obterColunasDaLista(dataContext.name_id), env.application.timeLoad);
+            this.timeCollumns = setTimeout(() => this.obterColunasDaLista(dataContext.name_id), env.application.timeLoad);
         }
     }
 
@@ -107,5 +111,5 @@ class GraficoCTE extends Component {
     }
 }
 
-const mapAction = dispatch => bindActionCreators({ atualizarBreadcrumbAction }, dispatch);
+const mapAction = dispatch => bindActionCreators({ limparBreadcrumbAction }, dispatch);
 export default connect(null, mapAction)(GraficoCTE);

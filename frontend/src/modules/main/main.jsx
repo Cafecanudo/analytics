@@ -39,20 +39,22 @@ class MainApplication extends Component {
                     <HeaderMenu/>
                     <Sidebar/>
                     <div className="content-wrapper">
-                        <div className="content-header app-breadcrumb">
-                            <div className="container-fluid">
-                                <div className="row mb-2">
-                                    <div className="col-sm-6">
-                                        <h1 className="m-0 text-dark">{this.props.breadcrumb.title}</h1>
-                                    </div>
-                                    <div className="col-sm-6">
-                                        <ol className="breadcrumb float-sm-right">
-                                            {this.obterLinkBreadcrumb()}
-                                        </ol>
+                        {this.props.breadcrumb.title ?
+                            <div className="content-header app-breadcrumb">
+                                <div className="container-fluid">
+                                    <div className="row mb-2">
+                                        <div className="col-sm-6">
+                                            <h1 className="m-0 text-dark">{this.props.breadcrumb.title}</h1>
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <ol className="breadcrumb float-sm-right">
+                                                {this.obterLinkBreadcrumb()}
+                                            </ol>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            : <div className="breadcrumb-out"></div> }
 
                         {/*Troca de rotas acontece aqui*/}
                         <section className="content">

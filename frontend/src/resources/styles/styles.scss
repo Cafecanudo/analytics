@@ -7,6 +7,11 @@ body, html {
 }
 
 body.fullscreen-mode {
+  .wrapper{
+    .main-header, .breadcrumb-out{
+      display: none;
+    }
+  }
   .content-wrapper {
     margin-top: 15px;
     .app-breadcrumb {
@@ -158,4 +163,8 @@ body.fullscreen-mode {
   a.d-block.active-sub {
     background: #5d656d;
   }
+}
+
+.breadcrumb-out{
+  padding: 7px;
 }

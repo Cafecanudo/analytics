@@ -1,4 +1,6 @@
-export class DashboardModel {
+import { Document } from 'mongoose';
+
+export interface IDashboardModel extends Document  {
     principal: false;
     name: string;
     descricao: string;

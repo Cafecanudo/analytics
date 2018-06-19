@@ -3,6 +3,7 @@ import AmCharts from '@amcharts/amcharts3-react/index';
 
 /**
  * Parametros:
+ *  animate         = Animar mudanca de esta (padrao true)
  *  dataProvider    = dados do grafico
  *  export          = se aceita exportacao (Padrao false)
  *  width           = largura (Padrao 100%)
@@ -31,16 +32,16 @@ export class ___CharPie___ extends Component {
             'depth3D': (this.props.chart3D || false) ? 10 : 0,
             'angle': (this.props.chart3D || false) ? 30 : 0,
             'balloonText': '[[title]]<br><span style=\'font-size:14px\'><b>[[value]]</b> ([[percents]]%)</span>',
-            'dataProvider': this.props.dataProvider || [],
+            'dataProvider': [],
             'export': {
                 'enabled': this.props.export || false
             },
             'clickSlice': (dataItem) => {
-            console.log(dataItem);
                 if (this.props.click) {
                     this.props.click(dataItem.index, dataItem.value, dataItem.title, dataItem.dataContext);
                 }
-            }
+            },
+            'listeners': this.obterListeners()
         };
         if (this.props.showLegend) {
             config.legend = {
@@ -51,6 +52,24 @@ export class ___CharPie___ extends Component {
         }
         return config;
     };
+
+    obterListeners() {
+        return [
+            {
+                'event': 'init',
+                'method': it => this.animate(it)
+            }
+        ];
+    }
+
+    animate(it) {
+        it.chart.animateData(this.props.dataProvider || [], {
+            duration: (this.props.animate || true) ? 1000 : 0,
+            complete: () => {
+                setTimeout(() => this.animate(it), 2000);
+            }
+        });
+    }
 
     render() {
         return React.createElement(AmCharts.React, {

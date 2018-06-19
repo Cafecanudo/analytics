@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class DadosUsuarioModel {
+class DadosUsuarioModel extends Document {
 }
 exports.DadosUsuarioModel = DadosUsuarioModel;
 exports.dadosUsuarioSchema = {

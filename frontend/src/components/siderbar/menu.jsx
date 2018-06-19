@@ -73,8 +73,8 @@ class Menu extends Component {
 
     obterDashboard() {
         return (
-            <li className="nav-item has-treeview" sc-down={this.props.perfil.dashboards.length * 43}>
-                <a className="nav-link">
+            <li className="nav-item has-treeview menu-open" sc-down={this.props.perfil.dashboards.length * 43}>
+                <a className="nav-link active">
                     <i className={`nav-icon fa fa-${this.props.perfil.dashboards.length > 0 ? 'dashboard' : 'spinner fa-pulse fa-3x fa-fw'}`}></i>
                     <p>
                         {this.props.perfil.dashboards.length > 0 ? 'Dashboard' : 'Carregando...'}

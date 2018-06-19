@@ -17,6 +17,10 @@ export const atualizarBreadcrumbAction = breadcrumb => ({
     breadcrumb: breadcrumb
 });
 
+export const limparBreadcrumbAction = () => ({
+    type: TYPES.LIMPAR_BREADCRUMB
+});
+
 export const addLinkBreadcrumbAction = breadcrumb => ({
     type: TYPES.ADD_LINK_BREADCRUMB,
     breadcrumb: breadcrumb

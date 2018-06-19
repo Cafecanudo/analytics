@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import { ShowComponent } from '../../components/commons/ifshow';
 import { BarChart } from '../../components/charts/charts';
 import { Loading } from '../../components/commons/loading';
 import { env } from '../../config/config';
+import { atualizarBreadcrumbAction } from '../main/redux/actions';
 
 export const timeUpdateChart = 60 * 1000;
 
-export default class DashboardMagazine extends Component {
+class DashboardMagazine extends Component {
 
     constructor(props) {
         super(props);
@@ -46,7 +49,7 @@ export default class DashboardMagazine extends Component {
                 }
             });
             clearTimeout(this.timeNFE);
-            this.timeCTE = setTimeout(() => this.obterDadosGraficoNFE(), timeUpdateChart);
+            this.timeNFE = setTimeout(() => this.obterDadosGraficoNFE(), timeUpdateChart);
         });
     }
 
@@ -59,7 +62,7 @@ export default class DashboardMagazine extends Component {
                 }
             });
             clearTimeout(this.timeCTE);
-            this.timeNFE = setTimeout(() => this.obterDadosGraficodCTE(), timeUpdateChart);
+            this.timeCTE = setTimeout(() => this.obterDadosGraficodCTE(), timeUpdateChart);
         });
     }
 
@@ -67,6 +70,9 @@ export default class DashboardMagazine extends Component {
         this.timeNFSE = setTimeout(() => this.obterDadosGraficoNFSE(), env.application.timeLoad);
         this.timeCTE = setTimeout(() => this.obterDadosGraficoNFE(), env.application.timeLoad);
         this.timeNFE = setTimeout(() => this.obterDadosGraficodCTE(), env.application.timeLoad);
+        this.props.atualizarBreadcrumbAction({
+            title: ''
+        });
     }
 
     componentWillUnmount() {
@@ -128,3 +134,6 @@ export default class DashboardMagazine extends Component {
         );
     }
 }
+
+const mapAction = dispatch => bindActionCreators({ atualizarBreadcrumbAction }, dispatch);
+export default connect(null, mapAction)(DashboardMagazine);

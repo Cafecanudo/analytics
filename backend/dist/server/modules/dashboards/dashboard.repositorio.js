@@ -11,10 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const repositorio_base_1 = require("../../api/@core/repositorio.base");
 const decorators_1 = require("../../api/@core/decorators/decorators");
-const dashboard_model_1 = require("./models/dashboard.model");
+const IDashboardModel_1 = require("./models/IDashboardModel");
 class DashboardRepositorio extends repositorio_base_1.RepositoryBase {
     schema() {
-        return dashboard_model_1.dashboardSchema;
+        return IDashboardModel_1.dashboardSchema;
     }
     obterDashboardName(idDashboard) {
         return new Promise((resolve, reject) => {
@@ -23,7 +23,7 @@ class DashboardRepositorio extends repositorio_base_1.RepositoryBase {
                 _id: 'be4c425a7d15b3a1dbb838a0779f1d3e',
                 name: 'notas-internalizadas',
                 descricao: 'Status de Notas',
-                hint: 'DashboardModel mostra uma visao de todas as notas internalizadas/pendente/cancelado',
+                hint: 'IDashboardModel mostra uma visao de todas as notas internalizadas/pendente/cancelado',
                 icone: 'fa fa-line-chart'
             };
             resolve(dashboard);
@@ -37,7 +37,7 @@ class DashboardRepositorio extends repositorio_base_1.RepositoryBase {
                     _id: 'be4c425a7d15b3a1dbb838a0779f1d3e',
                     name: 'notas-internalizadas',
                     descricao: 'Status de Notas',
-                    hint: 'DashboardModel mostra uma visao de todas as notas internalizadas/pendente/cancelado',
+                    hint: 'IDashboardModel mostra uma visao de todas as notas internalizadas/pendente/cancelado',
                     icone: 'fa fa-line-chart'
                 }
             ]);

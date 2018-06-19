@@ -1,3 +1,4 @@
+import * as mongoose from 'mongoose';
 import { Document, Model, model, Schema } from 'mongoose';
 import ConsoleUtil from '../../utils/console.util';
 
@@ -6,14 +7,14 @@ const uniqueValidator = require('mongoose-unique-validator');
 /**
  * Implementar aqui todos os metodos do mongoose
  */
-export abstract class RepositoryBase<T> {
+export abstract class RepositoryBase<T extends mongoose.Document> {
 
     private _model: Model<Document>;
     private _schema: any;
 
     constructor() {
         this._schema = new Schema(this.schema.caller(), { collection: this.schema['collectionName'] });
-        this._model = model(this.schema['collectionName'], this._schema);
+        this._model = model<T>(this.schema['collectionName'], this._schema);
         this._schema.plugin(uniqueValidator);
         ConsoleUtil.data(`Collection "${this.schema['collectionName']}" criado no banco de dados.`);
     }

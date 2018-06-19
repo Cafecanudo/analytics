@@ -1,12 +1,13 @@
-import { DadosUsuarioModel, dadosUsuarioSchema } from './dados.usuario.model';
+import { Document } from 'mongoose';
+import { dadosUsuarioSchema, IDadosUsuarioModel } from './IDadosUsuarioModel';
 
 /**
  * Interface de modelo de dados do usuario;
  */
-export class UsuarioModel {
+export interface IUsuarioModel extends Document {
     login: string;
     foto?: string;
-    dadosUsuario: DadosUsuarioModel;
+    dadosUsuario: IDadosUsuarioModel;
 }
 
 /**

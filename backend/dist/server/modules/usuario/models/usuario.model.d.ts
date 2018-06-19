@@ -1,22 +1,13 @@
-import { DadosUsuarioModel } from './dados.usuario.model';
-export declare class UsuarioModel {
+import { IDadosUsuarioModel } from './dados.usuario.model';
+export declare class UsuarioModel extends Document {
     login: string;
     foto?: string;
-    dadosUsuario: DadosUsuarioModel;
+    dadosUsuario: IDadosUsuarioModel;
 }
 export declare const usuarioSchema: {
     login: {
         type: StringConstructor;
         required: boolean;
     };
-    dadosUsuario: {
-        nome: {
-            type: StringConstructor;
-            required: boolean;
-        };
-        email: {
-            type: StringConstructor;
-            required: boolean;
-        };
-    };
+    dadosUsuario: any;
 };

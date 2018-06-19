@@ -1,15 +1,15 @@
 import { RepositoryBase } from '../../api/@core/repositorio.base';
 import { MongoCollection } from '../../api/@core/decorators/decorators';
-import { ChartModel, chartSchame } from './models/chart.model';
+import { chartSchame, IChartModel } from './models/IChartModel';
 
-class ChartsRepositorio extends RepositoryBase<ChartModel> {
+class ChartsRepositorio extends RepositoryBase<IChartModel> {
 
     @MongoCollection('chart')
     schema() {
         return chartSchame;
     }
 
-    obterGraficoID(idGrafico: string): Promise<ChartModel> {
+    obterGraficoID(idGrafico: string): Promise<any> {
         return new Promise((resolve, reject) => {
             resolve({
                 _id: 'be4c425a7d15b3a1dbb838a0779f1d3e',
@@ -22,7 +22,7 @@ class ChartsRepositorio extends RepositoryBase<ChartModel> {
         });
     }
 
-    obterGraficoDashboardID(idDashboard): Promise<ChartModel[]> {
+    obterGraficoDashboardID(idDashboard): Promise<any[]> {
         return new Promise((resolve, reject) => {
             resolve([
                 {

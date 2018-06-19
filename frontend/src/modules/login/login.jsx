@@ -64,20 +64,11 @@ class Login extends Component {
                         </div>
                         <div className="row">
                             <div className="col-8">
-                                <div className="checkbox icheck">
-                                    <label>
-                                        <input type="checkbox"/> Lembrar Senha
-                                    </label>
-                                </div>
                             </div>
                             <div className="col-4">
                                 <button type="submit" className="btn btn-primary btn-block btn-flat" onClick={() => this.sendUsuario()}>Entrar</button>
                             </div>
                         </div>
-
-                        <p className="mb-1">
-                            <a href="#">Esqueci minha senha</a>
-                        </p>
                     </div>
                 </div>
                 <ShowComponent show={this.state.message}>

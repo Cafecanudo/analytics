@@ -11,11 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const decorators_1 = require("../../api/@core/decorators/decorators");
 const repositorio_base_1 = require("../../api/@core/repositorio.base");
-const usuario_model_1 = require("./models/usuario.model");
 const dashboard_repositorio_1 = require("../dashboards/dashboard.repositorio");
+const IUsuarioModel_1 = require("./models/IUsuarioModel");
 class UsuarioRepositorio extends repositorio_base_1.RepositoryBase {
     schema() {
-        return usuario_model_1.usuarioSchema;
+        return IUsuarioModel_1.usuarioSchema;
     }
     login(login, senha) {
         console.log(login, senha);
@@ -64,27 +64,6 @@ class UsuarioRepositorio extends repositorio_base_1.RepositoryBase {
                                     descricao: 'CT-e',
                                     hint: 'Notas de Conhecimento de Transporte Eletrônico',
                                     icone: 'fa fa-bar-chart'
-                                }
-                            ]
-                        },
-                        {
-                            titulo: 'Configurações',
-                            menus: [
-                                {
-                                    _id: '2b08b9562dd8095452efe2c26fdfa3ff',
-                                    tipo: 'PAGE',
-                                    name: 'geral',
-                                    descricao: 'Geral',
-                                    icone: 'fa fa-sliders',
-                                    url: 'configuracao/geral'
-                                },
-                                {
-                                    _id: '07c3c9642100fdc4d5bd635e1d8f1558',
-                                    tipo: 'PAGE',
-                                    name: 'graficos',
-                                    descricao: 'Gráficos',
-                                    icone: 'fa fa-bar-chart',
-                                    url: 'configuracao/graficos'
                                 }
                             ]
                         }

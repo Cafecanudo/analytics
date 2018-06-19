@@ -1,6 +1,6 @@
 import { RepositoryBase } from '../../api/@core/repositorio.base';
-import { DashboardModel } from './models/dashboard.model';
-declare class DashboardRepositorio extends RepositoryBase<DashboardModel> {
+import { IDashboardModel } from './models/IDashboardModel';
+declare class DashboardRepositorio extends RepositoryBase<IDashboardModel> {
     schema(): {
         principal: {
             type: BooleanConstructor;

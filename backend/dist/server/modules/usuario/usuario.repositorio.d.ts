@@ -1,6 +1,6 @@
 import { RepositoryBase } from '../../api/@core/repositorio.base';
-import { UsuarioModel } from './models/usuario.model';
-declare class UsuarioRepositorio extends RepositoryBase<UsuarioModel> {
+import { IUsuarioModel } from './models/IUsuarioModel';
+declare class UsuarioRepositorio extends RepositoryBase<IUsuarioModel> {
     schema(): {
         login: {
             type: StringConstructor;
@@ -19,7 +19,7 @@ declare class UsuarioRepositorio extends RepositoryBase<UsuarioModel> {
     };
     login(login: any, senha: any): Promise<any>;
     obterMenusUsuario(): Promise<any>;
-    obterPerfilUsuario(): Promise<UsuarioModel>;
+    obterPerfilUsuario(): Promise<any>;
     obterPerfilNotificacaoResumo(): Promise<any>;
 }
 export declare const usuarioRepositorio: UsuarioRepositorio;

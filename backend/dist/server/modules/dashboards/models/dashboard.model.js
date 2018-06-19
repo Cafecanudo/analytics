@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class DashboardModel {
+class DashboardModel extends Document {
 }
 exports.DashboardModel = DashboardModel;
 exports.dashboardSchema = {

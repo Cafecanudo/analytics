@@ -1,12 +1,12 @@
 import { MongoCollection } from '../../api/@core/decorators/decorators';
 import { RepositoryBase } from '../../api/@core/repositorio.base';
-import { UsuarioModel, usuarioSchema } from './models/usuario.model';
 import { dashboardRepositorio } from '../dashboards/dashboard.repositorio';
+import { IUsuarioModel, usuarioSchema } from './models/IUsuarioModel';
 
 /**
  * Repositorio
  */
-class UsuarioRepositorio extends RepositoryBase<UsuarioModel> {
+class UsuarioRepositorio extends RepositoryBase<IUsuarioModel> {
 
     @MongoCollection('usuario')
     schema() {
@@ -63,27 +63,6 @@ class UsuarioRepositorio extends RepositoryBase<UsuarioModel> {
                                     icone: 'fa fa-bar-chart'
                                 }
                             ]
-                        },
-                        {
-                            titulo: 'Configurações',
-                            menus: [
-                                {
-                                    _id: '2b08b9562dd8095452efe2c26fdfa3ff',
-                                    tipo: 'PAGE',
-                                    name: 'geral',
-                                    descricao: 'Geral',
-                                    icone: 'fa fa-sliders',
-                                    url: 'configuracao/geral'
-                                },
-                                {
-                                    _id: '07c3c9642100fdc4d5bd635e1d8f1558',
-                                    tipo: 'PAGE',
-                                    name: 'graficos',
-                                    descricao: 'Gráficos',
-                                    icone: 'fa fa-bar-chart',
-                                    url: 'configuracao/graficos'
-                                }
-                            ]
                         }
                     ]
                 });
@@ -93,7 +72,7 @@ class UsuarioRepositorio extends RepositoryBase<UsuarioModel> {
         });
     }
 
-    obterPerfilUsuario(): Promise<UsuarioModel> {
+    obterPerfilUsuario(): Promise<any> {
         return new Promise((resolve, reject) => {
             /*ALTERAR ESSA LINHA PARA PESQUISAR NO BANCO*/
             resolve({

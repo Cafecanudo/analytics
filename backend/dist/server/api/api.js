@@ -38,13 +38,14 @@ class Api {
         if ((process.env.NODE_ENV || 'development') === 'development') {
             this.app.use(logger('dev'));
         }
+        const portCors = (env.frontend.port && env.frontend.port !== 80) ? `:${env.frontend.port}` : '';
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(errorHandlerApi_1.errorHandlerApi);
         this.app.use(bodyParser.json());
         this.app.use(compression());
         this.app.use(helmet());
         this.app.use(cors({
-            origin: `${env.frontend.protocolo || 'http'}://${env.frontend.host}${env.frontend.port ? `:${env.frontend.port}` : ''}`,
+            origin: `${env.frontend.protocolo || 'http'}://${env.frontend.host}${portCors}`,
             methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
             optionsSuccessStatus: 204
         }));

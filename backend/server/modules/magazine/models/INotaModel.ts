@@ -1,17 +1,13 @@
-export class NotaModel {
+import { Document } from 'mongoose';
 
-    _id?: string;
-
-    constructor(
-        public tipo: 'NFSE' | 'NFE' | 'CTE',
-        public integrada: number,
-        public erro_integracao: number,
-        public erro_no_batimento: number,
-        public falta_po: number,
-        public reprovada: number,
-        public duplicidade: number
-    ) {
-    }
+export interface INotaModel extends Document {
+    tipo: 'NFSE' | 'NFE' | 'CTE';
+    integrada: number;
+    erro_integracao: number;
+    erro_no_batimento: number;
+    falta_po: number;
+    reprovada: number;
+    duplicidade: number;
 }
 
 export const NotaSchema = {

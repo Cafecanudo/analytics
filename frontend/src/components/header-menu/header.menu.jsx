@@ -113,42 +113,41 @@ class HeaderMenu extends Component {
                             <i className="fa fa-bars"></i>
                         </a>
                     </li>
-                    <li className="nav-item d-none d-sm-inline-block">
-                        <Link to="/" className="nav-link">Inicio</Link>
-                    </li>
                 </ul>
                 <ul className="navbar-nav ml-auto">
-                    <li className="nav-item dropdown">
-                        <a className="nav-link" data-toggle="dropdown" href="#">
-                            <i className="fa fa-bell-o"></i>
-                            <span className={`badge navbar-badge badge-${this.props.notificacao.bellColor || 'info'}`}
-                                  style={{ display: this.props.notificacao.lista.length === 0 ? 'none' : '' }}>
-                                {this.props.notificacao.lista.length}
-                            </span>
-                        </a>
-                        <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <span
-                                className="dropdown-item dropdown-header">{this.props.notificacao.bellQuant || 0} Notificações</span>
-                            {this.processarListaNotificacoes()}
-                            <div className="dropdown-divider"></div>
-                            <Link to={'/notificacao'} className={'dropdown-item dropdown-footer'}>
-                                Todas Notificações
-                            </Link>
-                        </div>
+                    {/*<li className="nav-item dropdown">*/}
+                    {/*<a className="nav-link" data-toggle="dropdown" href="#">*/}
+                    {/*<i className="fa fa-bell-o"></i>*/}
+                    {/*<span className={`badge navbar-badge badge-${this.props.notificacao.bellColor || 'info'}`}*/}
+                    {/*style={{ display: this.props.notificacao.lista.length === 0 ? 'none' : '' }}>*/}
+                    {/*{this.props.notificacao.lista.length}*/}
+                    {/*</span>*/}
+                    {/*</a>*/}
+                    {/*<div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">*/}
+                    {/*<span*/}
+                    {/*className="dropdown-item dropdown-header">{this.props.notificacao.bellQuant || 0} Notificações</span>*/}
+                    {/*{this.processarListaNotificacoes()}*/}
+                    {/*<div className="dropdown-divider"></div>*/}
+                    {/*<Link to={'/notificacao'} className={'dropdown-item dropdown-footer'}>*/}
+                    {/*Todas Notificações*/}
+                    {/*</Link>*/}
+                    {/*</div>*/}
+                    {/*</li>*/}
+
+
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/login" title="Sair/Logout">
+                            <i className="fa fa-lock" aria-hidden="true"></i>
+                        </Link>
                     </li>
-                    {this.opcoesExtrasLivre()}
+                    <li className="nav-item">
+                        <a className="nav-link" data-widget="control-sidebar" style={{ cursor: 'pointer' }} onClick={() => this.toggleFullScreen()}>
+                            <i className="fa fa-television"></i>
+                        </a>
+                    </li>
+
                 </ul>
             </nav>
-        );
-    }
-
-    opcoesExtrasLivre() {
-        return (
-            <li className="nav-item">
-                <a className="nav-link" data-widget="control-sidebar" style={{ cursor: 'pointer' }} onClick={() => this.toggleFullScreen()}>
-                    <i className="fa fa-television"></i>
-                </a>
-            </li>
         );
     }
 }

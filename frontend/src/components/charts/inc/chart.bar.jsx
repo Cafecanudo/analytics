@@ -3,6 +3,7 @@ import AmCharts from '@amcharts/amcharts3-react/index';
 
 /**
  * Parametros:
+ *  animate         = Animar mudanca de esta (padrao true)
  *  dataProvider    = dados do grafico
  *  rotation        = Rotacao do titulo de cada barra (Padrao 45)
  *  export          = se aceita exportacao (Padrao false)
@@ -26,7 +27,11 @@ export class ___CharBar___ extends Component {
             'theme': 'light',
             'marginRight': ((this.props.export || false) ? 70 : 0),
             'startDuration': 1,
-            'dataProvider': this.props.dataProvider || [],
+            'dataProvider': [],
+            'valueAxes': [{
+                'minimum': 0,
+                'maximum': 5000
+            }],
             'graphs': [{
                 'balloonText': '<b>[[category]]: [[value]]</b>',
                 'fillAlphas': 0.9,
@@ -57,8 +62,21 @@ export class ___CharBar___ extends Component {
         return config;
     };
 
+    animate(it) {
+        it.chart.animateData(this.props.dataProvider || [], {
+            duration: (this.props.animate || true) ? 1000 : 0,
+            complete: () => {
+                setTimeout(() => this.animate(it), 2000);
+            }
+        });
+    }
+
     obterListeners() {
         return [
+            {
+                'event': 'init',
+                'method': it => this.animate(it)
+            },
             {
                 'event': 'clickGraphItem',
                 'method': it => {

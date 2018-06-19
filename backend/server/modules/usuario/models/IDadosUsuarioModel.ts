@@ -1,4 +1,6 @@
-export class DadosUsuarioModel {
+import { Document } from 'mongoose';
+
+export interface IDadosUsuarioModel extends Document {
     nome: string;
     email: string;
 }

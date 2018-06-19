@@ -1,10 +1,9 @@
-export class ChartModel {
-    _id?: string;
+import { Document } from 'mongoose';
+
+export interface IChartModel extends Document {
     tipo: 'BAR' | 'BAR-COLOR' | 'BAR-COLOR-3D';
     name: string;
     descricao: string;
-    order?: number = 0;
-    maxcol?: number = 3;
 }
 
 export const chartSchame = {
