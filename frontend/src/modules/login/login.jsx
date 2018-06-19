@@ -24,9 +24,11 @@ class Login extends Component {
             if (value.status === 200) {
                 this.props.atualizarLoginUsuarioAction(value.data);
                 this.props.history.replace('/');
-            } else {
+            }
+        }, err => {
+            if (err.status === 403) {
                 this.setState({
-                    message: ''
+                    message: err.data.message
                 });
             }
         });

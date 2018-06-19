@@ -7,6 +7,13 @@ import MainApplication from './modules/main/main';
 import { appStore } from './config/store';
 import NoFound from './modules/nofound/nofound';
 import Login from './modules/login/login';
+import Axios from 'axios/index';
+
+Axios.interceptors.response.use((response) => {
+    return response;
+}, error => {
+    return Promise.reject(error.response);
+});
 
 const app = () => (
     <HashRouter>
