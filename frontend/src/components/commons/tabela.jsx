@@ -94,8 +94,15 @@ export default class Tabela extends Component {
         );
     }
 
-    search(e) {
-        // console.log(e.target.value);
+    search(value) {
+        const newList = this.state.provider.find((it, i) => {
+            if (it.chave.indexOf(value) > -1 || it.num_doc_ele.indexOf(value) > -1 || it.num_doc.indexOf(value) > -1 || it.uf.indexOf(value) > -1) {
+                return true;
+            }
+        });
+        this.setState({
+            provider: newList
+        });
     }
 
     render() {
@@ -108,7 +115,8 @@ export default class Tabela extends Component {
                     {this.props.titulo ? <h3 className="card-title">{this.props.titulo}</h3> : ''}
                     <div className="card-tools">
                         <div className="input-group input-group-sm" style={{ width: '150px' }}>
-                            <input type="text" name="table_search" className="form-control float-right" placeholder="Pesquisar" onChange={this.search}/>
+                            <input type="text" name="table_search" className="form-control float-right" placeholder="Pesquisar"
+                                   onChange={(e) => this.search(e.target.value)}/>
                             <div className="input-group-append">
                                 <button type="submit" className="btn btn-default"><i className="fa fa-search"></i></button>
                             </div>

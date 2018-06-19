@@ -1,5 +1,4 @@
-import * as mongoose from 'mongoose';
-import { Document, Model, model, Schema } from 'mongoose';
+import { Document, model, Model, Schema } from 'mongoose';
 import ConsoleUtil from '../../utils/console.util';
 
 const uniqueValidator = require('mongoose-unique-validator');
@@ -7,9 +6,9 @@ const uniqueValidator = require('mongoose-unique-validator');
 /**
  * Implementar aqui todos os metodos do mongoose
  */
-export abstract class RepositoryBase<T extends mongoose.Document> {
+export abstract class RepositoryBase<T extends Document> {
 
-    private _model: Model<Document>;
+    private _model: Model<T>;
     private _schema: any;
 
     constructor() {
@@ -25,12 +24,28 @@ export abstract class RepositoryBase<T extends mongoose.Document> {
      */
     abstract schema();
 
-    save(document: T): Promise<any> {
+    save(document: T): Promise<T> {
         return new this._model(document).save();
     }
 
-    /*saveOrUpdate(document: T): Promise<any> {
-        return new this._model(document).findOneAndUpdate({}, document, { upsert: true,  });
-    }*/
+    saveOrUpdate(params: {}, document: T): Promise<T> {
+        return new Promise<T>((resolve, reject) => {
+            this._model.findOneAndUpdate(params, document, {
+                new: true, upsert: true,
+                runValidators: true
+            }).then(res => {
+                console.log(res);
+                resolve(res);
+            }).catch(reason => {
+                console.log(reason);
+                reject(reason);
+            });
+        });
+
+
+        // return _d.findOneAndUpdate(
+        //     {tipo: document.tipo}
+        // ) //(document).findOneAndUpdate({}, document, { upsert: true,  });
+    }
 
 }

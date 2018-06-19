@@ -13,6 +13,20 @@ class RepositoryBase {
     save(document) {
         return new this._model(document).save();
     }
+    saveOrUpdate(params, document) {
+        return new Promise((resolve, reject) => {
+            this._model.findOneAndUpdate(params, document, {
+                new: true, upsert: true,
+                runValidators: true
+            }).then(res => {
+                console.log(res);
+                resolve(res);
+            }).catch(reason => {
+                console.log(reason);
+                reject(reason);
+            });
+        });
+    }
 }
 exports.RepositoryBase = RepositoryBase;
 //# sourceMappingURL=repositorio.base.js.map

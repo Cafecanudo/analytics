@@ -68,7 +68,6 @@ class GraficoNFSE extends Component {
 
     obterDadosLista(tipo) {
         Axios.get(`${env.server.url}/v1/magazine/nfse/pendentes/lista/${tipo}`).then(value => {
-            console.log(value.data);
             this.setState({
                 dataListaNotas: value.data
             });

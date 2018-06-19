@@ -10,6 +10,7 @@ import DashboardMagazine from '../magazine/dashboard.magazine';
 import GraficoNFSE from '../magazine/graficos/grafico.nfse';
 import GraficoNFE from '../magazine/graficos/grafico.nfe';
 import GraficoCTE from '../magazine/graficos/grafico.cte';
+import Footer from '../../components/footer/Footer';
 
 class MainApplication extends Component {
 
@@ -68,12 +69,7 @@ class MainApplication extends Component {
                         </section>
                     </div>
                 </div>
-                <footer className="main-footer">
-                    <div className="float-right d-none d-sm-inline">
-                        SOFTBOX
-                    </div>
-                    <span>Copyright &copy; 2018 <a href="#">www.softbox.com.br</a>.</span> Todos direitos reservados.
-                </footer>
+                <Footer/>
             </main-application>
         );
     }

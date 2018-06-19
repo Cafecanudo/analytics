@@ -50,7 +50,6 @@ class GraficoCTE extends Component {
 
     obterDadosLista(tipo) {
         Axios.get(`${env.server.url}/v1/magazine/cte/cancelados/lista/${tipo}`).then(value => {
-            console.log(value.data);
             this.setState({
                 dataListaNotas: value.data
             });
@@ -71,7 +70,6 @@ class GraficoCTE extends Component {
 
     clickBar(index, valor, nome, dataContext) {
         if (nome === 'Cancelados') {
-            console.log(dataContext.name_id);
             this.setState({
                 ...this.state,
                 tituloLista: nome,
