@@ -95,7 +95,7 @@ export default class Tabela extends Component {
     }
 
     search(value) {
-        const newList = this.state.provider.find((it, i) => {
+        const newList = (this.state.provider || []).find((it, i) => {
             if (it.chave.indexOf(value) > -1 || it.num_doc_ele.indexOf(value) > -1 || it.num_doc.indexOf(value) > -1 || it.uf.indexOf(value) > -1) {
                 return true;
             }
