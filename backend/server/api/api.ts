@@ -6,6 +6,7 @@ import * as logger from 'morgan';
 import * as compression from 'compression';
 import * as helmet from 'helmet';
 import * as cors from 'cors';
+import * as forcessl from 'express-force-ssl';
 //Adicionando rotas
 import { errorHandlerApi } from './errorHandlerApi';
 import Routes from './routes';
@@ -58,11 +59,10 @@ class Api {
             methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
             optionsSuccessStatus: 204
         }));
+        if (env.server.protocolo === 'https') {
+            this.app.use(forcessl);
+        }
 
-    }
-
-    private showHost(): void {
-        ConsoleUtil.info(`ELDOC-Analytics is UP on http://${env.server.hostname}:${env.server.port} ###`);
     }
 
     private routes(): void {

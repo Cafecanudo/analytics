@@ -1,24 +1,19 @@
 import * as debug from 'debug';
 import * as http from 'http';
+import * as https from 'https';
+import * as fs from 'fs';
+
 import Api from './api/api';
 import ConsoleUtil from './utils/console.util';
 
 debug('ts-express:server');
 
 const env = require('./config/config')();
-const server = http.createServer(Api);
-
-const normalizePort = (val: number | string): any => {
-    const port: number = (typeof val === 'string') ? parseInt(val, 10) : val;
-    if (isNaN(port)) {
-        return val;
-    } else if (port >= 0) {
-        return port;
-    } else {
-        return false;
-    }
+const configSSL = {
+    cert: fs.readFileSync(`./server/config/env/${env.server.ssl.certificado}`, 'utf8'),
+    key: fs.readFileSync(`./server/config/env/${env.server.ssl.privateKey}`, 'utf8')
 };
-
+const server = env.server.protocolo === 'https' ? https.createServer(configSSL, Api) : http.createServer(Api);
 const onError = (error: NodeJS.ErrnoException): void => {
     ConsoleUtil.error(`Ocorreu um erro: ${error}`);
     if (error.syscall !== 'listen') {
@@ -37,10 +32,10 @@ const onError = (error: NodeJS.ErrnoException): void => {
             throw error;
     }
 };
-
-server.listen(env.server.port, env.server.hostname);
+const port = env.server.protocolo === 'https' ? env.server.ssl.portssl : env.server.port;
+server.listen(port, env.server.hostname);
 server.on('listening', () => {
-    ConsoleUtil.info(`ELDOC-Analytics is UP on http://${env.server.hostname}:${env.server.port}`);
+    ConsoleUtil.info(`ELDOC-Analytics is UP on ${env.server.protocolo}://${env.server.hostname}:${port}`);
     ConsoleUtil.info('');
 });
 server.on('error', onError);
